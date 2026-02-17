@@ -1,3 +1,7 @@
 numpy
 scipy
 matplotlib
+sympy
+pylatexenc
+qiskit
+qiskit-aer
