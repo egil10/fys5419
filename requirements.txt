@@ -5,3 +5,4 @@ sympy
 pylatexenc
 qiskit
 qiskit-aer
+qiskit-ibm-runtime
