@@ -3,6 +3,9 @@ import numpy as np
 from scipy import linalg
 from scipy.optimize import minimize
 import matplotlib.pyplot as plt
+from plot_style import setup_economist_style, add_economist_signature
+
+setup_economist_style()
 
 # Define plot path relative to script location
 plot_dir = os.path.join(os.path.dirname(__file__), "..", "plots")
@@ -63,40 +66,38 @@ vqe_energies = np.array(vqe_energies)
 exact_energies = np.array(exact_energies)
 
 # Plotting
-plt.figure(figsize=(10, 6))
-plt.plot(lambdas, exact_energies, 'r-', label="Exact Ground State")
-plt.plot(lambdas, vqe_energies, 'bo', markersize=4, label="VQE Ground State")
-plt.xlabel("lambda")
-plt.ylabel("Energy")
-plt.title("VQE vs. Exact Eigenvalues for 2x2 Hamiltonian")
-plt.legend()
-plt.grid(True)
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.plot(lambdas, exact_energies, '-', color='#006BA2', label="Exact Ground State")
+ax.plot(lambdas, vqe_energies, 'o', color='#E3120B', markersize=4, label="VQE Ground State")
+ax.set_xlabel("lambda")
+ax.set_ylabel("Energy")
+ax.legend()
+add_economist_signature(ax, "VQE vs. Exact Results", subtitle="Ground state energy of 2x2 one-qubit Hamiltonian")
 plt.savefig(os.path.join(plot_dir, "part-c_vqe_comp.pdf"))
 
 # Error plot
-plt.figure(figsize=(10, 6))
-plt.semilogy(lambdas, np.abs(vqe_energies - exact_energies) + 1e-16, 'g-')
-plt.xlabel("lambda")
-plt.ylabel("Absolute Error")
-plt.title("VQE Error relative to Exact Ground State")
-plt.grid(True)
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.semilogy(lambdas, np.abs(vqe_energies - exact_energies) + 1e-16, color='#37A635')
+ax.set_xlabel("lambda")
+ax.set_ylabel("Absolute Error")
+add_economist_signature(ax, "VQE Numerical Error", subtitle="Precision across interaction range")
 plt.savefig(os.path.join(plot_dir, "part-c_vqe_error.pdf"))
 
 # Visualize Energy Landscape for lambda = 1.0
+fig, ax = plt.subplots(figsize=(10, 6))
 l_plot = 1.0
 thetas = np.linspace(-np.pi, np.pi, 200)
 energies_land = [expectation_value(t, l_plot) for t in thetas]
 vqe_val, vqe_theta = vqe_solver(l_plot)
 
-plt.figure(figsize=(10, 6))
-plt.plot(thetas, energies_land, 'k-', label=f"E(theta) for lambda={l_plot}")
-plt.plot(vqe_theta, vqe_val, 'ro', label="VQE Minimum")
-plt.xlabel("Variational Parameter theta")
-plt.ylabel("Expected Energy")
-plt.title(f"VQE Energy Landscape (lambda={l_plot})")
-plt.legend()
-plt.grid(True)
+ax.plot(thetas, energies_land, color='#006BA2', label=f"E(theta) for lambda={l_plot}")
+ax.plot(vqe_theta, vqe_val, 'o', color='#E3120B', label="VQE Minimum")
+ax.set_xlabel("Variational Parameter theta")
+ax.set_ylabel("Expected Energy")
+ax.legend()
+add_economist_signature(ax, "VQE Energy Landscape", subtitle=f"Optimization surface for lambda={l_plot}")
 plt.savefig(os.path.join(plot_dir, "part-c_energy_landscape.pdf"))
+plt.show()
 
 print("VQE simulation and landscape visualization complete.")
 print(f"Max error across lambda sweep: {np.max(np.abs(vqe_energies - exact_energies)):.2e}")

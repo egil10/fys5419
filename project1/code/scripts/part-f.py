@@ -2,6 +2,9 @@ import os
 import numpy as np
 from scipy import linalg
 import matplotlib.pyplot as plt
+from plot_style import setup_economist_style, add_economist_signature
+
+setup_economist_style()
 
 # Define plot path relative to script location
 plot_dir = os.path.join(os.path.dirname(__file__), "..", "plots")
@@ -58,37 +61,35 @@ for v in v_vals:
 eig_j2 = np.array(eig_j2)
 
 # Plot J=1
-plt.figure(figsize=(10, 6))
+fig, ax = plt.subplots(figsize=(10, 6))
 for i in range(3):
-    plt.plot(v_vals, eig_j1[:, i], label=f"E{i}")
-plt.xlabel("Interaction Strength V")
-plt.ylabel("Eigenvalues")
-plt.title("Lipkin Model Eigenvalues for J=1 (N=2)")
-plt.legend()
-plt.grid(True)
+    ax.plot(v_vals, eig_j1[:, i], label=f"E{i}")
+ax.set_xlabel("Interaction Strength V")
+ax.set_ylabel("Energy")
+ax.legend()
+add_economist_signature(ax, "Lipkin Model J=1", subtitle="Eigenvalues for N=2 particles")
 plt.savefig(os.path.join(plot_dir, "part-f_j1.pdf"))
 
 # Plot J=2
-plt.figure(figsize=(10, 6))
+fig, ax = plt.subplots(figsize=(10, 6))
 for i in range(5):
-    plt.plot(v_vals, eig_j2[:, i], label=f"E{i}")
-plt.xlabel("Interaction Strength V")
-plt.ylabel("Eigenvalues")
-plt.title("Lipkin Model Eigenvalues for J=2 (N=4)")
-plt.legend()
-plt.grid(True)
+    ax.plot(v_vals, eig_j2[:, i], label=f"E{i}")
+ax.set_xlabel("Interaction Strength V")
+ax.set_ylabel("Energy")
+ax.legend()
+add_economist_signature(ax, "Lipkin Model J=2", subtitle="Eigenvalues for N=4 particles")
 plt.savefig(os.path.join(plot_dir, "part-f_j2.pdf"))
 
 # Plotting Comparison (E0 / N)
-plt.figure(figsize=(10, 6))
-plt.plot(v_vals, eig_j1[:, 0] / 2.0, 'b-', label="J=1 (N=2)")
-plt.plot(v_vals, eig_j2[:, 0] / 4.0, 'r--', label="J=2 (N=4)")
-plt.xlabel("Interaction Strength V")
-plt.ylabel("Ground State Energy per Particle (E0/N)")
-plt.title("Lipkin Model: Scaling of Ground State Energy")
-plt.legend()
-plt.grid(True)
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.plot(v_vals, eig_j1[:, 0] / 2.0, color='#006BA2', label="J=1 (N=2)")
+ax.plot(v_vals, eig_j2[:, 0] / 4.0, '--', color='#E3120B', label="J=2 (N=4)")
+ax.set_xlabel("Interaction Strength V")
+ax.set_ylabel("E0 / N")
+ax.legend()
+add_economist_signature(ax, "Lipkin Scaling Analysis", subtitle="Ground state energy per particle")
 plt.savefig(os.path.join(plot_dir, "part-f_scaling.pdf"))
+plt.show()
 
 print("Lipkin model classical analysis and scaling comparison complete.")
 print(f"Saved plots to {plot_dir}")

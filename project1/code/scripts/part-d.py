@@ -2,6 +2,9 @@ import os
 import numpy as np
 from scipy import linalg
 import matplotlib.pyplot as plt
+from plot_style import setup_economist_style, add_economist_signature
+
+setup_economist_style()
 
 # Define plot path relative to script location
 plot_dir = os.path.join(os.path.dirname(__file__), "..", "plots")
@@ -56,27 +59,25 @@ for i, l in enumerate(lambdas):
 all_eigvals = np.array(all_eigvals)
 
 # Plotting Eigenvalues
-plt.figure(figsize=(10, 6))
-colors = ['r', 'g', 'b', 'k']
+fig, ax = plt.subplots(figsize=(10, 6))
 for i in range(4):
-    plt.plot(lambdas, all_eigvals[:, i], label=f"E{i}", color=colors[i])
-plt.xlabel("lambda")
-plt.ylabel("Eigenvalues")
-plt.title("Two-Qubit Hamiltonian Eigenvalues vs. lambda")
-plt.legend()
-plt.grid(True)
+    ax.plot(lambdas, all_eigvals[:, i], label=f"E{i}")
+ax.set_xlabel("lambda")
+ax.set_ylabel("Energy")
+ax.legend()
+add_economist_signature(ax, "Two-Qubit Eigenvalues", subtitle="Analysis of 4x4 interacting system")
 plt.savefig(os.path.join(plot_dir, "part-d_eigenvalues.pdf"))
 
 # Plotting Entropy for all states
-plt.figure(figsize=(10, 6))
+fig, ax = plt.subplots(figsize=(10, 6))
 for i in range(4):
-    plt.plot(lambdas, all_entropies[:, i], label=f"S(E{i})", color=colors[i])
-plt.xlabel("lambda")
-plt.ylabel("von Neumann Entropy S(A)")
-plt.title("Eigenstate Entanglement Entropy vs. lambda")
-plt.legend()
-plt.grid(True)
+    ax.plot(lambdas, all_entropies[:, i], label=f"S(E{i})")
+ax.set_xlabel("lambda")
+ax.set_ylabel("von Neumann Entropy")
+ax.legend()
+add_economist_signature(ax, "Entanglement Analysis", subtitle="Entropy of all four eigenstates")
 plt.savefig(os.path.join(plot_dir, "part-d_entropy.pdf"))
+plt.show()
 
 print("Two-qubit analysis complete.")
 print(f"Saved plots to {plot_dir}")

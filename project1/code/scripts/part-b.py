@@ -2,6 +2,9 @@ import os
 import numpy as np
 from scipy import linalg
 import matplotlib.pyplot as plt
+from plot_style import setup_economist_style, add_economist_signature
+
+setup_economist_style()
 
 # Define plot path relative to script location
 plot_dir = os.path.join(os.path.dirname(__file__), "..", "plots")
@@ -50,30 +53,29 @@ eigvals = np.array(eigvals)
 eigvecs = np.array(eigvecs)
 
 # Plotting Eigenvalues
-plt.figure(figsize=(8, 6))
-plt.plot(lambdas, eigvals[:, 0], label="Ground State E-")
-plt.plot(lambdas, eigvals[:, 1], label="Excited State E+")
-plt.axvline(2/3, color='r', linestyle='--', label="lambda = 2/3")
-plt.xlabel("Interaction Strength lambda")
-plt.ylabel("Energy")
-plt.title("One-Qubit Hamiltonian Eigenvalues vs. lambda")
-plt.legend()
-plt.grid(True)
+fig, ax = plt.subplots(figsize=(8, 6))
+ax.plot(lambdas, eigvals[:, 0], label="Ground State E-")
+ax.plot(lambdas, eigvals[:, 1], label="Excited State E+")
+ax.axvline(2/3, color='#E3120B', linestyle='--', alpha=0.7, label="lambda = 2/3")
+ax.set_xlabel("Interaction Strength lambda")
+ax.set_ylabel("Energy")
+ax.legend()
+add_economist_signature(ax, "Hamiltonian Eigenvalues", subtitle="Analysis of 2x2 one-qubit system")
 plt.savefig(os.path.join(plot_dir, "part-b_eigenvalues.pdf"))
 
 # Plotting Eigenvector Composition (Ground State)
-# Probability of being in state |0> vs |1>
-gs_probs = np.abs(eigvecs[:, :, 0])**2 # Amplitudes of the first eigenvector (GS)
-plt.figure(figsize=(8, 6))
-plt.plot(lambdas, gs_probs[:, 0], label="Prob(|0>)")
-plt.plot(lambdas, gs_probs[:, 1], label="Prob(|1>)")
-plt.axvline(2/3, color='grey', linestyle='--', alpha=0.5)
-plt.xlabel("Interaction Strength lambda")
-plt.ylabel("Probability")
-plt.title("Ground State Composition vs. lambda")
-plt.legend()
-plt.grid(True)
+fig, ax = plt.subplots(figsize=(8, 6))
+gs_probs = np.abs(eigvecs[:, :, 0])**2 
+ax.plot(lambdas, gs_probs[:, 0], label="Prob(|0>)")
+ax.plot(lambdas, gs_probs[:, 1], label="Prob(|1>)")
+ax.axvline(2/3, color='grey', linestyle='--', alpha=0.5)
+ax.set_xlabel("Interaction Strength lambda")
+ax.set_ylabel("Probability")
+ax.legend()
+add_economist_signature(ax, "Ground State Composition", subtitle="State mixing as a function of interaction")
 plt.savefig(os.path.join(plot_dir, "part-b_eigenvector_mixing.pdf"))
+
+plt.show()
 
 print(f"\nSaved plots to {plot_dir}")
 print(f"At lambda=2/3, E1={eigvals[67, 0]:.4f}, E2={eigvals[67, 1]:.4f}")

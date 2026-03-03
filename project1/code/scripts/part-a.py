@@ -1,6 +1,9 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+from plot_style import setup_economist_style, add_economist_signature
+
+setup_economist_style()
 
 # Define plot path relative to script location
 plot_dir = os.path.join(os.path.dirname(__file__), "..", "plots")
@@ -112,15 +115,14 @@ print(f"|10>: {avg_counts[2]:.4f} (+/- {std_counts[2]:.4f})")
 print(f"|11>: {avg_counts[3]:.4f} (+/- {std_counts[3]:.4f})")
 
 # Plotting the distribution
-plt.figure(figsize=(10, 6))
+fig, ax = plt.subplots(figsize=(10, 6))
 labels = ['|00>', '|01>', '|10>', '|11>']
-plt.bar(labels, avg_counts, yerr=std_counts, capsize=10, color='skyblue', edgecolor='navy')
-plt.xlabel("Quantum State")
-plt.ylabel("Probability")
-plt.title(f"Measured State Distribution (Avg of {num_runs} runs, {shots_per_run} shots each)")
-plt.grid(axis='y', linestyle='--', alpha=0.7)
+ax.bar(labels, avg_counts, yerr=std_counts, capsize=10, color='#006BA2', alpha=0.8)
+ax.set_ylabel("Probability")
+add_economist_signature(ax, "Measured State Distribution", 
+                        subtitle=f"Average of {num_runs} runs, {shots_per_run} shots each")
 plt.savefig(os.path.join(plot_dir, "part-a_measurement_dist.pdf"))
-# plt.show()
+plt.show()
 
 print(f"\nSaved measurement distribution plot to {os.path.join(plot_dir, 'part-a_measurement_dist.pdf')}")
 

@@ -3,6 +3,9 @@ import numpy as np
 from scipy import linalg
 from scipy.optimize import minimize
 import matplotlib.pyplot as plt
+from plot_style import setup_economist_style, add_economist_signature
+
+setup_economist_style()
 
 # Define plot path relative to script location
 plot_dir = os.path.join(os.path.dirname(__file__), "..", "plots")
@@ -62,15 +65,15 @@ vqe_res = np.array(vqe_res)
 exact_res = np.array(exact_res)
 
 # Plotting J=1
-plt.figure(figsize=(10, 6))
-plt.plot(v_vals, exact_res, 'r-', label="Exact GS")
-plt.plot(v_vals, vqe_res, 'ko', markersize=4, label="VQE GS")
-plt.xlabel("V")
-plt.ylabel("Energy")
-plt.title("VQE Lipkin Model J=1 (N=2)")
-plt.legend()
-plt.grid(True)
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.plot(v_vals, exact_res, '-', color='#006BA2', label="Exact GS")
+ax.plot(v_vals, vqe_res, 'o', color='#E3120B', markersize=4, label="VQE GS")
+ax.set_xlabel("V")
+ax.set_ylabel("Energy")
+ax.legend()
+add_economist_signature(ax, "VQE Lipkin Simulation", subtitle="Ground state energy for J=1 (N=2)")
 plt.savefig(os.path.join(plot_dir, "part-g_vqe_j1.pdf"))
+plt.show()
 
 print("Lipkin VQE analysis complete for J=1.")
 print(f"Max absolute error: {np.max(np.abs(vqe_res - exact_res)):.4e}")
