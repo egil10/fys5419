@@ -86,23 +86,43 @@ state = CNOT @ state
 print(f"Final state (Expected |Phi+>):\n{state}\n")
 
 # Measurement simulation
-def measure_qubit(state, qubit_idx, num_shots=1000):
+def simulate_measurements(state, num_runs=100, shots_per_run=1000):
+    all_counts = []
     probs = np.abs(state)**2
-    outcomes = np.random.choice([0, 1, 2, 3], size=num_shots, p=probs)
-    # outcomes: 0=|00>, 1=|01>, 2=|10>, 3=|11>
-    # Qubit 0 is msb, Qubit 1 is lsb
-    if qubit_idx == 0:
-        results = (outcomes >= 2).astype(int) # 2 and 3 have qubit0 = 1
-    else:
-        results = (outcomes % 2).astype(int) # 1 and 3 have qubit1 = 1
-    return results
+    
+    for _ in range(num_runs):
+        outcomes = np.random.choice([0, 1, 2, 3], size=shots_per_run, p=probs)
+        counts = np.bincount(outcomes, minlength=4) / shots_per_run
+        all_counts.append(counts)
+    
+    return np.array(all_counts)
 
-res0 = measure_qubit(state, 0)
-res1 = measure_qubit(state, 1)
+num_runs = 50
+shots_per_run = 1000
+measurement_data = simulate_measurements(state, num_runs, shots_per_run)
 
-print(f"Qubit 0 mean: {np.mean(res0)}")
-print(f"Qubit 1 mean: {np.mean(res1)}")
-print(f"Correlation: {np.mean(res0 == res1)}")
+# Average results
+avg_counts = np.mean(measurement_data, axis=0)
+std_counts = np.std(measurement_data, axis=0)
+
+print(f"Average probability distribution over {num_runs} runs:")
+print(f"|00>: {avg_counts[0]:.4f} (+/- {std_counts[0]:.4f})")
+print(f"|01>: {avg_counts[1]:.4f} (+/- {std_counts[1]:.4f})")
+print(f"|10>: {avg_counts[2]:.4f} (+/- {std_counts[2]:.4f})")
+print(f"|11>: {avg_counts[3]:.4f} (+/- {std_counts[3]:.4f})")
+
+# Plotting the distribution
+plt.figure(figsize=(10, 6))
+labels = ['|00>', '|01>', '|10>', '|11>']
+plt.bar(labels, avg_counts, yerr=std_counts, capsize=10, color='skyblue', edgecolor='navy')
+plt.xlabel("Quantum State")
+plt.ylabel("Probability")
+plt.title(f"Measured State Distribution (Avg of {num_runs} runs, {shots_per_run} shots each)")
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.savefig(os.path.join(plot_dir, "part-a_measurement_dist.pdf"))
+# plt.show()
+
+print(f"\nSaved measurement distribution plot to {os.path.join(plot_dir, 'part-a_measurement_dist.pdf')}")
 
 # 5. Density Matrix & von Neumann Entropy
 print_divider("5. Density Matrix & von Neumann Entropy")

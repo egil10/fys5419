@@ -37,6 +37,7 @@ The implementation follows the project roadmap from qubit basics to many-body VQ
 
 ## Plot Directory
 All plots are stored in [plots/](../plots/) as PDFs.
+- `part-a_measurement_dist.pdf`
 - `part-b_eigenvalues.pdf`
 - `part-c_vqe_comp.pdf`
 - `part-c_vqe_error.pdf`
