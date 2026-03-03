@@ -1,0 +1,2 @@
+Two-qubit analysis complete.
+Saved plots to C:\Users\ofurn\Dokumenter\Github\fys5419\project1\code\scripts\..\plots

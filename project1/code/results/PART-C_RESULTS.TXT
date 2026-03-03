@@ -1,0 +1,3 @@
+VQE simulation and landscape visualization complete.
+Max error across lambda sweep: 5.41e-11
+Saved plots to C:\Users\ofurn\Dokumenter\Github\fys5419\project1\code\scripts\..\plots

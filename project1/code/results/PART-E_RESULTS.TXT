@@ -1,0 +1,3 @@
+Two-qubit VQE complete.
+Max absolute error: 1.02e-10
+Saved plot to C:\Users\ofurn\Dokumenter\Github\fys5419\project1\code\scripts\..\plots\part-e_vqe_comp.pdf

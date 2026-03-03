@@ -1,0 +1,8 @@
+H0 decomposition: eps=2.0, Omega=-2.0
+H0 original matches decomposition: True
+HI decomposition: c=0.0, omega_z=3.0, omega_x=0.2
+HI original matches decomposition: True
+
+Saved plots to C:\Users\ofurn\Dokumenter\Github\fys5419\project1\code\scripts\..\plots
+At lambda=2/3, E1=1.8656, E2=2.1344
+Level crossing and state mixing analysis complete.
