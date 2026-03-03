@@ -16,17 +16,15 @@ def setup_economist_style():
         'axes.facecolor': 'white',
         
         # Spines
-        'axes.spines.top': False,
-        'axes.spines.right': False,
+        'axes.spines.top': True,
+        'axes.spines.right': True,
         'axes.spines.left': True,
         'axes.spines.bottom': True,
+        'axes.linewidth': 1.0,
+        'axes.edgecolor': ECONOMIST_DARK_GREY,
         
         # Grid
-        'axes.grid': True,
-        'grid.color': ECONOMIST_LIGHT_GREY,
-        'grid.linestyle': '-',
-        'grid.linewidth': 0.5,
-        'axes.axisbelow': True,
+        'axes.grid': False,
         
         # Fonts and sizes
         'font.family': 'sans-serif',
@@ -35,7 +33,11 @@ def setup_economist_style():
         'axes.titleweight': 'bold',
         'axes.labelsize': 12,
         'xtick.labelsize': 10,
+        'xtick.major.size': 5,
+        'xtick.major.width': 1.0,
         'ytick.labelsize': 10,
+        'ytick.major.size': 5,
+        'ytick.major.width': 1.0,
         'legend.fontsize': 10,
         'legend.frameon': False,
         
