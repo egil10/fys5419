@@ -39,10 +39,13 @@ The implementation follows the project roadmap from qubit basics to many-body VQ
 All plots are stored in [plots/](../plots/) as PDFs.
 - `part-a_measurement_dist.pdf`
 - `part-b_eigenvalues.pdf`
+- `part-b_eigenvector_mixing.pdf`
 - `part-c_vqe_comp.pdf`
 - `part-c_vqe_error.pdf`
+- `part-c_energy_landscape.pdf`
 - `part-d_eigenvalues.pdf`
 - `part-d_entropy.pdf`
 - `part-e_vqe_comp.pdf`
 - `part-f_j1.pdf` / `part-f_j2.pdf`
+- `part-f_scaling.pdf`
 - `part-g_vqe_j1.pdf`

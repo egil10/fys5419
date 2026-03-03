@@ -41,40 +41,42 @@ def von_neumann_entropy(state, subsystem_to_trace):
 # Sweep lambda from 0 to 1
 lambdas = np.linspace(0, 1, 101)
 all_eigvals = []
-entropies = []
+all_entropies = np.zeros((len(lambdas), 4))
 
-for l in lambdas:
+for i, l in enumerate(lambdas):
     H = H0 + l * HI
     w, v = np.linalg.eigh(H)
     all_eigvals.append(w)
     
-    # Ground state entropy
-    gs = v[:, 0]
-    entropies.append(von_neumann_entropy(gs, 0))
+    # Entropy for each of the 4 eigenstates
+    for j in range(4):
+        state = v[:, j]
+        all_entropies[i, j] = von_neumann_entropy(state, 0)
 
 all_eigvals = np.array(all_eigvals)
 
 # Plotting Eigenvalues
 plt.figure(figsize=(10, 6))
+colors = ['r', 'g', 'b', 'k']
 for i in range(4):
-    plt.plot(lambdas, all_eigvals[:, i], label=f"E{i}")
+    plt.plot(lambdas, all_eigvals[:, i], label=f"E{i}", color=colors[i])
 plt.xlabel("lambda")
 plt.ylabel("Eigenvalues")
 plt.title("Two-Qubit Hamiltonian Eigenvalues vs. lambda")
 plt.legend()
 plt.grid(True)
 plt.savefig(os.path.join(plot_dir, "part-d_eigenvalues.pdf"))
-# plt.show()
 
-# Plotting Entropy
+# Plotting Entropy for all states
 plt.figure(figsize=(10, 6))
-plt.plot(lambdas, entropies, 'm-')
+for i in range(4):
+    plt.plot(lambdas, all_entropies[:, i], label=f"S(E{i})", color=colors[i])
 plt.xlabel("lambda")
 plt.ylabel("von Neumann Entropy S(A)")
-plt.title("Ground State Entanglement Entropy vs. lambda")
+plt.title("Eigenstate Entanglement Entropy vs. lambda")
+plt.legend()
 plt.grid(True)
 plt.savefig(os.path.join(plot_dir, "part-d_entropy.pdf"))
-# plt.show()
 
 print("Two-qubit analysis complete.")
-print(f"Saved plots to {os.path.join(plot_dir, 'part-d_eigenvalues.pdf')} and {os.path.join(plot_dir, 'part-d_entropy.pdf')}")
+print(f"Saved plots to {plot_dir}")

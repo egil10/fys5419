@@ -82,6 +82,22 @@ plt.title("VQE Error relative to Exact Ground State")
 plt.grid(True)
 plt.savefig(os.path.join(plot_dir, "part-c_vqe_error.pdf"))
 
-print("VQE simulation complete.")
+# Visualize Energy Landscape for lambda = 1.0
+l_plot = 1.0
+thetas = np.linspace(-np.pi, np.pi, 200)
+energies_land = [expectation_value(t, l_plot) for t in thetas]
+vqe_val, vqe_theta = vqe_solver(l_plot)
+
+plt.figure(figsize=(10, 6))
+plt.plot(thetas, energies_land, 'k-', label=f"E(theta) for lambda={l_plot}")
+plt.plot(vqe_theta, vqe_val, 'ro', label="VQE Minimum")
+plt.xlabel("Variational Parameter theta")
+plt.ylabel("Expected Energy")
+plt.title(f"VQE Energy Landscape (lambda={l_plot})")
+plt.legend()
+plt.grid(True)
+plt.savefig(os.path.join(plot_dir, "part-c_energy_landscape.pdf"))
+
+print("VQE simulation and landscape visualization complete.")
 print(f"Max error across lambda sweep: {np.max(np.abs(vqe_energies - exact_energies)):.2e}")
-print(f"Saved plots to {os.path.join(plot_dir, 'part-c_vqe_comp.pdf')} and {os.path.join(plot_dir, 'part-c_vqe_error.pdf')}")
+print(f"Saved plots to {plot_dir}")
