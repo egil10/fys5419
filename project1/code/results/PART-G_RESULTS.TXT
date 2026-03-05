@@ -1,3 +1,12 @@
-Lipkin VQE analysis complete for J=1.
-Max absolute error: 1.7452e-10
-Saved plot to C:\Users\ofurn\Dokumenter\Github\fys5419\project1\code\scripts\..\plots\part-g_vqe_j1.pdf
+PART G: LIPKIN VQE RESULTS
+==================================================
+
+Ansatz: Hardware-efficient Ry-CZ, depth=2
+Optimizer: BFGS with multiple restarts
+
+J=1 (N=2): Max VQE error = 7.03e-11
+J=2 (N=4): Max VQE error = 2.00e-01
+
+Sector consistency verified:
+  J=1 Pauli GS = Quasispin GS: True
+  J=2 Pauli GS = Quasispin GS: True

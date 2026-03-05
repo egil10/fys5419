@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from plot_style import setup_economist_style, add_economist_signature
 
+np.random.seed(42)  # For reproducible measurement simulation
 setup_economist_style()
 
 # Define plot path relative to script location
@@ -122,7 +123,7 @@ ax.set_ylabel("Probability")
 add_economist_signature(ax, "Measured State Distribution", 
                         subtitle=f"Average of {num_runs} runs, {shots_per_run} shots each")
 plt.savefig(os.path.join(plot_dir, "part-a_measurement_dist.pdf"))
-plt.show()
+# plt.show()  # Disabled for non-interactive execution
 
 print(f"\nSaved measurement distribution plot to {os.path.join(plot_dir, 'part-a_measurement_dist.pdf')}")
 
@@ -151,9 +152,29 @@ def von_neumann_entropy(state, subsystem_to_trace):
     entropy = -np.sum(eigvals * np.log2(eigvals))
     return entropy
 
-ent_phi = von_neumann_entropy(phi_plus, 1)
-print(f"Entropy of |Phi+> (expect 1): {ent_phi}")
+# Compute entropy for ALL Bell states
+bell_states = {
+    "|Φ+⟩": phi_plus,
+    "|Φ−⟩": phi_minus,
+    "|Ψ+⟩": psi_plus,
+    "|Ψ−⟩": psi_minus,
+}
 
-# Entropy of a separable state |00>
-ent_sep = von_neumann_entropy(ket00, 1)
-print(f"Entropy of |00> (expect 0): {ent_sep}")
+print("von Neumann Entropy for Bell States (all maximally entangled, expect S=1):")
+for name, state in bell_states.items():
+    ent = von_neumann_entropy(state, 1)
+    print(f"  S({name}) = {ent:.6f}")
+
+# Entropy of separable states
+print("\nvon Neumann Entropy for Separable States (expect S=0):")
+ent_sep_00 = von_neumann_entropy(ket00, 1)
+print(f"  S(|00⟩) = {ent_sep_00:.6f}")
+
+# Non-trivially separable: |+> ⊗ |0>
+ket_plus = (ket0 + ket1) / np.sqrt(2)
+product_state = np.kron(ket_plus, ket0)
+ent_product = von_neumann_entropy(product_state, 1)
+print(f"  S(|+⟩⊗|0⟩) = {ent_product:.6f}")
+
+print("\nConclusion: All Bell states have maximal entropy S=1 (maximally entangled),")
+print("while all product states have S=0 (no entanglement), regardless of superposition.")

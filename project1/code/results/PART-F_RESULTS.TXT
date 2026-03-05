@@ -1,2 +1,16 @@
-Lipkin model classical analysis and scaling comparison complete.
-Saved plots to C:\Users\ofurn\Dokumenter\Github\fys5419\project1\code\scripts\..\plots
+PART F: LIPKIN MODEL CLASSICAL ANALYSIS
+==================================================
+
+Pauli Decomposition (J=1, N=2, 2 qubits):
+  H = (eps/2) ZI + (eps/2) IZ + (V/2) XX - (V/2) YY
+
+Pauli Decomposition (J=2, N=4, 4 qubits):
+  H = (eps/2) sum_i Z_i + (V/2) sum_{i<j} (X_iX_j - Y_iY_j)
+
+Verification (eps=1.0, V=0.5):
+  J=1 triplet eigenvalues match quasispin: True
+  J=2 sector eigenvalues match quasispin:  True
+
+Critical interaction strengths:
+  N=2: V_c = 1.0000
+  N=4: V_c = 0.3333

@@ -94,7 +94,7 @@ ax.legend()
 add_economist_signature(ax, "Ground State Character", subtitle="State mixing showing the avoided crossing transition")
 plt.savefig(os.path.join(plot_dir, "part-b_eigenvector_mixing.pdf"))
 
-plt.show()
+# plt.show()  # Disabled for non-interactive execution
 
 # --- DISCUSSION ---
 idx_two_thirds = np.argmin(np.abs(lambdas - 2/3))

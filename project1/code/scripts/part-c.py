@@ -157,7 +157,7 @@ ax.legend()
 add_economist_signature(ax, "VQE Precision", subtitle="Numerical error for both states")
 plt.savefig(os.path.join(plot_dir, "part-c_vqe_spectrum_error.pdf"))
 
-plt.show()
+# plt.show()  # Disabled for non-interactive execution
 
 print("\n--- DISCUSSION OF RESULTS ---")
 print("1. Consistency: The VQE implementation yields results highly consistent with exact diagonalization for both states.")

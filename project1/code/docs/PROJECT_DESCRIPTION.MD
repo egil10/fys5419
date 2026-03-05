@@ -53,9 +53,13 @@ For $J=1$ (3 states), we map the system to a 2-qubit subspace ($2^2=4$ states). 
 - Optimization and accuracy benchmarking.
 
 ### Part (f): Lipkin Model
-- Second quantization Hamiltonian construction.
-- Classical diagonalization for $J=1$ and $J=2$.
+- Second quantization Hamiltonian construction using quasispin operators.
+- **Pauli decomposition**: J=1 mapped to `(ε/2)(Z₁+Z₂) + (V/2)(X₁X₂ − Y₁Y₂)`, verified by projection to triplet subspace.
+- **Pauli decomposition**: J=2 mapped to `(ε/2)Σᵢ Zᵢ + (V/2)Σᵢ<ⱼ(XᵢXⱼ − YᵢYⱼ)`, J=2 sector eigenvalues verified.
+- Classical diagonalization for $J=1$ and $J=2$ with Hartree-Fock comparison.
 
 ### Part (g): VQE for Lipkin Model
-- Mapping quasispin to Pauli strings.
-- VQE optimization for the Lipkin model ground state.
+- Mapping quasispin to Pauli strings for N-qubit simulation.
+- VQE optimization for the Lipkin model ground state with hardware-efficient ansatz.
+- Triplet-sector verification: VQE ground state confirmed in maximal-J sector.
+- Cross-validation against quasispin exact diagonalization.

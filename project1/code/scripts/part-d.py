@@ -66,7 +66,7 @@ def get_von_neumann_entropy(state):
 # --- Sweep lambda ---
 lambdas = np.linspace(0, 1, 201)
 energies = []
-entropies = []
+entropies_all = []  # Entropy for all 4 eigenstates
 
 print("Analyzing two-qubit system over lambda range...")
 for l in lambdas:
@@ -74,11 +74,12 @@ for l in lambdas:
     w, v = np.linalg.eigh(H)
     
     energies.append(w)
-    # Ground state entropy
-    entropies.append(get_von_neumann_entropy(v[:, 0]))
+    # Entropy for ALL eigenstates
+    state_entropies = [get_von_neumann_entropy(v[:, i]) for i in range(4)]
+    entropies_all.append(state_entropies)
 
 energies = np.array(energies)
-entropies = np.array(entropies)
+entropies_all = np.array(entropies_all)  # shape: (n_lambda, 4)
 
 # --- Plotting ---
 # 1. Eigenvalues
@@ -93,12 +94,14 @@ ax.legend(title="Eigenstates")
 add_economist_signature(ax, "Two-Qubit State Spectrum", subtitle="Energy levels showing interaction effects and avoided crossings")
 plt.savefig(os.path.join(plot_dir, "part-d_eigenvalues.pdf"))
 
-# 2. Entropy
+# 2. Entropy for ALL eigenstates
 fig, ax = plt.subplots(figsize=(10, 6))
-ax.plot(lambdas, entropies, color='#E3120B', lw=2)
+for i in range(4):
+    ax.plot(lambdas, entropies_all[:, i], color=colors[i], lw=2, label=f"State {i}")
 ax.set_xlabel("Interaction Strength lambda")
 ax.set_ylabel("von Neumann Entropy (bits)")
-add_economist_signature(ax, "Ground State Entanglement", subtitle="Entropy jump marking a phase/character transition")
+ax.legend(title="Eigenstates")
+add_economist_signature(ax, "Entanglement Across the Spectrum", subtitle="Entropy for all eigenstates showing interaction-driven entanglement")
 plt.savefig(os.path.join(plot_dir, "part-d_entropy.pdf"))
 
 # plt.show()
@@ -117,7 +120,8 @@ print("   At lambda = 0, entropy is 0.0 because the ground state is a pure compu
 print("   basis state (|00>). As interaction grows, the state becomes a superposition.")
 print("   The sharp increase (jump) in entropy marks a point where the ground state")
 print("   undergoes a significant change in composition, often termed an 'avoided crossing'.")
-print(f"   Peak Entropy observed: {np.max(entropies):.4f} bits.")
+print(f"   Peak GS Entropy observed: {np.max(entropies_all[:, 0]):.4f} bits.")
+print(f"   Similar peaks in excited states: {[f'{np.max(entropies_all[:, i]):.4f}' for i in range(1, 4)]}")
 
 print("\n3. IMPLICATION:")
 print("   Entanglement is intrinsically driven by the Hamiltonian's off-diagonal elements")
