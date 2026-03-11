@@ -1,46 +1,44 @@
-# FYS5419 -- Quantum Computing & Quantum Machine Learning
+# FYS5419 — Quantum Computing & Quantum Machine Learning
 
 > *"Nature isn't classical, dammit, and if you want to make a simulation of nature, you'd better make it quantum mechanical."*
-> -- Richard Feynman
+> — Richard Feynman
 
-Code, notebooks, and notes for FYS5419 at the University of Oslo, Spring 2026.
-
-The course is about building and running quantum algorithms -- from single-qubit gates all the way to variational solvers on real hardware. It sits at the intersection of quantum physics, computer science, and machine learning, and it's one of the most exciting things happening in science right now.
+University of Oslo · Spring 2026
 
 ---
 
 ## Projects
 
-| # | Title | Description |
-|---|-------|-------------|
-| 1 | **VQE Study of the Lipkin Model** | Variational quantum eigensolvers, ground state search, entanglement, and noise. |
-| 2 | **QAOA** | Quantum Approximate Optimization Algorithm. Details TBD. |
+### [Project 1 — VQE Study of the Lipkin Model](project1/)
+
+From single-qubit gates to many-body nuclear physics on a quantum computer.
+
+We implement the Variational Quantum Eigensolver from scratch, benchmark it against exact diagonalization and Qiskit, and apply it to the Lipkin-Meshkov-Glick model — a cornerstone of nuclear structure theory. Along the way: entanglement entropy, avoided crossings, Hartree-Fock, and the quantum phase transition.
+
+### Project 2 — *TBD*
 
 ---
 
-## What you'll learn
+## Repository Structure
 
-- Quantum gates, circuits, and measurement
-- Variational Quantum Eigensolver (VQE) -- the workhorse of near-term quantum computing
-- Entanglement, density matrices, von Neumann entropy
-- Quantum noise and error on real hardware
-- Quantum machine learning on classical and quantum data
+```
+fys5419/
+├── project1/
+│   └── code/
+│       ├── scripts/     # Python scripts (part-a.py through part-g.py)
+│       ├── notebooks/   # Jupyter notebook mirrors
+│       ├── plots/       # Generated figures (PDF)
+│       ├── results/     # Numerical output
+│       └── docs/        # Per-part write-ups and results
+├── lectures/            # Lecture notes and materials
+└── requirements.txt     # Python dependencies
+```
 
-The goal is to build real intuition for how quantum systems behave, and to actually run things -- not just read about them.
+## Stack
 
----
+Python · NumPy · SciPy · Matplotlib · Qiskit
 
-## Prerequisites
+## References
 
-- Quantum mechanics (FYS3110 / FYS4480)
-- Machine learning (FYS-STK4155)
-- Linear algebra -- you'll live in Hilbert spaces
-- Python -- NumPy, SciPy, Matplotlib
-
----
-
-## Resources
-
-- [Course page at UiO](https://www.uio.no/studier/emner/matnat/fys/FYS5419/)
-- [Lipkin model reference (Phys. Rev. C 106, 024319)](https://journals.aps.org/prc/pdf/10.1103/PhysRevC.106.024319)
-- IBM Quantum for real hardware access
+- [Course page — UiO](https://www.uio.no/studier/emner/matnat/fys/FYS5419/)
+- [Lipkin model reference — Phys. Rev. C 106, 024319 (2022)](https://journals.aps.org/prc/pdf/10.1103/PhysRevC.106.024319)
