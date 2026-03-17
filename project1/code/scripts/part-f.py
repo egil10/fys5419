@@ -75,28 +75,28 @@ print("=" * 60)
 #   J+^2 + J-^2 = sum_{i<j} (XiXj - YiYj)  [for N=2: just X1X2 - Y1Y2]
 #
 # Therefore:
-#   H = eps/2 * (Z_1 + Z_2) + V/2 * (X_1 X_2 - Y_1 Y_2)
+#   H = eps/2 * (Z_1 + Z_2) + V/2 * (X_1 X_2 - Y_1 Y_2) + W/2 * (X_1 X_2 + Y_1 Y_2)
 #
 # In Pauli string notation:
-#   H = (eps/2) ZI + (eps/2) IZ + (V/2) XX - (V/2) YY
+#   H = (eps/2) ZI + (eps/2) IZ + (V/2 + W/2) XX + (-V/2 + W/2) YY
 
 print("\n--- J=1 (N=2, 2-qubit Pauli decomposition) ---")
-print("H_J1 = (eps/2) ZI + (eps/2) IZ + (V/2) XX - (V/2) YY")
+print("H_J1 = (eps/2) ZI + (eps/2) IZ + (V/2 + W/2) XX + (-V/2 + W/2) YY")
 print("\nVerification:")
 
-def lipkin_pauli_j1(eps, V):
+def lipkin_pauli_j1(eps, V, W=0.0):
     """Constructs J=1 Lipkin Hamiltonian using Pauli strings (4x4)."""
     H = (eps/2) * np.kron(sigma_z, I2)     # ZI
     H += (eps/2) * np.kron(I2, sigma_z)    # IZ
-    H += (V/2) * np.kron(sigma_x, sigma_x)  # XX
-    H -= (V/2) * np.kron(sigma_y, sigma_y)  # YY
+    H += (V/2 + W/2) * np.kron(sigma_x, sigma_x)  # XX
+    H += (-V/2 + W/2) * np.kron(sigma_y, sigma_y)  # YY
     return np.real(H)
 
 # Verify: The 4x4 Pauli Hamiltonian's triplet-sector eigenvalues
 # must match the 3x3 quasispin eigenvalues.
-eps_test, V_test = 1.0, 0.5
-H_pauli_4x4 = lipkin_pauli_j1(eps_test, -V_test)
-H_quasispin_3x3 = lipkin_hamiltonian(1, eps_test, -V_test, 0)
+eps_test, V_test, W_test = 1.0, 0.5, 0.2
+H_pauli_4x4 = lipkin_pauli_j1(eps_test, -V_test, W_test)
+H_quasispin_3x3 = lipkin_hamiltonian(1, eps_test, -V_test, W_test)
 
 eig_pauli = np.sort(np.linalg.eigvalsh(H_pauli_4x4))
 eig_quasi = np.sort(np.linalg.eigvalsh(H_quasispin_3x3))
@@ -131,18 +131,18 @@ print(f"  Matrices match: {np.allclose(H_projected, H_quasispin_3x3)}")
 #   J+^2 + J-^2 = 2 * sum_{i<j} (X_i X_j - Y_i Y_j)
 #
 # Therefore:
-#   H = eps/2 * (Z1+Z2+Z3+Z4) + V * sum_{i<j} (XiXj - YiYj)
+#   H = eps/2 * (Z1+Z2+Z3+Z4) + V/2 * sum_{i<j} (XiXj - YiYj) + W/2 * sum_{i<j} (XiXj + YiYj)
 #
 # The 6 pairs (i<j) for 4 qubits are:
 #   (0,1), (0,2), (0,3), (1,2), (1,3), (2,3)
 
 print("\n--- J=2 (N=4, 4-qubit Pauli decomposition) ---")
-print("H_J2 = (eps/2) * sum_i Z_i + (V/2) * sum_{i<j} (X_iX_j - Y_iY_j)")
+print("H_J2 = (eps/2) * sum_i Z_i + sum_{i<j} [ (V/2 + W/2) X_iX_j + (-V/2 + W/2) Y_iY_j ]")
 print("     = (eps/2)(ZIII + IZII + IIZI + IIIZ)")
-print("       + (V/2)*(XXII - YYII + XIXI - YIYI + XIII - YIIY")
-print("               + IXXI - IYYI + IXIX - IYIY + IIXX - IIYY)")
+print("       + (V/2 + W/2)*(XXII + XIXI + XIII + IXXI + IXIX + IIXX)")
+print("       + (-V/2 + W/2)*(YYII + YIYI + YIIY + IYYI + IYIY + IIYY)")
 
-def lipkin_pauli_j2(eps, V):
+def lipkin_pauli_j2(eps, V, W=0.0):
     """Constructs J=2 Lipkin Hamiltonian using Pauli strings (16x16)."""
     N = 4
     paulis = {"I": I2, "X": sigma_x, "Y": sigma_y, "Z": sigma_z}
@@ -162,22 +162,22 @@ def lipkin_pauli_j2(eps, V):
         ops[i] = sigma_z
         H += (eps/2) * pauli_string(ops)
     
-    # H1: V/2 * sum_{i<j} (XiXj - YiYj)
+    # Interaction terms
     for i in range(N):
         for j in range(i+1, N):
             ops_xx = [I2] * N
             ops_xx[i], ops_xx[j] = sigma_x, sigma_x
-            H += (V/2) * pauli_string(ops_xx)
+            H += (V/2 + W/2) * pauli_string(ops_xx)
             
             ops_yy = [I2] * N
             ops_yy[i], ops_yy[j] = sigma_y, sigma_y
-            H -= (V/2) * pauli_string(ops_yy)
+            H += (-V/2 + W/2) * pauli_string(ops_yy)
     
     return np.real(H)
 
 # Verify J=2
-H_pauli_16x16 = lipkin_pauli_j2(eps_test, -V_test)
-H_quasispin_5x5 = lipkin_hamiltonian(2, eps_test, -V_test, 0)
+H_pauli_16x16 = lipkin_pauli_j2(eps_test, -V_test, W_test)
+H_quasispin_5x5 = lipkin_hamiltonian(2, eps_test, -V_test, W_test)
 
 eig_pauli_j2 = np.sort(np.linalg.eigvalsh(H_pauli_16x16))
 eig_quasi_j2 = np.sort(np.linalg.eigvalsh(H_quasispin_5x5))
@@ -298,7 +298,7 @@ print("   The 16x16 space contains J=0,1,2 sectors; the J=2 sector (dim=5)")
 print("   eigenvalues are verified to match the quasispin 5x5 matrix.")
 
 print("\n2. MATRIX VERIFICATION:")
-print(f"   For J=1, V=0.5, H_J1 is:\n{lipkin_hamiltonian(1, eps, -0.5, 0)}")
+print(f"   For J=1, V=0.5, W=0, H_J1 is:\n{lipkin_hamiltonian(1, eps, -0.5, 0)}")
 print("   Matches the prompt format: [[-eps, 0, -V], [0, 0, 0], [-V, 0, eps]]")
 
 print("\n3. PHASE TRANSITION:")
@@ -323,10 +323,10 @@ with open(os.path.join(results_dir, "PART-F_RESULTS.TXT"), "w") as f:
     f.write("PART F: LIPKIN MODEL CLASSICAL ANALYSIS\n")
     f.write("="*50 + "\n\n")
     f.write("Pauli Decomposition (J=1, N=2, 2 qubits):\n")
-    f.write("  H = (eps/2) ZI + (eps/2) IZ + (V/2) XX - (V/2) YY\n\n")
+    f.write("  H = (eps/2) ZI + (eps/2) IZ + (V/2 + W/2) XX + (-V/2 + W/2) YY\n\n")
     f.write("Pauli Decomposition (J=2, N=4, 4 qubits):\n")
-    f.write("  H = (eps/2) sum_i Z_i + (V/2) sum_{i<j} (X_iX_j - Y_iY_j)\n\n")
-    f.write(f"Verification (eps={eps_test}, V={V_test}):\n")
+    f.write("  H = (eps/2) sum_i Z_i + sum_{i<j} [ (V/2 + W/2) X_iX_j + (-V/2 + W/2) Y_iY_j ]\n\n")
+    f.write(f"Verification (eps={eps_test}, V={V_test}, W={W_test}):\n")
     f.write(f"  J=1 triplet eigenvalues match quasispin: True\n")
     f.write(f"  J=2 sector eigenvalues match quasispin:  True\n\n")
     f.write(f"Critical interaction strengths:\n")

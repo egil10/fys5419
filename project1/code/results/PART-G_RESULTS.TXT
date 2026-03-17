@@ -6,7 +6,7 @@ Ansatz: Hardware-efficient Ry-CZ (alternating entanglement)
   J=2: depth=4, 16 params, 4 restarts
 Optimizer: L-BFGS-B
 
-J=1 (N=2): Max VQE error = 2.91e-11
+J=1 (N=2): Max VQE error = 2.92e-11
 J=2 (N=4): Max VQE error = 1.80e-02
 
 Sector consistency verified at V=0.5:

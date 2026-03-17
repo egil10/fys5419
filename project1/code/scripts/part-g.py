@@ -22,10 +22,10 @@ if not os.path.exists(plot_dir):
 # For N particles (J = N/2):
 #   Jz = 1/2 * sum(Zi)
 #   J+^2 + J-^2 = sum_{i<j} (XiXj - YiYj)
-#   H = eps * Jz + 1/2 * V * (J+^2 + J-^2)
-#   H = eps/2 * sum(Zi) + V/2 * sum_{i<j} (XiXj - YiYj)
+#   H = eps * Jz + 1/2 * V * (J+^2 + J-^2) + 1/2 * W * (J+J- + J-J+ - N)
+#   H = eps/2 * sum(Zi) + V/2 * sum_{i<j} (XiXj - YiYj) + W/2 * sum_{i<j} (XiXj + YiYj)
 
-def get_lipkin_sparse_pauli(N, eps, V):
+def get_lipkin_sparse_pauli(N, eps, V, W=0.0):
     """Constructs the Lipkin Hamiltonian as a SparsePauliOp for N qubits."""
     pauli_list = []
     
@@ -35,15 +35,15 @@ def get_lipkin_sparse_pauli(N, eps, V):
         paulis[i] = "Z"
         pauli_list.append(("".join(paulis), eps/2.0))
         
-    # H1: (V/2) * sum_{i<j} (XiXj - YiYj)
+    # Interaction terms
     for i in range(N):
         for j in range(i + 1, N):
             px = ["I"] * N
             px[i], px[j] = "X", "X"
-            pauli_list.append(("".join(px), V * 0.5))
+            pauli_list.append(("".join(px), V * 0.5 + W * 0.5))
             py = ["I"] * N
             py[i], py[j] = "Y", "Y"
-            pauli_list.append(("".join(py), -V * 0.5))
+            pauli_list.append(("".join(py), -V * 0.5 + W * 0.5))
             
     return SparsePauliOp.from_list(pauli_list)
 
@@ -65,10 +65,14 @@ def get_quasispin_ops(J):
             Jminus[i-1, i] = np.sqrt(J*(J+1) - m*(m-1))
     return Jz, Jplus, Jminus
 
-def lipkin_quasispin(J, eps, V):
+def lipkin_quasispin(J, eps, V, W=0.0):
     """Reference Lipkin Hamiltonian in the J-subspace (quasispin form)."""
     Jz, Jp, Jm = get_quasispin_ops(J)
-    return eps * Jz + 0.5 * V * (Jp @ Jp + Jm @ Jm)
+    N = 2 * J
+    H0 = eps * Jz
+    H1 = 0.5 * V * (Jp @ Jp + Jm @ Jm)
+    H2 = 0.5 * W * (-N * np.eye(int(2*J+1)) + Jp @ Jm + Jm @ Jp)
+    return H0 + H1 + H2
 
 # ======================================================================
 # Triplet-Sector Verification (quick check at one V value)
@@ -78,10 +82,10 @@ print("=" * 60)
 print(" TRIPLET-SECTOR VERIFICATION")
 print("=" * 60)
 
-eps_test, V_test = 1.0, 0.5
+eps_test, V_test, W_test = 1.0, 0.5, 0.2
 for N, J_val in [(2, 1), (4, 2)]:
-    H_pauli_mat = get_lipkin_sparse_pauli(N, eps_test, V_test).to_matrix()
-    H_quasi = lipkin_quasispin(J_val, eps_test, V_test)
+    H_pauli_mat = get_lipkin_sparse_pauli(N, eps_test, V_test, W_test).to_matrix()
+    H_quasi = lipkin_quasispin(J_val, eps_test, V_test, W_test)
     
     eig_pauli = np.sort(np.linalg.eigvalsh(np.real(H_pauli_mat)))
     eig_quasi = np.sort(np.linalg.eigvalsh(H_quasi))
@@ -127,13 +131,13 @@ def hardware_efficient_ansatz(N, params, depth=2):
                     qc.cz(0, N - 1)  # Wrap-around for full connectivity
     return qc
 
-def vqe_objective(params, N, eps, V, depth):
-    h_op = get_lipkin_sparse_pauli(N, eps, V)
+def vqe_objective(params, N, eps, V, W, depth):
+    h_op = get_lipkin_sparse_pauli(N, eps, V, W)
     qc = hardware_efficient_ansatz(N, params, depth)
     psi = Statevector.from_instruction(qc)
     return psi.expectation_value(h_op).real
 
-def solve_vqe(N, eps, V, depth=2, n_restarts=3):
+def solve_vqe(N, eps, V, W=0.0, depth=2, n_restarts=3):
     """VQE solver with multiple random restarts."""
     num_params = depth * N
     best_energy = np.inf
@@ -144,15 +148,15 @@ def solve_vqe(N, eps, V, depth=2, n_restarts=3):
         else:
             init_params = np.random.uniform(-np.pi, np.pi, num_params)
         
-        res = minimize(vqe_objective, init_params, args=(N, eps, V, depth),
+        res = minimize(vqe_objective, init_params, args=(N, eps, V, W, depth),
                        method='L-BFGS-B')
         if res.fun < best_energy:
             best_energy = res.fun
     
     return best_energy
 
-def lipkin_sparse_to_matrix(N, eps, V):
-    return get_lipkin_sparse_pauli(N, eps, V).to_matrix()
+def lipkin_sparse_to_matrix(N, eps, V, W=0.0):
+    return get_lipkin_sparse_pauli(N, eps, V, W).to_matrix()
 
 # ======================================================================
 # Print Circuit Diagrams

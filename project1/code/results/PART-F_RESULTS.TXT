@@ -2,12 +2,12 @@ PART F: LIPKIN MODEL CLASSICAL ANALYSIS
 ==================================================
 
 Pauli Decomposition (J=1, N=2, 2 qubits):
-  H = (eps/2) ZI + (eps/2) IZ + (V/2) XX - (V/2) YY
+  H = (eps/2) ZI + (eps/2) IZ + (V/2 + W/2) XX + (-V/2 + W/2) YY
 
 Pauli Decomposition (J=2, N=4, 4 qubits):
-  H = (eps/2) sum_i Z_i + (V/2) sum_{i<j} (X_iX_j - Y_iY_j)
+  H = (eps/2) sum_i Z_i + sum_{i<j} [ (V/2 + W/2) X_iX_j + (-V/2 + W/2) Y_iY_j ]
 
-Verification (eps=1.0, V=0.5):
+Verification (eps=1.0, V=0.5, W=0.2):
   J=1 triplet eigenvalues match quasispin: True
   J=2 sector eigenvalues match quasispin:  True
 
