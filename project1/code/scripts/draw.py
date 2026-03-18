@@ -75,4 +75,14 @@ qc_g_j2 = draw_hardware_efficient_ansatz(4, 4)
 qc_g_j2.draw(output='mpl', style=style_bw, filename=os.path.join(plot_dir, "circuit_part_g_j2.pdf"))
 print("Saved circuit_part_g_j2.pdf")
 
+# ==========================================
+# Bell State Preparation (Phi+)
+# ==========================================
+qc_bell = QuantumCircuit(2)
+qc_bell.h(0)
+qc_bell.cx(0, 1)
+
+qc_bell.draw(output='mpl', style=style_bw, filename=os.path.join(plot_dir, "circuit_bell_state.pdf"))
+print("Saved circuit_bell_state.pdf")
+
 print("\nDone! Diagrams have been generated using a minimal black and white LaTeX style.")
