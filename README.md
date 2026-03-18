@@ -1,9 +1,18 @@
 # FYS5419 — Quantum Computing & Quantum Machine Learning
 
+University of Oslo · Spring 2026
+
 > *"Nature isn't classical, dammit, and if you want to make a simulation of nature, you'd better make it quantum mechanical."*
 > — Richard Feynman
 
-University of Oslo · Spring 2026
+---
+
+## Report
+
+The full written report is available here:
+**[fys5419-overleaf](https://github.com/egil10/fys5419-overleaf)**
+
+It covers the VQE study of the Lipkin–Meshkov–Glick model in detail — from single-qubit gates through four-qubit systems — including methods, results, numerical stability analysis, and appendices on the VQE algorithm and Python environment.
 
 ---
 
@@ -11,34 +20,41 @@ University of Oslo · Spring 2026
 
 ### [Project 1 — VQE Study of the Lipkin Model](project1/)
 
-From single-qubit gates to many-body nuclear physics on a quantum computer.
+Implementing the Variational Quantum Eigensolver from scratch and applying it to the Lipkin–Meshkov–Glick model, a cornerstone of nuclear structure theory. Benchmarked against exact diagonalization and Qiskit, with analysis of entanglement entropy, avoided crossings, Hartree-Fock, and quantum phase transitions.
 
-We implement the Variational Quantum Eigensolver from scratch, benchmark it against exact diagonalization and Qiskit, and apply it to the Lipkin-Meshkov-Glick model — a cornerstone of nuclear structure theory. Along the way: entanglement entropy, avoided crossings, Hartree-Fock, and the quantum phase transition.
+### [Project 2 — QAOA](project2/)
 
-### Project 2 — *TBD*
+Quantum Approximate Optimization Algorithm.
 
 ---
 
-## Repository Structure
+## Structure
 
 ```
 fys5419/
 ├── project1/
 │   └── code/
-│       ├── scripts/     # Python scripts (part-a.py through part-g.py)
-│       ├── notebooks/   # Jupyter notebook mirrors
-│       ├── plots/       # Generated figures (PDF)
-│       ├── results/     # Numerical output
-│       └── docs/        # Per-part write-ups and results
-├── lectures/            # Lecture notes and materials
-└── requirements.txt     # Python dependencies
+│       ├── scripts/       # part-a.py through part-g.py
+│       ├── notebooks/     # Jupyter notebook mirrors
+│       ├── plots/         # Generated figures (PDF)
+│       ├── results/       # Numerical output
+│       └── docs/          # Per-part write-ups
+├── project2/
+│   └── code/
+│       ├── scripts/
+│       ├── notebooks/
+│       └── plots/
+├── lectures/              # Lecture notes and materials
+└── requirements.txt
 ```
 
 ## Stack
 
-Python · NumPy · SciPy · Matplotlib · Qiskit
+Python · NumPy · SciPy · Matplotlib · Qiskit · PennyLane
+
+---
 
 ## References
 
-- [Course page — UiO](https://www.uio.no/studier/emner/matnat/fys/FYS5419/)
-- [Lipkin model reference — Phys. Rev. C 106, 024319 (2022)](https://journals.aps.org/prc/pdf/10.1103/PhysRevC.106.024319)
+- [Course page — UiO FYS5419](https://www.uio.no/studier/emner/matnat/fys/FYS5419/)
+- [Lipkin model — Phys. Rev. C 106, 024319 (2022)](https://journals.aps.org/prc/pdf/10.1103/PhysRevC.106.024319)
