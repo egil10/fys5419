@@ -10,7 +10,7 @@ University of Oslo · Spring 2026
 ## Report
 
 The full written report is available here:
-**[fys5419-overleaf](https://github.com/egil10/fys5419-overleaf)**
+**[fys5419-overleaf](https://github.com/egil10/claudoverius)**
 
 It covers the VQE study of the Lipkin–Meshkov–Glick model in detail — from single-qubit gates through four-qubit systems — including methods, results, numerical stability analysis, and appendices on the VQE algorithm and Python environment.
 
