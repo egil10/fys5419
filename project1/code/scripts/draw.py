@@ -47,6 +47,20 @@ fig_e.savefig(os.path.join(plot_dir, "circuit_part_e.pdf"), bbox_inches='tight',
 print("Saved circuit_part_e.pdf")
 
 # ==========================================
+# Part E: 2-Qubit Ansatz (1-indexed matching report eq)
+# ==========================================
+qc_e_1idx = QuantumCircuit(2)
+qc_e_1idx.ry(Parameter('$\\theta_1$'), 0)
+qc_e_1idx.ry(Parameter('$\\theta_2$'), 1)
+qc_e_1idx.cx(0, 1)
+qc_e_1idx.ry(Parameter('$\\theta_3$'), 0)
+qc_e_1idx.ry(Parameter('$\\theta_4$'), 1)
+
+fig_e_1idx = qc_e_1idx.draw(output='mpl', style=style_bw)
+fig_e_1idx.savefig(os.path.join(plot_dir, "circuit_part_e_1idx.pdf"), bbox_inches='tight', pad_inches=0.0)
+print("Saved circuit_part_e_1idx.pdf")
+
+# ==========================================
 # Part G: Many-Body Ansatz (Hardware-Efficient)
 # ==========================================
 def draw_hardware_efficient_ansatz(N, depth=2):
