@@ -32,17 +32,29 @@ Both algorithms are near-term. Both are variational. Both are genuinely quantum.
 
 ## Projects
 
-**[Project 1 — VQE & the Lipkin Model](project1/)**
-Variational Quantum Eigensolver applied to the Lipkin–Meshkov–Glick model. One to four qubits. Benchmarked against exact diagonalization and Qiskit. Entanglement entropy, avoided crossings, Hartree-Fock, quantum phase transitions.
+### [Project 1 — A VQE Study of the Lipkin Interaction](project1/)
 
-**[Project 2 — QAOA for Portfolio Optimization](project2/)**
-Quantum Approximate Optimization Algorithm applied to cardinality-constrained minimum-volatility portfolio selection. Problem cast as a QUBO. Tested against historical crisis windows: 2008, 2020, 2022.
+*How precisely can a variational quantum circuit reproduce the ground state of a nuclear model — and where does it break?*
+
+The Lipkin–Meshkov–Glick model is a benchmark for many-body quantum methods. This project implements VQE from scratch and pushes it through progressively harder systems: single-qubit gates, Bell state entanglement, the J=1 Lipkin Hamiltonian on two qubits, and finally the J=2 system on four qubits.
+
+The results are striking. For one qubit, the Ry ansatz is exact — errors below 10⁻¹⁰ across the full parameter range. For two qubits, precision holds until λ ≈ 0.4, where the optimizer undergoes a catastrophic branch-tracking failure at the avoided crossing: errors jump twelve orders of magnitude, from 10⁻¹⁴ to 10⁻¹. The same failure occurs in Qiskit. It's not a bug — it's a systematic consequence of the optimization landscape. The optimizer stays on the continuously connected upper branch and never crosses to the ground state.
+
+For four qubits, the problem shifts: the hardware-efficient ansatz lacks the symmetry of the Lipkin Hamiltonian, the optimizer wanders into unwanted sectors, and barren plateaus cause gradients to vanish near the phase transition. Error plateaus at 10⁻².
+
+What makes this interesting isn't where VQE succeeds — it's exactly where and why it fails.
+
+Full report: **[claudoverius](https://github.com/egil10/claudoverius)**
 
 <br>
 
-## Report
+### [Project 2 — QAOA for Portfolio Optimization](project2/)
 
-The full written report lives here: **[fys5419-overleaf-2](https://github.com/egil10/fys5419-overleaf-2)**
+*Can a quantum circuit find the minimum-volatility portfolio during a financial crisis?*
+
+Quantum Approximate Optimization Algorithm applied to cardinality-constrained minimum-volatility portfolio selection. The optimization problem is cast as a QUBO — structurally identical to finding the ground state of an Ising Hamiltonian — and solved via parameterized quantum circuits on Qiskit simulators. Covariance matrices are estimated from historical crisis windows (2008, 2020, 2022) to stress-test performance where classical assumptions break down.
+
+Full report: **[fys5419-overleaf-2](https://github.com/egil10/fys5419-overleaf-2)**
 
 <br>
 
