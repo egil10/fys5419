@@ -13,3 +13,6 @@ __pycache__/
 
 # Course resources (ignored)
 archive/
+
+# Claude Code
+.claude/
