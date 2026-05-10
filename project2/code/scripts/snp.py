@@ -24,6 +24,14 @@ from pathlib import Path
 _ROOT = Path(__file__).resolve().parent.parent
 _DATA_DIR = _ROOT / "data"
 _PLOTS_DIR = _ROOT / "plots" / "eda"
+
+def _rel(path):
+    """Display path relative to project root for clean console output."""
+    try:
+        return path.relative_to(_ROOT)
+    except ValueError:
+        return path.name
+
 _ANN = {"1d": 252, "1wk": 52, "1mo": 12}
 
 # ── Editorial palette ─────────────────────────────────────────────────
@@ -114,7 +122,7 @@ class SNP:
         _DATA_DIR.mkdir(parents=True, exist_ok=True)
         path = _DATA_DIR / f"{name}.parquet"
         self.prices.to_parquet(path)
-        print(f"✓ saved → {path.relative_to(_ROOT)}")
+        print(f"✓ saved → {_rel(path)}")
         return path
 
     @classmethod
@@ -149,8 +157,7 @@ class SNP:
 
         if path.exists() and not force:
             self.prices = pd.read_parquet(path)
-            print(f"✓ loaded {len(self.prices)} {self.interval} obs for "
-                  f"{self.tickers} from cache ({path.name})")
+            print(f"✓ cached → {_rel(path)}")
             return self
 
         self.fetch()
@@ -202,6 +209,7 @@ class SNP:
         ax.legend(fontsize=9, ncol=min(4, self.n))
         ax.set_title("Normalised prices")
         ax.set_ylabel("Price (base=1)"); ax.set_xlabel("Date")
+        ax.tick_params(axis='x', rotation=30)
 
     def _panel_hist(self, ax):
         for t, c in zip(self.tickers, self.colors):
@@ -220,6 +228,7 @@ class SNP:
         ax.legend(fontsize=9, ncol=min(4, self.n))
         ax.set_title(f"Rolling volatility ({window}-period, annualised %)")
         ax.set_ylabel("Volatility (%)"); ax.set_xlabel("Date")
+        ax.tick_params(axis='x', rotation=30)
 
     def _panel_correlation(self, ax):
         corr = self.returns.corr().values
@@ -250,11 +259,6 @@ class SNP:
 
     # ── stacked returns panel (multi-Axes) ────────────────────────────
     def _panel_returns_stacked(self, fig, subplot_spec=None):
-        """
-        Draw stacked log-return time series. If subplot_spec is given,
-        the panel is nested inside that gridspec slot; otherwise a
-        standalone figure layout is used.
-        """
         rets = self.returns * 100
         ymin, ymax = rets.values.min(), rets.values.max()
 
@@ -276,13 +280,14 @@ class SNP:
                 ax.tick_params(labelbottom=False)
             else:
                 ax.set_xlabel("Date")
+                ax.tick_params(axis='x', rotation=30)
             if i == 0:
                 ax.set_title("Log-returns (%)")
             axes.append(ax)
         return axes
 
     # ── public plotting API ───────────────────────────────────────────
-    def plot(self, save=False, individual=False):
+    def plot(self, save=False, individual=False, name="overview"):
         """
         Plot 6-panel EDA overview (3x2 grid).
 
@@ -297,6 +302,9 @@ class SNP:
             If True, save plot(s) as PDF to code/project2/plots/eda/.
         individual : bool
             If True, render each panel as its own figure. Else a 3x2 grid.
+        name : str
+            Filename prefix for saved plots. e.g. name="mag7" produces
+            "mag7_overview.pdf" or "mag7_prices.pdf" etc.
         """
         _apply_style()
 
@@ -312,40 +320,39 @@ class SNP:
             _PLOTS_DIR.mkdir(parents=True, exist_ok=True)
 
         if individual:
-            for name, draw, _ in single_panels:
+            for panel_name, draw, _ in single_panels:
                 fig, ax = plt.subplots(figsize=(8, 5))
                 draw(ax)
                 plt.tight_layout()
                 if save:
-                    path = _PLOTS_DIR / f"{name}.pdf"
+                    path = _PLOTS_DIR / f"{name}_{panel_name}.pdf"
                     fig.savefig(path, bbox_inches="tight")
-                    print(f"✓ saved → {path.relative_to(_ROOT)}")
+                    print(f"✓ saved → {_rel(path)}")
                 plt.show()
             fig = plt.figure(figsize=(10, 1.6 * self.n + 1))
             self._panel_returns_stacked(fig)
             plt.tight_layout()
             if save:
-                path = _PLOTS_DIR / "returns.pdf"
+                path = _PLOTS_DIR / f"{name}_returns.pdf"
                 fig.savefig(path, bbox_inches="tight")
-                print(f"✓ saved → {path.relative_to(_ROOT)}")
+                print(f"✓ saved → {_rel(path)}")
             plt.show()
         else:
             fig = plt.figure(figsize=(14, 16))
             gs = GridSpec(3, 2, figure=fig, hspace=0.45, wspace=0.25)
-            fig.suptitle("Dataset Overview", fontweight="bold",
+            fig.suptitle(f"Dataset Overview — {name}", fontweight="bold",
                          fontsize=15, color=PALETTE["charcoal"], y=0.995)
 
-            for name, draw, (r, c) in single_panels:
+            for panel_name, draw, (r, c) in single_panels:
                 ax = fig.add_subplot(gs[r, c])
                 draw(ax)
 
-            # stacked returns panel in [0, 1]
             self._panel_returns_stacked(fig, subplot_spec=gs[0, 1])
 
             if save:
-                path = _PLOTS_DIR / "overview.pdf"
+                path = _PLOTS_DIR / f"{name}_overview.pdf"
                 fig.savefig(path, bbox_inches="tight")
-                print(f"✓ saved → {path.relative_to(_ROOT)}")
+                print(f"✓ saved → {_rel(path)}")
             plt.show()
 
     def __repr__(self):

@@ -29,11 +29,11 @@ BASKETS = {
         "end":   "2023-12-31",
         "description": "Established firms with quantum exposure",
     },
-    "diversified": {
-        "tickers": ["JPM", "XOM", "JNJ", "WMT"],
+    "anti": {
+        "tickers": ["XOM", "DAL", "NEM", "JPM"],
         "start": "2020-01-01",
         "end":   "2023-12-31",
-        "description": "Cross-sector mix — finance, energy, healthcare, retail",
+        "description": "Macro-opposed basket — oil producer, airline, gold miner, and bank with offsetting sensitivities",
     },
 }
 
