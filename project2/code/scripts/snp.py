@@ -1,5 +1,8 @@
 
 
+class SNP: 
+    
+
 
 def load_synthetic():
     return mu, Sigma, tickers
@@ -9,4 +12,6 @@ def load_sp500():
 
 def features(mu, Sigma):
     return aug
+
+
 
