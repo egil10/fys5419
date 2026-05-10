@@ -4,10 +4,12 @@ snp.py — Stock data loader for portfolio analysis.
 Usage
 -----
     from scripts.snp import SNP
-    snp = SNP(["AAPL", "MSFT", "AMZN", "GOOG"], "2020-01-01", "2023-12-31")
-    snp.fetch()
+    from scripts.baskets import get
+
+    # First run downloads + caches; later runs load from disk
+    snp = SNP(get("mag7"), "2020-01-01", "2023-12-31").cached_fetch(name="mag7")
     snp.summary()
-    snp.plot(save=True)                  # one big 4x2 grid
+    snp.plot(save=True)                  # 2x3 grid (returns panel = stacked rows)
     snp.plot(save=True, individual=True) # one PDF per panel
 
     mu, Sigma = snp.mu, snp.Sigma
@@ -15,7 +17,8 @@ Usage
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from matplotlib.colors import LinearSegmentedColormap, ListedColormap
+from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.gridspec import GridSpec, GridSpecFromSubplotSpec
 from pathlib import Path
 
 _ROOT = Path(__file__).resolve().parent.parent
@@ -25,47 +28,40 @@ _ANN = {"1d": 252, "1wk": 52, "1mo": 12}
 
 # ── Editorial palette ─────────────────────────────────────────────────
 PALETTE = {
-    # reds
-    "red":          "#E3120B",   # Economist red
-    "crimson":      "#B00020",   # deep crimson
-    "coral":        "#F04E45",   # soft coral
-    "salmon":       "#FF7A70",   # light salmon
-    # blues
-    "blue":         "#005BBB",   # editorial blue
-    "navy":         "#003F7D",   # deep navy
-    "blue_muted":   "#4A90C2",   # muted data blue
-    "sky":          "#9CC7E5",   # pale sky
-    # neutrals
-    "cream":        "#F7F3E8",   # warm cream background
-    "ivory":        "#FFFDF7",   # near-white ivory
-    "parchment":    "#E8E2D0",   # light parchment
-    "warm_grey":    "#C9C3B5",   # warm grey
-    "charcoal":     "#2F2F2F",   # charcoal text
-    "grey":         "#6E6E6E",   # medium grey
-    "grid":         "#D8D8D8",   # light gridline grey
-    # accents
-    "teal":         "#2A9D8F",   # muted teal
-    "ochre":        "#E9A23B",   # restrained gold
-    "purple":       "#6B5B95",   # muted purple
+    "red":          "#E3120B",
+    "crimson":      "#B00020",
+    "coral":        "#F04E45",
+    "salmon":       "#FF7A70",
+    "blue":         "#005BBB",
+    "navy":         "#003F7D",
+    "blue_muted":   "#4A90C2",
+    "sky":          "#9CC7E5",
+    "cream":        "#F7F3E8",
+    "ivory":        "#FFFDF7",
+    "parchment":    "#E8E2D0",
+    "warm_grey":    "#C9C3B5",
+    "charcoal":     "#2F2F2F",
+    "grey":         "#6E6E6E",
+    "grid":         "#D8D8D8",
+    "teal":         "#2A9D8F",
+    "ochre":        "#E9A23B",
+    "purple":       "#6B5B95",
 }
 
-# Cycle for asset colours (mix of reds, blues, accents — high contrast)
 _ASSET_CYCLE = [
     PALETTE["red"], PALETTE["blue"], PALETTE["teal"], PALETTE["ochre"],
     PALETTE["purple"], PALETTE["navy"], PALETTE["coral"], PALETTE["blue_muted"],
     PALETTE["crimson"], PALETTE["sky"], PALETTE["salmon"],
 ]
 
-# Diverging colormap for correlations (blue → cream → red)
 _CORR_CMAP = LinearSegmentedColormap.from_list(
     "editorial_div",
-    [PALETTE["navy"], PALETTE["blue_muted"], PALETTE["cream"],
+    [PALETTE["navy"], PALETTE["blue_muted"], "white",
      PALETTE["coral"], PALETTE["crimson"]],
 )
 
 
 def _apply_style():
-    """Apply the editorial style globally for this figure."""
     plt.rcParams.update({
         "figure.facecolor":  "white",
         "axes.facecolor":    "white",
@@ -100,6 +96,7 @@ class SNP:
 
     # ── data ──────────────────────────────────────────────────────────
     def fetch(self):
+        """Download adjusted close prices from yfinance."""
         import yfinance as yf
         data = yf.download(self.tickers, start=self.start, end=self.end,
                            interval=self.interval, auto_adjust=True,
@@ -113,19 +110,54 @@ class SNP:
         return self
 
     def save(self, name="prices"):
+        """Save prices to parquet in code/project2/data/."""
         _DATA_DIR.mkdir(parents=True, exist_ok=True)
-        path = _DATA_DIR / f"{name}.csv"
-        self.prices.to_csv(path)
+        path = _DATA_DIR / f"{name}.parquet"
+        self.prices.to_parquet(path)
         print(f"✓ saved → {path}")
         return path
 
     @classmethod
     def load(cls, name="prices"):
-        path = _DATA_DIR / f"{name}.csv" if not Path(name).exists() else Path(name)
-        prices = pd.read_csv(path, index_col=0, parse_dates=True)
+        """Load prices from parquet in code/project2/data/."""
+        path = Path(name)
+        if not path.exists():
+            path = _DATA_DIR / (name if name.endswith(".parquet") else f"{name}.parquet")
+        prices = pd.read_parquet(path)
         obj = cls(list(prices.columns))
         obj.prices = prices
+        print(f"✓ loaded {len(prices)} obs for {obj.tickers} from {path.name}")
         return obj
+
+    def cached_fetch(self, name=None, force=False):
+        """
+        Fetch prices, using a local parquet cache if available.
+
+        Parameters
+        ----------
+        name : str, optional
+            Cache filename (without extension). Defaults to a fingerprint
+            of tickers + date range, e.g. "AAPL-MSFT_2020-01-01_2023-12-31_1d".
+        force : bool
+            If True, ignore cache and re-download.
+        """
+        if name is None:
+            name = (f"{'-'.join(self.tickers)}"
+                    f"_{self.start or 'inf'}_{self.end or 'inf'}"
+                    f"_{self.interval}")
+        path = _DATA_DIR / f"{name}.parquet"
+
+        if path.exists() and not force:
+            self.prices = pd.read_parquet(path)
+            print(f"✓ loaded {len(self.prices)} {self.interval} obs for "
+                  f"{self.tickers} from cache ({path.name})")
+            return self
+
+        self.fetch()
+        _DATA_DIR.mkdir(parents=True, exist_ok=True)
+        self.prices.to_parquet(path)
+        print(f"✓ cached → {path}")
+        return self
 
     # ── derived quantities ────────────────────────────────────────────
     @property
@@ -146,7 +178,6 @@ class SNP:
 
     @property
     def colors(self):
-        """Cycle of asset colours from the palette."""
         return [_ASSET_CYCLE[i % len(_ASSET_CYCLE)] for i in range(self.n)]
 
     def annualised(self):
@@ -163,7 +194,7 @@ class SNP:
             print(f"{t:<8}{mu_a[i]*100:>9.2f}%{vol_a[i]*100:>9.2f}%"
                   f"{mu_a[i]/vol_a[i]:>10.3f}")
 
-    # ── plot panels (each takes an Axes, draws on it) ─────────────────
+    # ── plot panels (single-Axes) ─────────────────────────────────────
     def _panel_prices(self, ax):
         normed = self.prices / self.prices.iloc[0]
         for t, c in zip(self.tickers, self.colors):
@@ -171,35 +202,6 @@ class SNP:
         ax.legend(fontsize=9, ncol=min(4, self.n))
         ax.set_title("Normalised prices")
         ax.set_ylabel("Price (base=1)"); ax.set_xlabel("Date")
-
-    def _panel_returns(self, ax):
-        rets = self.returns * 100
-        for t, c in zip(self.tickers, self.colors):
-            ax.plot(rets.index, rets[t], lw=0.7, alpha=0.7, color=c, label=t)
-        ax.axhline(0, color=PALETTE["charcoal"], lw=0.6)
-        ax.legend(fontsize=9, ncol=min(4, self.n))
-        ax.set_title("Log-returns (%)")
-        ax.set_ylabel("Return (%)"); ax.set_xlabel("Date")
-
-    def _panel_cumulative(self, ax):
-        cum = self.returns.cumsum() * 100
-        for t, c in zip(self.tickers, self.colors):
-            ax.plot(cum.index, cum[t], lw=1.6, color=c, label=t)
-        ax.axhline(0, color=PALETTE["charcoal"], lw=0.6)
-        ax.legend(fontsize=9, ncol=min(4, self.n))
-        ax.set_title("Cumulative log-return (%)")
-        ax.set_ylabel("Cumulative return (%)"); ax.set_xlabel("Date")
-
-    def _panel_drawdown(self, ax):
-        cum_price = (1 + self.returns).cumprod()
-        running_max = cum_price.cummax()
-        drawdown = (cum_price / running_max - 1) * 100
-        for t, c in zip(self.tickers, self.colors):
-            ax.plot(drawdown.index, drawdown[t], lw=1.2, color=c, label=t)
-        ax.axhline(0, color=PALETTE["charcoal"], lw=0.6)
-        ax.legend(fontsize=9, ncol=min(4, self.n))
-        ax.set_title("Drawdown (%)")
-        ax.set_ylabel("Drawdown (%)"); ax.set_xlabel("Date")
 
     def _panel_hist(self, ax):
         for t, c in zip(self.tickers, self.colors):
@@ -228,7 +230,7 @@ class SNP:
         for i in range(self.n):
             for j in range(self.n):
                 ax.text(j, i, f"{corr[i, j]:.2f}", ha="center", va="center",
-                        color=PALETTE["ivory"] if abs(corr[i, j]) > 0.7
+                        color="white" if abs(corr[i, j]) > 0.7
                               else PALETTE["charcoal"],
                         fontsize=9)
         ax.set_title("Return correlation")
@@ -246,26 +248,71 @@ class SNP:
         ax.set_xlabel("Ann. volatility (%)"); ax.set_ylabel("Ann. return (%)")
         ax.set_title("Risk–return")
 
+    # ── stacked returns panel (multi-Axes) ────────────────────────────
+    def _panel_returns_stacked(self, fig, subplot_spec=None):
+        """
+        Draw stacked log-return time series. If subplot_spec is given,
+        the panel is nested inside that gridspec slot; otherwise a
+        standalone figure layout is used.
+        """
+        rets = self.returns * 100
+        ymin, ymax = rets.values.min(), rets.values.max()
+
+        if subplot_spec is not None:
+            inner = GridSpecFromSubplotSpec(
+                self.n, 1, subplot_spec=subplot_spec, hspace=0.15)
+        else:
+            inner = GridSpec(self.n, 1, figure=fig, hspace=0.15)
+
+        axes = []
+        for i, (t, c) in enumerate(zip(self.tickers, self.colors)):
+            ax = fig.add_subplot(inner[i, 0], sharex=axes[0] if axes else None)
+            ax.plot(rets.index, rets[t], lw=0.7, color=c)
+            ax.axhline(0, color=PALETTE["charcoal"], lw=0.5)
+            ax.set_ylim(ymin * 1.05, ymax * 1.05)
+            ax.set_ylabel(t, rotation=0, ha="right", va="center", fontsize=10)
+            ax.grid(alpha=0.4)
+            if i < self.n - 1:
+                ax.tick_params(labelbottom=False)
+            else:
+                ax.set_xlabel("Date")
+            if i == 0:
+                ax.set_title("Log-returns (%)")
+            axes.append(ax)
+        return axes
+
     # ── public plotting API ───────────────────────────────────────────
     def plot(self, save=False, individual=False):
+        """
+        Plot 6-panel EDA overview (2x3 grid).
+
+        Layout:
+            [0,0] Prices       [0,1] Returns (stacked)   [0,2] Histogram
+            [1,0] Rolling vol  [1,1] Correlation         [1,2] Risk–return
+
+        Parameters
+        ----------
+        save : bool
+            If True, save plot(s) as PDF to code/project2/plots/eda/.
+        individual : bool
+            If True, render each panel as its own figure. Else a 2x3 grid.
+        """
         _apply_style()
 
-        panels = [
-            ("prices",      self._panel_prices),
-            ("returns",     self._panel_returns),
-            ("cumulative",  self._panel_cumulative),
-            ("drawdown",    self._panel_drawdown),
-            ("histogram",   self._panel_hist),
-            ("rolling_vol", self._panel_rolling_vol),
-            ("correlation", self._panel_correlation),
-            ("risk_return", self._panel_risk_return),
+        single_panels = [
+            ("prices",      self._panel_prices,      (0, 0)),
+            ("histogram",   self._panel_hist,        (0, 2)),
+            ("rolling_vol", self._panel_rolling_vol, (1, 0)),
+            ("correlation", self._panel_correlation, (1, 1)),
+            ("risk_return", self._panel_risk_return, (1, 2)),
         ]
 
         if save:
             _PLOTS_DIR.mkdir(parents=True, exist_ok=True)
 
         if individual:
-            for name, draw in panels:
+            # single-axes panels
+            for name, draw, _ in single_panels:
                 fig, ax = plt.subplots(figsize=(8, 5))
                 draw(ax)
                 plt.tight_layout()
@@ -274,13 +321,29 @@ class SNP:
                     fig.savefig(path, bbox_inches="tight")
                     print(f"✓ saved → {path}")
                 plt.show()
-        else:
-            fig, axes = plt.subplots(4, 2, figsize=(14, 18))
-            fig.suptitle("Dataset Overview", fontweight="bold",
-                         fontsize=15, color=PALETTE["charcoal"], y=0.995)
-            for (name, draw), ax in zip(panels, axes.flat):
-                draw(ax)
+            # stacked returns panel
+            fig = plt.figure(figsize=(10, 1.6 * self.n + 1))
+            self._panel_returns_stacked(fig)
             plt.tight_layout()
+            if save:
+                path = _PLOTS_DIR / "returns.pdf"
+                fig.savefig(path, bbox_inches="tight")
+                print(f"✓ saved → {path}")
+            plt.show()
+        else:
+            fig = plt.figure(figsize=(18, 10))
+            gs = GridSpec(2, 3, figure=fig, hspace=0.35, wspace=0.3)
+            fig.suptitle("Dataset Overview", fontweight="bold",
+                         fontsize=15, color=PALETTE["charcoal"], y=1.0)
+
+            # single-axes panels
+            for name, draw, (r, c) in single_panels:
+                ax = fig.add_subplot(gs[r, c])
+                draw(ax)
+
+            # stacked returns panel in [0, 1]
+            self._panel_returns_stacked(fig, subplot_spec=gs[0, 1])
+
             if save:
                 path = _PLOTS_DIR / "overview.pdf"
                 fig.savefig(path, bbox_inches="tight")
