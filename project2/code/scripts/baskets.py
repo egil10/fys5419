@@ -12,19 +12,27 @@ correlation and return regimes:
 
 BASKETS = {
     "mag7": {
-        "tickers": ["AAPL", "MSFT", "GOOGL", "META"],
+        "tickers": ["AAPL", "MSFT", "GOOGL", "AMZN"],
+        "start": "2020-01-01",
+        "end":   "2023-12-31",
         "description": "Mega-cap tech — high correlation, low dispersion",
     },
     "quantum": {
         "tickers": ["IONQ", "RGTI", "QBTS", "QUBT"],
+        "start": "2022-08-01",
+        "end":   "2024-12-31",
         "description": "Quantum-computing pure-plays — speculative, high volatility",
     },
     "quantum_big": {
-        "tickers": ["IBM", "HON", "NVDA", "AMZN"],
+        "tickers": ["IBM", "HON", "GOOGL", "NVDA"],
+        "start": "2020-01-01",
+        "end":   "2023-12-31",
         "description": "Established firms with quantum exposure",
     },
     "diversified": {
         "tickers": ["JPM", "XOM", "JNJ", "WMT"],
+        "start": "2020-01-01",
+        "end":   "2023-12-31",
         "description": "Cross-sector mix — finance, energy, healthcare, retail",
     },
 }
@@ -44,3 +52,8 @@ def describe(name):
     b = BASKETS[name]
     print(f"{name:12s} — {b['description']}")
     print(f"             tickers: {b['tickers']}")
+
+def config(name):
+    """Return (tickers, start, end) for a named basket."""
+    b = BASKETS[name]
+    return b["tickers"], b["start"], b["end"]

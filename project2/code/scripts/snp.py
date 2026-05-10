@@ -114,7 +114,7 @@ class SNP:
         _DATA_DIR.mkdir(parents=True, exist_ok=True)
         path = _DATA_DIR / f"{name}.parquet"
         self.prices.to_parquet(path)
-        print(f"✓ saved → {path}")
+        print(f"✓ saved → {path.relative_to(_ROOT)}")
         return path
 
     @classmethod
@@ -284,34 +284,34 @@ class SNP:
     # ── public plotting API ───────────────────────────────────────────
     def plot(self, save=False, individual=False):
         """
-        Plot 6-panel EDA overview (2x3 grid).
+        Plot 6-panel EDA overview (3x2 grid).
 
         Layout:
-            [0,0] Prices       [0,1] Returns (stacked)   [0,2] Histogram
-            [1,0] Rolling vol  [1,1] Correlation         [1,2] Risk–return
+            [0,0] Prices            [0,1] Returns (stacked)
+            [1,0] Rolling vol       [1,1] Histogram
+            [2,0] Correlation       [2,1] Risk–return
 
         Parameters
         ----------
         save : bool
             If True, save plot(s) as PDF to code/project2/plots/eda/.
         individual : bool
-            If True, render each panel as its own figure. Else a 2x3 grid.
+            If True, render each panel as its own figure. Else a 3x2 grid.
         """
         _apply_style()
 
         single_panels = [
             ("prices",      self._panel_prices,      (0, 0)),
-            ("histogram",   self._panel_hist,        (0, 2)),
             ("rolling_vol", self._panel_rolling_vol, (1, 0)),
-            ("correlation", self._panel_correlation, (1, 1)),
-            ("risk_return", self._panel_risk_return, (1, 2)),
+            ("histogram",   self._panel_hist,        (1, 1)),
+            ("correlation", self._panel_correlation, (2, 0)),
+            ("risk_return", self._panel_risk_return, (2, 1)),
         ]
 
         if save:
             _PLOTS_DIR.mkdir(parents=True, exist_ok=True)
 
         if individual:
-            # single-axes panels
             for name, draw, _ in single_panels:
                 fig, ax = plt.subplots(figsize=(8, 5))
                 draw(ax)
@@ -319,24 +319,22 @@ class SNP:
                 if save:
                     path = _PLOTS_DIR / f"{name}.pdf"
                     fig.savefig(path, bbox_inches="tight")
-                    print(f"✓ saved → {path}")
+                    print(f"✓ saved → {path.relative_to(_ROOT)}")
                 plt.show()
-            # stacked returns panel
             fig = plt.figure(figsize=(10, 1.6 * self.n + 1))
             self._panel_returns_stacked(fig)
             plt.tight_layout()
             if save:
                 path = _PLOTS_DIR / "returns.pdf"
                 fig.savefig(path, bbox_inches="tight")
-                print(f"✓ saved → {path}")
+                print(f"✓ saved → {path.relative_to(_ROOT)}")
             plt.show()
         else:
-            fig = plt.figure(figsize=(18, 10))
-            gs = GridSpec(2, 3, figure=fig, hspace=0.35, wspace=0.3)
+            fig = plt.figure(figsize=(14, 16))
+            gs = GridSpec(3, 2, figure=fig, hspace=0.45, wspace=0.25)
             fig.suptitle("Dataset Overview", fontweight="bold",
-                         fontsize=15, color=PALETTE["charcoal"], y=1.0)
+                         fontsize=15, color=PALETTE["charcoal"], y=0.995)
 
-            # single-axes panels
             for name, draw, (r, c) in single_panels:
                 ax = fig.add_subplot(gs[r, c])
                 draw(ax)
@@ -347,7 +345,7 @@ class SNP:
             if save:
                 path = _PLOTS_DIR / "overview.pdf"
                 fig.savefig(path, bbox_inches="tight")
-                print(f"✓ saved → {path}")
+                print(f"✓ saved → {path.relative_to(_ROOT)}")
             plt.show()
 
     def __repr__(self):
