@@ -67,9 +67,9 @@ _CORR_CMAP = LinearSegmentedColormap.from_list(
 def _apply_style():
     """Apply the editorial style globally for this figure."""
     plt.rcParams.update({
-        "figure.facecolor":  PALETTE["ivory"],
-        "axes.facecolor":    PALETTE["ivory"],
-        "savefig.facecolor": PALETTE["ivory"],
+        "figure.facecolor":  "white",
+        "axes.facecolor":    "white",
+        "savefig.facecolor": "white",
         "axes.edgecolor":    PALETTE["charcoal"],
         "axes.labelcolor":   PALETTE["charcoal"],
         "axes.titlecolor":   PALETTE["charcoal"],
@@ -248,16 +248,6 @@ class SNP:
 
     # ── public plotting API ───────────────────────────────────────────
     def plot(self, save=False, individual=False):
-        """
-        Plot 8-panel EDA overview with editorial styling.
-
-        Parameters
-        ----------
-        save : bool
-            If True, save plot(s) as PDF to code/project2/plots/eda/.
-        individual : bool
-            If True, render each panel as its own figure. Else a 4x2 grid.
-        """
         _apply_style()
 
         panels = [
