@@ -118,12 +118,20 @@ class SNP:
         return self
 
     def save(self, name="prices"):
-        """Save prices to parquet in code/project2/data/."""
+        """Save prices to parquet (and a 20-row CSV preview) in code/project2/data/."""
         _DATA_DIR.mkdir(parents=True, exist_ok=True)
         path = _DATA_DIR / f"{name}.parquet"
         self.prices.to_parquet(path)
         print(f"✓ saved → {_rel(path)}")
+        self._write_sample(name)
         return path
+
+    def _write_sample(self, name, rows=20):
+        """Write a small CSV preview of self.prices for quick inspection."""
+        sample_path = _DATA_DIR / f"{name}_sample.csv"
+        self.prices.head(rows).to_csv(sample_path)
+        print(f"✓ sample → {_rel(sample_path)}")
+        return sample_path
 
     @classmethod
     def load(cls, name="prices"):
@@ -141,6 +149,10 @@ class SNP:
         """
         Fetch prices, using a local parquet cache if available.
 
+        The cache is invalidated (re-fetched) when the on-disk parquet's
+        columns don't match ``self.tickers`` or its date range doesn't
+        cover ``[self.start, self.end]``.
+
         Parameters
         ----------
         name : str, optional
@@ -156,14 +168,36 @@ class SNP:
         path = _DATA_DIR / f"{name}.parquet"
 
         if path.exists() and not force:
-            self.prices = pd.read_parquet(path)
-            print(f"✓ cached → {_rel(path)}")
-            return self
+            cached = pd.read_parquet(path)
+            cached_tickers = list(cached.columns)
+            stale_reason = None
+            if set(cached_tickers) != set(self.tickers):
+                stale_reason = (f"tickers {cached_tickers} ≠ requested "
+                                f"{self.tickers}")
+            elif self.start is not None and (
+                cached.index[0] > pd.Timestamp(self.start)
+            ):
+                stale_reason = (f"cache starts {cached.index[0].date()} "
+                                f"after requested {self.start}")
+            elif self.end is not None and (
+                cached.index[-1] < pd.Timestamp(self.end) - pd.Timedelta(days=7)
+            ):
+                stale_reason = (f"cache ends {cached.index[-1].date()} "
+                                f"before requested {self.end}")
+
+            if stale_reason is None:
+                self.prices = cached[self.tickers]
+                print(f"✓ cached → {_rel(path)}")
+                self._write_sample(name)
+                return self
+
+            print(f"⟳ cache stale ({stale_reason}); re-fetching")
 
         self.fetch()
         _DATA_DIR.mkdir(parents=True, exist_ok=True)
         self.prices.to_parquet(path)
-        print(f"✓ cached → {path}")
+        print(f"✓ cached → {_rel(path)}")
+        self._write_sample(name)
         return self
 
     # ── derived quantities ────────────────────────────────────────────

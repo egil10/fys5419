@@ -10,29 +10,32 @@ correlation and return regimes:
     diversified Cross-sector mix (low correlation, varied risk)
 """
 
+START = "2023-01-01"
+END = "2025-12-31"
+
 BASKETS = {
     "mag7": {
         "tickers": ["AAPL", "MSFT", "GOOGL", "AMZN"],
-        "start": "2020-01-01",
-        "end":   "2023-12-31",
+        "start": START,
+        "end": END,
         "description": "Mega-cap tech — high correlation, low dispersion",
     },
     "quantum": {
         "tickers": ["IONQ", "RGTI", "QBTS", "QUBT"],
-        "start": "2022-08-01",
-        "end":   "2024-12-31",
+        "start": START,
+        "end": END,
         "description": "Quantum-computing pure-plays — speculative, high volatility",
     },
     "quantum_big": {
-        "tickers": ["IBM", "HON", "GOOGL", "NVDA"],
-        "start": "2020-01-01",
-        "end":   "2023-12-31",
+        "tickers": ["IBM", "HON", "ACN", "NVDA"],
+        "start": START,
+        "end": END,
         "description": "Established firms with quantum exposure",
     },
     "anti": {
         "tickers": ["XOM", "DAL", "NEM", "JPM"],
-        "start": "2020-01-01",
-        "end":   "2023-12-31",
+        "start": START,
+        "end": END,
         "description": "Macro-opposed basket — oil producer, airline, gold miner, and bank with offsetting sensitivities",
     },
 }
