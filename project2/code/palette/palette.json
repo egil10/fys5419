@@ -1,0 +1,20 @@
+{
+  "red":         "#E3120B",
+  "crimson":     "#B00020",
+  "coral":       "#F04E45",
+  "salmon":      "#FF7A70",
+  "blue":        "#005BBB",
+  "navy":        "#003F7D",
+  "blue_muted":  "#4A90C2",
+  "sky":         "#9CC7E5",
+  "cream":       "#F7F3E8",
+  "ivory":       "#FFFDF7",
+  "parchment":   "#E8E2D0",
+  "warm_grey":   "#C9C3B5",
+  "charcoal":    "#2F2F2F",
+  "grey":        "#6E6E6E",
+  "grid":        "#D8D8D8",
+  "teal":        "#2A9D8F",
+  "ochre":       "#E9A23B",
+  "purple":      "#6B5B95"
+}

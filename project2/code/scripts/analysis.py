@@ -34,7 +34,7 @@ import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 from pathlib import Path
 
-from scripts.snp import PALETTE, _apply_style, _rel
+from scripts.snp import PALETTE, _apply_style, _rel, title
 
 _ROOT = Path(__file__).resolve().parent.parent
 _PLOTS_DIR = _ROOT / "plots" / "analysis"
@@ -89,8 +89,9 @@ class Landscape:
 
         _apply_style()
         fig, ax = plt.subplots(figsize=(8, 6))
-        fig.suptitle(f"QAOA Energy Landscape (p=1) — {name}",
-                     fontweight="bold", fontsize=13, color=PALETTE["charcoal"])
+        fig.suptitle(f"QAOA energy landscape — {name}",
+                     fontweight="bold", fontsize=13, color=PALETTE["charcoal"],
+                     x=0.02, ha="left", y=0.995)
 
         # Filled contour plot of the energy surface
         GG, BB = np.meshgrid(self.gammas, self.betas, indexing="ij")
@@ -114,7 +115,8 @@ class Landscape:
 
         ax.set_xlabel(r"$\gamma / \pi$", fontsize=12)
         ax.set_ylabel(r"$\beta / \pi$", fontsize=12)
-        ax.set_title("Energy surface over the variational parameters")
+        title(ax, "Energy landscape (p=1)",
+              r"$E(\gamma, \beta) = \langle\psi|H_C|\psi\rangle$ over the two variational angles")
         ax.grid(False)
 
         plt.tight_layout()
@@ -184,8 +186,9 @@ class Thermodynamics:
         """
         _apply_style()
         fig, axes = plt.subplots(1, 2, figsize=(13, 5))
-        fig.suptitle(f"Statistical Physics Connection — {name}",
-                     fontweight="bold", fontsize=13, color=PALETTE["charcoal"])
+        fig.suptitle(f"Statistical physics connection — {name}",
+                     fontweight="bold", fontsize=13, color=PALETTE["charcoal"],
+                     x=0.02, ha="left", y=0.995)
 
         # ── [0] Thermal energy vs β_th ───────────────────────────────
         ax = axes[0]
@@ -210,7 +213,8 @@ class Thermodynamics:
 
         ax.set_xlabel(r"Inverse temperature $\beta_{\rm th}$", fontsize=11)
         ax.set_ylabel(r"Thermal energy $\langle H\rangle_\beta$", fontsize=11)
-        ax.set_title("Thermal energy vs temperature")
+        title(ax, "Thermal energy vs temperature",
+              r"$\langle H\rangle_\beta \to E_0$ as $\beta_{\rm th} \to \infty$ — QAOA approximates this zero-T limit")
         ax.legend(fontsize=8, loc="upper right")
 
         # ── [1] Histogram of Ising energies ──────────────────────────
@@ -223,7 +227,8 @@ class Thermodynamics:
                    label=f"Ground state $E_0 = {self._E0:.4f}$")
         ax.set_xlabel(r"Ising energy $H(z)$", fontsize=11)
         ax.set_ylabel("Count", fontsize=11)
-        ax.set_title(rf"Energy distribution over all $2^n = {len(self._E_all)}$ states")
+        title(ax, "Ising energy distribution",
+              rf"Histogram of $H(z)$ over all $2^n = {len(self._E_all)}$ bitstrings")
         ax.legend(fontsize=9)
 
         plt.tight_layout()
@@ -263,8 +268,9 @@ def plot_diagnostics(qaoa, qaoa_results, save=False, name="diagnostics",
     fig = plt.figure(figsize=(14, 11))
     gs = GridSpec(2, 2, figure=fig, hspace=0.38, wspace=0.28,
                   height_ratios=[1.2, 1])
-    fig.suptitle(f"QAOA Diagnostics — {name}",
-                 fontweight="bold", fontsize=14, color=PALETTE["charcoal"])
+    fig.suptitle(f"QAOA diagnostics — {name}",
+                 fontweight="bold", fontsize=14, color=PALETTE["charcoal"],
+                 x=0.02, ha="left", y=0.995)
 
     # ── [top, full width] Landscape ──────────────────────────────────
     landscape = Landscape(qaoa, n_pts=n_pts).scan()
@@ -286,7 +292,8 @@ def plot_diagnostics(qaoa, qaoa_results, save=False, name="diagnostics",
 
     ax.set_xlabel(r"$\gamma / \pi$", fontsize=12)
     ax.set_ylabel(r"$\beta / \pi$", fontsize=12)
-    ax.set_title("Energy landscape (p=1)")
+    title(ax, "Energy landscape (p=1)",
+          r"$E(\gamma, \beta) = \langle\psi|H_C|\psi\rangle$ over the two variational angles")
     ax.grid(False)
 
     # ── [bot left] Thermal energy ────────────────────────────────────
@@ -308,7 +315,8 @@ def plot_diagnostics(qaoa, qaoa_results, save=False, name="diagnostics",
                    label=f"QAOA p={p}")
     ax.set_xlabel(r"Inverse temperature $\beta_{\rm th}$", fontsize=11)
     ax.set_ylabel(r"$\langle H\rangle_\beta$", fontsize=11)
-    ax.set_title("Thermal energy vs temperature")
+    title(ax, "Thermal energy vs temperature",
+          r"$\langle H\rangle_\beta \to E_0$ as $\beta_{\rm th} \to \infty$; QAOA energies overlaid")
     ax.legend(fontsize=8, loc="upper right")
 
     # ── [bot right] Histogram ────────────────────────────────────────
@@ -320,7 +328,8 @@ def plot_diagnostics(qaoa, qaoa_results, save=False, name="diagnostics",
                label=f"$E_0 = {therm._E0:.4f}$")
     ax.set_xlabel(r"Ising energy $H(z)$", fontsize=11)
     ax.set_ylabel("Count", fontsize=11)
-    ax.set_title(rf"Distribution over all $2^n = {len(therm._E_all)}$ states")
+    title(ax, "Ising energy distribution",
+          rf"Histogram of $H(z)$ over all $2^n = {len(therm._E_all)}$ bitstrings")
     ax.legend(fontsize=9)
 
     if save:

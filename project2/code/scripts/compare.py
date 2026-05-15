@@ -22,7 +22,7 @@ from matplotlib.gridspec import GridSpec
 from pathlib import Path
 
 from scripts.qaoa import QAOA
-from scripts.snp  import PALETTE, _apply_style, _rel
+from scripts.snp  import PALETTE, _apply_style, _rel, title
 
 _ROOT = Path(__file__).resolve().parent.parent
 _PLOTS_DIR = _ROOT / "plots" / "compare"
@@ -114,8 +114,9 @@ class Compare:
 
         fig = plt.figure(figsize=(14, 5.5))
         gs = GridSpec(1, 2, figure=fig, wspace=0.3)
-        fig.suptitle(f"QAOA vs Brute Force — {name}", fontweight="bold",
-                     fontsize=14, color=PALETTE["charcoal"])
+        fig.suptitle(f"QAOA vs brute force — {name}", fontweight="bold",
+                     fontsize=14, color=PALETTE["charcoal"],
+                     x=0.02, ha="left", y=0.995)
 
         # ── [0] QAOA energy + ratio vs p ──────────────────────────────
         ax = fig.add_subplot(gs[0, 0])
@@ -127,7 +128,8 @@ class Compare:
                    label=f"Ground state E₀ = {self._E0:.4f}")
         ax.set_xlabel("Circuit depth p"); ax.set_ylabel("Energy")
         ax.set_xticks(ps)
-        ax.set_title("QAOA energy vs depth")
+        title(ax, "QAOA energy vs depth",
+              "Lower is better; ground state $E_0$ (red dashed) is the brute-force optimum")
         ax.legend(fontsize=9)
         for p, e, r in zip(ps, energies, ratios):
             ax.annotate(f"r={r:.3f}", (p, e),
@@ -150,7 +152,8 @@ class Compare:
         ax.set_xticks(range(n_states))
         ax.set_xticklabels(bit_labels, rotation=90, fontsize=7)
         ax.set_ylabel("Probability")
-        ax.set_title(f"QAOA probabilities (p={best_p})")
+        title(ax, "QAOA measurement probabilities",
+              f"Best depth p={best_p}; red bars satisfy the budget K={pf.K}")
         ax.legend(fontsize=9)
         ax.text(0.98, 0.95, f"red = budget {pf.K}", transform=ax.transAxes,
                 ha="right", va="top", color=PALETTE["red"],

@@ -14,6 +14,7 @@ Usage
 
     mu, Sigma = snp.mu, snp.Sigma
 """
+import json
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -24,6 +25,7 @@ from pathlib import Path
 _ROOT = Path(__file__).resolve().parent.parent
 _DATA_DIR = _ROOT / "data"
 _PLOTS_DIR = _ROOT / "plots" / "eda"
+_PALETTE_PATH = _ROOT / "palette" / "palette.json"
 
 def _rel(path):
     """Display path relative to project root for clean console output."""
@@ -35,26 +37,8 @@ def _rel(path):
 _ANN = {"1d": 252, "1wk": 52, "1mo": 12}
 
 # ── Editorial palette ─────────────────────────────────────────────────
-PALETTE = {
-    "red":          "#E3120B",
-    "crimson":      "#B00020",
-    "coral":        "#F04E45",
-    "salmon":       "#FF7A70",
-    "blue":         "#005BBB",
-    "navy":         "#003F7D",
-    "blue_muted":   "#4A90C2",
-    "sky":          "#9CC7E5",
-    "cream":        "#F7F3E8",
-    "ivory":        "#FFFDF7",
-    "parchment":    "#E8E2D0",
-    "warm_grey":    "#C9C3B5",
-    "charcoal":     "#2F2F2F",
-    "grey":         "#6E6E6E",
-    "grid":         "#D8D8D8",
-    "teal":         "#2A9D8F",
-    "ochre":        "#E9A23B",
-    "purple":       "#6B5B95",
-}
+# Source of truth: scripts/palette.json (shared with notebooks/visuals.ipynb).
+PALETTE = json.loads(_PALETTE_PATH.read_text(encoding="utf-8"))
 
 _ASSET_CYCLE = [
     PALETTE["red"], PALETTE["blue"], PALETTE["teal"], PALETTE["ochre"],
@@ -67,6 +51,20 @@ _CORR_CMAP = LinearSegmentedColormap.from_list(
     [PALETTE["navy"], PALETTE["blue_muted"], "white",
      PALETTE["coral"], PALETTE["crimson"]],
 )
+
+
+def title(ax, bold, subtitle=None):
+    """Two-line left-shifted title: bold headline + grey subtitle.
+
+    Use everywhere a plot needs a title — keeps the house style consistent.
+    """
+    if subtitle:
+        ax.set_title(bold, loc="left", fontweight="bold", fontsize=12, pad=22)
+        ax.text(0.0, 1.01, subtitle, transform=ax.transAxes,
+                ha="left", va="bottom", fontsize=10,
+                color=PALETTE["grey"], fontweight="normal")
+    else:
+        ax.set_title(bold, loc="left", fontweight="bold", fontsize=12)
 
 
 def _apply_style():
@@ -242,7 +240,8 @@ class SNP:
             ax.plot(normed.index, normed[t], label=t, lw=1.6, color=c)
         ax.set_yscale("log")
         ax.legend(fontsize=9, ncol=min(4, self.n))
-        ax.set_title("Normalised prices (log)")
+        title(ax, "Normalised prices",
+              "Log scale, base 1 at the first trading day of the window")
         ax.set_ylabel("Price (base=1, log)"); ax.set_xlabel("Date")
         ax.tick_params(axis='x', rotation=30)
 
@@ -252,7 +251,8 @@ class SNP:
                     color=c, label=t, edgecolor=PALETTE["charcoal"], linewidth=0.3)
         ax.axvline(0, color=PALETTE["charcoal"], lw=0.6)
         ax.legend(fontsize=8)
-        ax.set_title("Return distribution")
+        title(ax, "Return distribution",
+              "Histogram of daily log-returns per asset, overlaid")
         ax.set_xlabel("Return (%)"); ax.set_ylabel("Count")
 
     def _panel_rolling_vol(self, ax, window=30):
@@ -261,7 +261,8 @@ class SNP:
         for t, c in zip(self.tickers, self.colors):
             ax.plot(roll_vol.index, roll_vol[t], lw=1.2, color=c, label=t)
         ax.legend(fontsize=9, ncol=min(4, self.n))
-        ax.set_title(f"Rolling volatility ({window}-period, annualised %)")
+        title(ax, "Rolling volatility",
+              f"{window}-period rolling standard deviation, annualised")
         ax.set_ylabel("Volatility (%)"); ax.set_xlabel("Date")
         ax.tick_params(axis='x', rotation=30)
 
@@ -288,7 +289,8 @@ class SNP:
                         color="white" if abs(corr[i, j]) > 0.7
                               else PALETTE["charcoal"],
                         fontsize=9)
-        ax.set_title("Return correlation (seriated)")
+        title(ax, "Return correlation",
+              "Seriated by leading eigenvector — high correlations cluster near the diagonal")
         ax.grid(False)
 
     def _panel_risk_return(self, ax):
@@ -305,7 +307,8 @@ class SNP:
                         xytext=(7 + dx, 5 + dy), textcoords="offset points",
                         fontsize=10, color=PALETTE["charcoal"])
         ax.set_xlabel("Ann. volatility (%)"); ax.set_ylabel("Ann. return (%)")
-        ax.set_title("Risk–return")
+        title(ax, "Risk–return",
+              "Annualised mean vs volatility per asset")
 
     def _panel_returns(self, ax):
         rets = self.returns * 100
@@ -314,7 +317,8 @@ class SNP:
                     alpha=0.55, label=t)
         ax.axhline(0, color=PALETTE["charcoal"], lw=0.5)
         ax.legend(fontsize=8, ncol=min(4, self.n))
-        ax.set_title("Log-returns (%)")
+        title(ax, "Log-returns",
+              "Daily log-returns (%) per asset, overlaid")
         ax.set_ylabel("Return (%)"); ax.set_xlabel("Date")
         ax.tick_params(axis='x', rotation=30)
 
@@ -370,8 +374,9 @@ class SNP:
         else:
             fig = plt.figure(figsize=figsize or (14, 16))
             gs = GridSpec(3, 2, figure=fig, hspace=0.45, wspace=0.25)
-            fig.suptitle(f"Dataset Overview — {name}", fontweight="bold",
-                         fontsize=15, color=PALETTE["charcoal"], y=0.995)
+            fig.suptitle(f"Dataset overview — {name}", fontweight="bold",
+                         fontsize=15, color=PALETTE["charcoal"],
+                         x=0.02, ha="left", y=0.995)
 
             for panel_name, draw, (r, c) in single_panels:
                 ax = fig.add_subplot(gs[r, c])
