@@ -18,7 +18,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
-from matplotlib.gridspec import GridSpec, GridSpecFromSubplotSpec
+from matplotlib.gridspec import GridSpec
 from pathlib import Path
 
 _ROOT = Path(__file__).resolve().parent.parent
@@ -240,9 +240,10 @@ class SNP:
         normed = self.prices / self.prices.iloc[0]
         for t, c in zip(self.tickers, self.colors):
             ax.plot(normed.index, normed[t], label=t, lw=1.6, color=c)
+        ax.set_yscale("log")
         ax.legend(fontsize=9, ncol=min(4, self.n))
-        ax.set_title("Normalised prices")
-        ax.set_ylabel("Price (base=1)"); ax.set_xlabel("Date")
+        ax.set_title("Normalised prices (log)")
+        ax.set_ylabel("Price (base=1, log)"); ax.set_xlabel("Date")
         ax.tick_params(axis='x', rotation=30)
 
     def _panel_hist(self, ax):
@@ -266,8 +267,8 @@ class SNP:
 
     def _panel_correlation(self, ax):
         corr = self.returns.corr().values
-        im = ax.imshow(corr, cmap=_CORR_CMAP, vmin=-1, vmax=1)
-        plt.colorbar(im, ax=ax, shrink=0.8)
+        im = ax.imshow(corr, cmap=_CORR_CMAP, vmin=-1, vmax=1, aspect="auto")
+        plt.colorbar(im, ax=ax, shrink=0.55, pad=0.015, fraction=0.035)
         ax.set_xticks(range(self.n)); ax.set_yticks(range(self.n))
         ax.set_xticklabels(self.tickers); ax.set_yticklabels(self.tickers)
         for i in range(self.n):
@@ -283,50 +284,36 @@ class SNP:
         mu_a, Sig_a = self.annualised()
         vol_a = np.sqrt(np.diag(Sig_a)) * 100
         ax.scatter(vol_a, mu_a * 100, s=140, c=self.colors,
-                   edgecolors=PALETTE["charcoal"], linewidth=0.8, zorder=5)
+                   edgecolors=PALETTE["charcoal"], linewidth=0.8,
+                   alpha=0.65, zorder=5)
+        rng = np.random.default_rng(0)
         for k, t in enumerate(self.tickers):
+            dx = rng.uniform(-3, 9)
+            dy = rng.uniform(-6, 8)
             ax.annotate(t, (vol_a[k], mu_a[k] * 100),
-                        xytext=(7, 5), textcoords="offset points",
+                        xytext=(7 + dx, 5 + dy), textcoords="offset points",
                         fontsize=10, color=PALETTE["charcoal"])
         ax.set_xlabel("Ann. volatility (%)"); ax.set_ylabel("Ann. return (%)")
         ax.set_title("Risk–return")
 
-    # ── stacked returns panel (multi-Axes) ────────────────────────────
-    def _panel_returns_stacked(self, fig, subplot_spec=None):
+    def _panel_returns(self, ax):
         rets = self.returns * 100
-        ymin, ymax = rets.values.min(), rets.values.max()
-
-        if subplot_spec is not None:
-            inner = GridSpecFromSubplotSpec(
-                self.n, 1, subplot_spec=subplot_spec, hspace=0.15)
-        else:
-            inner = GridSpec(self.n, 1, figure=fig, hspace=0.15)
-
-        axes = []
-        for i, (t, c) in enumerate(zip(self.tickers, self.colors)):
-            ax = fig.add_subplot(inner[i, 0], sharex=axes[0] if axes else None)
-            ax.plot(rets.index, rets[t], lw=0.7, color=c)
-            ax.axhline(0, color=PALETTE["charcoal"], lw=0.5)
-            ax.set_ylim(ymin * 1.05, ymax * 1.05)
-            ax.set_ylabel(t, rotation=0, ha="right", va="center", fontsize=10)
-            ax.grid(alpha=0.4)
-            if i < self.n - 1:
-                ax.tick_params(labelbottom=False)
-            else:
-                ax.set_xlabel("Date")
-                ax.tick_params(axis='x', rotation=30)
-            if i == 0:
-                ax.set_title("Log-returns (%)")
-            axes.append(ax)
-        return axes
+        for t, c in zip(self.tickers, self.colors):
+            ax.plot(rets.index, rets[t], lw=0.7, color=c,
+                    alpha=0.55, label=t)
+        ax.axhline(0, color=PALETTE["charcoal"], lw=0.5)
+        ax.legend(fontsize=8, ncol=min(4, self.n))
+        ax.set_title("Log-returns (%)")
+        ax.set_ylabel("Return (%)"); ax.set_xlabel("Date")
+        ax.tick_params(axis='x', rotation=30)
 
     # ── public plotting API ───────────────────────────────────────────
-    def plot(self, save=False, individual=False, name="overview"):
+    def plot(self, save=False, individual=False, name="overview", figsize=None):
         """
         Plot 6-panel EDA overview (3x2 grid).
 
         Layout:
-            [0,0] Prices            [0,1] Returns (stacked)
+            [0,0] Prices            [0,1] Returns (overlay)
             [1,0] Rolling vol       [1,1] Histogram
             [2,0] Correlation       [2,1] Risk–return
 
@@ -339,11 +326,16 @@ class SNP:
         name : str
             Filename prefix for saved plots. e.g. name="mag7" produces
             "mag7_overview.pdf" or "mag7_prices.pdf" etc.
+        figsize : tuple, optional
+            Figure size. In individual mode applies to each panel
+            (default (8, 5)); in grid mode it is the overall figure
+            (default (14, 16)).
         """
         _apply_style()
 
         single_panels = [
             ("prices",      self._panel_prices,      (0, 0)),
+            ("returns",     self._panel_returns,     (0, 1)),
             ("rolling_vol", self._panel_rolling_vol, (1, 0)),
             ("histogram",   self._panel_hist,        (1, 1)),
             ("correlation", self._panel_correlation, (2, 0)),
@@ -354,8 +346,9 @@ class SNP:
             _PLOTS_DIR.mkdir(parents=True, exist_ok=True)
 
         if individual:
+            panel_size = figsize or (8, 5)
             for panel_name, draw, _ in single_panels:
-                fig, ax = plt.subplots(figsize=(8, 5))
+                fig, ax = plt.subplots(figsize=panel_size)
                 draw(ax)
                 plt.tight_layout()
                 if save:
@@ -363,16 +356,8 @@ class SNP:
                     fig.savefig(path, bbox_inches="tight")
                     print(f"✓ saved → {_rel(path)}")
                 plt.show()
-            fig = plt.figure(figsize=(10, 1.6 * self.n + 1))
-            self._panel_returns_stacked(fig)
-            plt.tight_layout()
-            if save:
-                path = _PLOTS_DIR / f"{name}_returns.pdf"
-                fig.savefig(path, bbox_inches="tight")
-                print(f"✓ saved → {_rel(path)}")
-            plt.show()
         else:
-            fig = plt.figure(figsize=(14, 16))
+            fig = plt.figure(figsize=figsize or (14, 16))
             gs = GridSpec(3, 2, figure=fig, hspace=0.45, wspace=0.25)
             fig.suptitle(f"Dataset Overview — {name}", fontweight="bold",
                          fontsize=15, color=PALETTE["charcoal"], y=0.995)
@@ -380,8 +365,6 @@ class SNP:
             for panel_name, draw, (r, c) in single_panels:
                 ax = fig.add_subplot(gs[r, c])
                 draw(ax)
-
-            self._panel_returns_stacked(fig, subplot_spec=gs[0, 1])
 
             if save:
                 path = _PLOTS_DIR / f"{name}_overview.pdf"
