@@ -1,5 +1,5 @@
 """
-compare.py — Side-by-side comparison of QAOA, QNN, and brute-force baselines.
+compare.py — Side-by-side comparison of QAOA and brute-force baselines.
 
 Usage
 -----
@@ -22,7 +22,6 @@ from matplotlib.gridspec import GridSpec
 from pathlib import Path
 
 from scripts.qaoa import QAOA
-from scripts.qnn  import QNN
 from scripts.snp  import PALETTE, _apply_style, _rel
 
 _ROOT = Path(__file__).resolve().parent.parent
@@ -31,8 +30,8 @@ _PLOTS_DIR = _ROOT / "plots" / "compare"
 
 class Compare:
     """
-    Run brute-force, QAOA (multiple p), and QNN on a single portfolio and
-    collect results for joint reporting and plotting.
+    Run brute-force and QAOA (at multiple depths p) on a single portfolio
+    and collect results for joint reporting and plotting.
 
     Parameters
     ----------
@@ -44,24 +43,19 @@ class Compare:
         self.pf = portfolio
         self.bf = None         # brute-force result
         self.qaoa_results = {} # {p: result_dict}
-        self.qnn = None        # trained QNN instance
 
     # ── Run ───────────────────────────────────────────────────────────
     def run(self, p_values=(1, 2, 3),
             qaoa_restarts=15, qaoa_seed=42,
-            qnn_layers=4, qnn_epochs=150, qnn_lr=0.08,
-            qnn_sharpness=5.0, qnn_restarts=6, qnn_seed=42,
             verbose=True):
-        """Run brute-force, QAOA at each p in p_values, and the QNN."""
+        """Run brute-force and QAOA at each p in p_values."""
         if verbose:
             print(f"=== Compare on {self.pf} ===")
 
-        # Brute force
         self.bf = self.pf.brute_force()
         if verbose:
             print(f"\n[Brute force] {self.bf['tickers']}  C = {self.bf['cost']:.6f}")
 
-        # QAOA at multiple depths
         qaoa = QAOA(self.pf, seed=qaoa_seed)
         self._E0 = qaoa.ground_state_energy()
         if verbose:
@@ -78,13 +72,6 @@ class Compare:
                 t = self.qaoa_results[p]
                 print(f"              p={p}: E = {res['energy']:.6f}  "
                       f"ratio = {t['ratio']:.4f}  top = {t['top']['bitstring']}")
-
-        # QNN
-        self.qnn = QNN(n_layers=qnn_layers, sharpness=qnn_sharpness, seed=qnn_seed)
-        self.qnn.fit(self.pf, n_epochs=qnn_epochs, lr=qnn_lr, n_restarts=qnn_restarts)
-        if verbose:
-            print(f"\n[QNN]         soft = {self.qnn.soft_cost():.6f}  "
-                  f"hard = {self.qnn.hard_cost():.6f}")
         return self
 
     # ── Reporting ─────────────────────────────────────────────────────
@@ -103,43 +90,34 @@ class Compare:
         print(f"  {'Method':<22} {'Portfolio':<24} {'Cost':>14}  {'Ratio':>6}")
         print("-" * 70)
 
-        # Brute force
         print(f"  {'Brute force':<22} {portfolio_str(bf['x']):<24} "
               f"{bf['cost']:>14.6f}  {'1.0000':>6}")
 
-        # QAOA
         for p, t in self.qaoa_results.items():
             top = t["top"]
             print(f"  {'QAOA p='+str(p)+' (top-1)':<22} "
                   f"{portfolio_str(top['x']):<24} "
                   f"{top['C_finance']:>14.6f}  {t['ratio']:>6.4f}")
-
-        # QNN
-        x_qnn = self.qnn.select()
-        print(f"  {'QNN (hard select)':<22} {portfolio_str(x_qnn):<24} "
-              f"{self.qnn.hard_cost():>14.6f}  {'—':>6}")
         print(line)
 
     # ── Plotting ──────────────────────────────────────────────────────
     def plot(self, save=False, name="comparison"):
         """
-        4-panel comparison figure:
-            [0,0] QAOA energy & approx ratio vs p
-            [0,1] QAOA probs (best p) — budget-K states highlighted
-            [1,0] QNN training curve
-            [1,1] QNN scores per asset (selected highlighted)
+        2-panel comparison figure:
+            [0] QAOA energy & approx ratio vs p (ground state E0 marked)
+            [1] QAOA probs (best p) — budget-K states highlighted, uniform baseline
         """
         _apply_style()
         pf = self.pf
         ps = sorted(self.qaoa_results.keys())
         best_p = max(ps, key=lambda p: self.qaoa_results[p]["ratio"])
 
-        fig = plt.figure(figsize=(14, 9))
-        gs = GridSpec(2, 2, figure=fig, hspace=0.4, wspace=0.3)
-        fig.suptitle(f"Method Comparison — {name}", fontweight="bold",
+        fig = plt.figure(figsize=(14, 5.5))
+        gs = GridSpec(1, 2, figure=fig, wspace=0.3)
+        fig.suptitle(f"QAOA vs Brute Force — {name}", fontweight="bold",
                      fontsize=14, color=PALETTE["charcoal"])
 
-        # ── [0,0] QAOA energy + ratio vs p ─────────────────────────────
+        # ── [0] QAOA energy + ratio vs p ──────────────────────────────
         ax = fig.add_subplot(gs[0, 0])
         energies = [self.qaoa_results[p]["result"]["energy"] for p in ps]
         ratios = [self.qaoa_results[p]["ratio"] for p in ps]
@@ -155,7 +133,7 @@ class Compare:
             ax.annotate(f"r={r:.3f}", (p, e),
                         xytext=(8, 8), textcoords="offset points", fontsize=9)
 
-        # ── [0,1] QAOA measurement probabilities (best p) ─────────────
+        # ── [1] QAOA measurement probabilities (best p) ───────────────
         ax = fig.add_subplot(gs[0, 1])
         probs = self.qaoa_results[best_p]["result"]["probs"]
         n_states = len(probs)
@@ -178,35 +156,6 @@ class Compare:
                 ha="right", va="top", color=PALETTE["red"],
                 fontsize=9, style="italic")
 
-        # ── [1,0] QNN training curve ──────────────────────────────────
-        ax = fig.add_subplot(gs[1, 0])
-        ax.plot(self.qnn.loss_history, color=PALETTE["blue"], lw=1.8)
-        ax.axhline(self.bf["cost"], color=PALETTE["red"], ls="--", lw=1.5,
-                   label=f"Brute-force ({self.bf['cost']:.5f})")
-        ax.set_xlabel("Epoch"); ax.set_ylabel("Loss (soft cost)")
-        ax.set_title("QNN training curve")
-        ax.legend(fontsize=9)
-
-        # ── [1,1] QNN per-asset scores ────────────────────────────────
-        ax = fig.add_subplot(gs[1, 1])
-        x_sel = self.qnn.select()
-        cols = [PALETTE["red"] if x_sel[i] else PALETTE["blue_muted"]
-                for i in range(pf.n)]
-        bars = ax.bar(pf.tickers, self.qnn.scores, color=cols,
-                      edgecolor=PALETTE["charcoal"], linewidth=0.6)
-        ax.axhline(0, color=PALETTE["charcoal"], lw=0.8)
-        for bar, s in zip(bars, self.qnn.scores):
-            ax.text(bar.get_x() + bar.get_width() / 2,
-                    s + np.sign(s) * 0.04,
-                    f"{s:+.3f}", ha="center",
-                    va="bottom" if s > 0 else "top", fontsize=9)
-        ax.set_ylabel("Score $s_i = \\langle Z \\rangle_i$")
-        ax.set_ylim(-1.3, 1.3)
-        ax.set_title("QNN asset scores")
-        ax.text(0.98, 0.95, "red = selected", transform=ax.transAxes,
-                ha="right", va="top", color=PALETTE["red"],
-                fontsize=9, style="italic")
-
         if save:
             _PLOTS_DIR.mkdir(parents=True, exist_ok=True)
             path = _PLOTS_DIR / f"{name}_comparison.pdf"
@@ -216,4 +165,4 @@ class Compare:
 
     def __repr__(self):
         ps = list(self.qaoa_results.keys())
-        return f"Compare({self.pf}, qaoa_p={ps}, qnn={'fit' if self.qnn else 'unfit'})"
+        return f"Compare({self.pf}, qaoa_p={ps})"

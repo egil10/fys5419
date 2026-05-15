@@ -266,18 +266,29 @@ class SNP:
         ax.tick_params(axis='x', rotation=30)
 
     def _panel_correlation(self, ax):
-        corr = self.returns.corr().values
+        # Seriate by leading eigenvector so highly-correlated tickers
+        # cluster near the diagonal (decay outward from top-left).
+        corr_df = self.returns.corr()
+        eigvals, eigvecs = np.linalg.eigh(corr_df.values)
+        leading = eigvecs[:, -1]
+        if leading.sum() < 0:
+            leading = -leading
+        order = np.argsort(-leading)
+        ordered = [self.tickers[i] for i in order]
+        corr = corr_df.loc[ordered, ordered].values
+        n = self.n
+
         im = ax.imshow(corr, cmap=_CORR_CMAP, vmin=-1, vmax=1, aspect="auto")
         plt.colorbar(im, ax=ax, shrink=0.55, pad=0.015, fraction=0.035)
-        ax.set_xticks(range(self.n)); ax.set_yticks(range(self.n))
-        ax.set_xticklabels(self.tickers); ax.set_yticklabels(self.tickers)
-        for i in range(self.n):
-            for j in range(self.n):
+        ax.set_xticks(range(n)); ax.set_yticks(range(n))
+        ax.set_xticklabels(ordered); ax.set_yticklabels(ordered)
+        for i in range(n):
+            for j in range(n):
                 ax.text(j, i, f"{corr[i, j]:.2f}", ha="center", va="center",
                         color="white" if abs(corr[i, j]) > 0.7
                               else PALETTE["charcoal"],
                         fontsize=9)
-        ax.set_title("Return correlation")
+        ax.set_title("Return correlation (seriated)")
         ax.grid(False)
 
     def _panel_risk_return(self, ax):
