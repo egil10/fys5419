@@ -19,6 +19,17 @@ from dataclasses import dataclass, field
 import numpy as np
 
 
+#: Canonical QUBO parameters. Every notebook should import these so the
+#: problem definition is identical everywhere; if you want to vary one
+#: (e.g. sweep 3 over `lam`), override locally — don't redefine the others.
+DEFAULTS = {
+    "lam":    2.0,
+    "A":      0.5,
+    "K_FRAC": 0.25,   # K = round(K_FRAC * n)
+    "K_AT_16": 4,     # convenience for the n=16 canonical instance
+}
+
+
 @dataclass(frozen=True)
 class PortfolioProblem:
     """Cardinality-constrained mean-variance problem container.

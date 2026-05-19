@@ -68,17 +68,41 @@ small dependency set, and adds `scripts/` to `sys.path`. Locally: the
 `google.colab` import fails silently, `setup()` walks up from the cwd to find
 the `scripts/` dir, and adds it to the path. Idempotent.
 
+## Canonical dataset: ONE universe, sub-sampled
+
+There is exactly one dataset: the **16-asset universe** = Mag7 + quantum +
+quantum_big + anti, 2023-01-01 to 2025-12-31 daily log returns. It lives at
+[`results/universe_16.npz`](code/results/) (computed on first call to
+`load_universe()` and cached forever).
+
+- **Notebooks 02, 03, 04, 06** fix `n=16, K=4` and call `load_universe()`.
+  Same μ and Σ everywhere — no per-notebook recomputation.
+- **Notebook 05** loads the same universe and **sub-samples** for each
+  `n ∈ {4, 6, 8, 10, 12, 14, 16}`. For each `n < 16` it draws 20 random
+  subsets, runs every solver, and reports median + IQR. The `n=16`
+  endpoint is the single canonical subset (all 16 assets), and by
+  construction reproduces the runs in notebooks 02/03/04/06.
+- `K` follows the ratio rule `K = round(0.25 * n)` ∈ {1, 2, 2, 3, 3, 4, 4}.
+  At `n=16` this gives `K=4`, matching `DEFAULTS["K_AT_16"]`.
+
+Project-wide constants live in `scripts.portfolio.DEFAULTS` so every
+notebook imports `lam`, `A`, `K_FRAC`, and `K_AT_16` from the same place.
+
 ## Workflow
 
-1. **`snp.ipynb`** — fetch and cache prices (run once per basket).
-2. **`01_eda.ipynb`** — confirm the data is sane, generate report EDA figures.
-3. **`02_classical.ipynb`** — baselines table on one fixed `(n, K)`.
-4. **`03_qaoa.ipynb`** — one QAOA run end-to-end (training curve, top-5 decode).
-5. **`04_depth.ipynb`** — Sweep 1 (p); writes `results/depth_sweep.json`.
-6. **`05_scaling.ipynb`** — Sweep 2 (n); writes `results/size_scaling.json`.
-7. **`06_risk.ipynb`** — Sweep 3 (λ); writes `results/risk_sweep.json`.
-8. **`07_compare.ipynb`** — read all three results files, produce the
-   headline figures.
+1. **`snp.ipynb`** — fetch and cache prices (run once per basket; also
+   populates the universe parquet via `load_universe()`).
+2. **`01_eda.ipynb`** — confirm the data is sane, per-basket EDA figures.
+3. **`02_classical.ipynb`** — baselines table at the canonical `n=16, K=4`.
+4. **`03_qaoa.ipynb`** — one QAOA run end-to-end at `n=16, K=4, p=3`.
+5. **`04_depth.ipynb`** — Sweep 1 (p ∈ {1..5}) at `n=16, K=4`.
+   Writes `results/depth_sweep.json`.
+6. **`05_scaling.ipynb`** — Sweep 2 (n ∈ {4..16} via random subsets, M=20).
+   Writes `results/size_scaling.json`.
+7. **`06_risk.ipynb`** — Sweep 3 (λ across two decades) at `n=16, K=4`.
+   Writes `results/risk_sweep.json`.
+8. **`07_compare.ipynb`** — read all three result files, produce the
+   headline figures with median + IQR shading.
 
 ## Module ownership (the one-true-definition rules)
 
