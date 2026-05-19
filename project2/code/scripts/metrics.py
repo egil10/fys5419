@@ -20,6 +20,15 @@ def approximation_ratio(energy: float, ground_state: float,
     return (energy - worst) / (ground_state - worst)
 
 
+def gap(energy: float, optimum: float) -> float:
+    """Relative gap (E - E_opt) / |E_opt|. Smaller is better; 0 = optimal.
+
+    Convention-agnostic alternative to approximation_ratio when the sign
+    of the optimum is awkward (mixed-sign cost functions).
+    """
+    return (energy - optimum) / abs(optimum) if optimum != 0 else float("inf")
+
+
 def prob_optimal(probs: np.ndarray, x_opt: np.ndarray) -> float:
     """Probability the optimiser samples the brute-force optimum.
 

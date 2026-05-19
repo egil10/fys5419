@@ -1,113 +1,100 @@
 """
-compare.py — Side-by-side comparison of QAOA and brute-force baselines.
+compare.py — Side-by-side runner for the classical baselines and QAOA.
+
+Pure orchestration: build a problem, call `scripts.classical.run_all`,
+call `scripts.qaoa.solve` at one or more depths, print a table, and plot
+the headline figures. No cost function or QAOA internals live here.
 
 Usage
 -----
-    from scripts.snp       import SNP
-    from scripts.baskets   import config
-    from scripts.portfolio import Portfolio
+    from scripts.data    import load_returns
+    from scripts.baskets import config
+    from scripts.portfolio import PortfolioProblem
     from scripts.compare   import Compare
 
     tickers, start, end = config("mag7")
-    snp = SNP(tickers, start, end).cached_fetch(name="mag7")
-    pf = Portfolio(snp.mu, snp.Sigma, lam=2.0, A=0.5, K=2, tickers=snp.tickers)
+    r  = load_returns(tickers, start, end, cache_name="mag7")
+    pf = PortfolioProblem(r.mu, r.Sigma, lam=2.0, A=0.5, K=2,
+                          tickers=list(r.tickers))
 
     cmp = Compare(pf).run(p_values=[1, 2, 3])
     cmp.report()
     cmp.plot(save=True, name="mag7")
 """
+from __future__ import annotations
+
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
-from pathlib import Path
 
-from scripts.qaoa import QAOA
-from scripts.snp  import PALETTE, _apply_style, _rel, title
-
-_ROOT = Path(__file__).resolve().parent.parent
-_PLOTS_DIR = _ROOT / "plots" / "compare"
+from scripts.portfolio import PortfolioProblem
+from scripts.classical import brute_force
+from scripts.qaoa      import solve, decode_top_k
+from scripts.plotting  import PALETTE, apply_style, title, rel_path, PLOTS_DIR
 
 
 class Compare:
-    """
-    Run brute-force and QAOA (at multiple depths p) on a single portfolio
-    and collect results for joint reporting and plotting.
+    """Run brute force + QAOA at multiple depths on one problem instance."""
 
-    Parameters
-    ----------
-    portfolio : Portfolio
-        The mean-variance problem to solve.
-    """
+    def __init__(self, problem: PortfolioProblem):
+        self.pf = problem
+        self.bf = None                  # brute_force SolverResult
+        self.qaoa_results: dict[int, dict] = {}
+        self._E0: float = float("nan")
 
-    def __init__(self, portfolio):
-        self.pf = portfolio
-        self.bf = None         # brute-force result
-        self.qaoa_results = {} # {p: result_dict}
-
-    # ── Run ───────────────────────────────────────────────────────────
+    # ── Run ────────────────────────────────────────────────────────────
     def run(self, p_values=(1, 2, 3),
-            qaoa_restarts=15, qaoa_seed=42,
-            verbose=True):
-        """Run brute-force and QAOA at each p in p_values."""
+            n_restarts: int = 10, seed: int = 42,
+            verbose: bool = True):
         if verbose:
             print(f"=== Compare on {self.pf} ===")
 
-        self.bf = self.pf.brute_force()
+        self.bf = brute_force(self.pf)
         if verbose:
-            print(f"\n[Brute force] {self.bf['tickers']}  C = {self.bf['cost']:.6f}")
+            print(f"\n[Brute force] {self.bf.tickers(self.pf)}  "
+                  f"C = {self.bf.cost:.6f}")
 
-        qaoa = QAOA(self.pf, seed=qaoa_seed)
-        self._E0 = qaoa.ground_state_energy()
-        if verbose:
-            print(f"[QAOA]        H_C ground state E0 = {self._E0:.6f}")
         for p in p_values:
-            res = qaoa.optimise(p=p, n_restarts=qaoa_restarts)
-            self.qaoa_results[p] = {
-                "result":    res,
-                "qaoa":      qaoa,
-                "ratio":     qaoa.approximation_ratio(res["energy"]),
-                "top":       qaoa.decode(res["probs"], top_k=1)[0],
-            }
+            res = solve(self.pf, p=p, n_restarts=n_restarts, seed=seed)
+            self.qaoa_results[p] = res
+            self._E0 = res["ground_state_energy"]
+            top1 = decode_top_k(res["probs"], self.pf, k=1)[0]
+            res["top1"] = top1
             if verbose:
-                t = self.qaoa_results[p]
-                print(f"              p={p}: E = {res['energy']:.6f}  "
-                      f"ratio = {t['ratio']:.4f}  top = {t['top']['bitstring']}")
+                print(f"[QAOA p={p}] E={res['energy']:.6f}  "
+                      f"ratio={res['ratio']:.4f}  "
+                      f"top={top1['bitstring']}  C(top)={top1['cost']:.6f}")
         return self
 
-    # ── Reporting ─────────────────────────────────────────────────────
+    # ── Reporting ──────────────────────────────────────────────────────
     def report(self):
-        """Print a method comparison table."""
+        assert self.bf is not None, "call .run() before .report()"
         pf = self.pf
-        bf = self.bf
 
         def portfolio_str(x):
             return "+".join(t for t, v in zip(pf.tickers, x) if v)
 
         line = "=" * 70
         print(f"\n{line}")
-        print(f"METHOD COMPARISON  (n={pf.n}, K={pf.K}, λ={pf.lam}, A={pf.A})")
+        print(f"METHOD COMPARISON  (n={pf.n}, K={pf.K}, lam={pf.lam}, A={pf.A})")
         print(line)
         print(f"  {'Method':<22} {'Portfolio':<24} {'Cost':>14}  {'Ratio':>6}")
         print("-" * 70)
 
-        print(f"  {'Brute force':<22} {portfolio_str(bf['x']):<24} "
-              f"{bf['cost']:>14.6f}  {'1.0000':>6}")
+        print(f"  {'Brute force':<22} {portfolio_str(self.bf.x):<24} "
+              f"{self.bf.cost:>14.6f}  {'1.0000':>6}")
 
-        for p, t in self.qaoa_results.items():
-            top = t["top"]
+        for p in sorted(self.qaoa_results.keys()):
+            res = self.qaoa_results[p]
+            top = res["top1"]
             print(f"  {'QAOA p='+str(p)+' (top-1)':<22} "
                   f"{portfolio_str(top['x']):<24} "
-                  f"{top['C_finance']:>14.6f}  {t['ratio']:>6.4f}")
+                  f"{top['cost']:>14.6f}  {res['ratio']:>6.4f}")
         print(line)
 
-    # ── Plotting ──────────────────────────────────────────────────────
-    def plot(self, save=False, name="comparison"):
-        """
-        2-panel comparison figure:
-            [0] QAOA energy & approx ratio vs p (ground state E0 marked)
-            [1] QAOA probs (best p) — budget-K states highlighted, uniform baseline
-        """
-        _apply_style()
+    # ── Plotting ───────────────────────────────────────────────────────
+    def plot(self, save: bool = False, name: str = "comparison"):
+        apply_style()
         pf = self.pf
         ps = sorted(self.qaoa_results.keys())
         best_p = max(ps, key=lambda p: self.qaoa_results[p]["ratio"])
@@ -118,14 +105,14 @@ class Compare:
                      fontsize=14, color=PALETTE["charcoal"],
                      x=0.02, ha="left", y=0.995)
 
-        # ── [0] QAOA energy + ratio vs p ──────────────────────────────
+        # [0] Energy & ratio vs depth
         ax = fig.add_subplot(gs[0, 0])
-        energies = [self.qaoa_results[p]["result"]["energy"] for p in ps]
-        ratios = [self.qaoa_results[p]["ratio"] for p in ps]
+        energies = [self.qaoa_results[p]["energy"] for p in ps]
+        ratios   = [self.qaoa_results[p]["ratio"]  for p in ps]
         ax.plot(ps, energies, "o-", color=PALETTE["blue"], lw=2, ms=10,
                 label="QAOA energy")
         ax.axhline(self._E0, color=PALETTE["red"], ls="--", lw=1.5,
-                   label=f"Ground state E₀ = {self._E0:.4f}")
+                   label=f"Ground state E0 = {self._E0:.4f}")
         ax.set_xlabel("Circuit depth p"); ax.set_ylabel("Energy")
         ax.set_xticks(ps)
         title(ax, "QAOA energy vs depth",
@@ -135,9 +122,9 @@ class Compare:
             ax.annotate(f"r={r:.3f}", (p, e),
                         xytext=(8, 8), textcoords="offset points", fontsize=9)
 
-        # ── [1] QAOA measurement probabilities (best p) ───────────────
+        # [1] Measurement probabilities at the best depth
         ax = fig.add_subplot(gs[0, 1])
-        probs = self.qaoa_results[best_p]["result"]["probs"]
+        probs = self.qaoa_results[best_p]["probs"]
         n_states = len(probs)
         budget_ok = np.array([
             bin(k).count("1") == pf.K for k in range(n_states)
@@ -155,15 +142,13 @@ class Compare:
         title(ax, "QAOA measurement probabilities",
               f"Best depth p={best_p}; red bars satisfy the budget K={pf.K}")
         ax.legend(fontsize=9)
-        ax.text(0.98, 0.95, f"red = budget {pf.K}", transform=ax.transAxes,
-                ha="right", va="top", color=PALETTE["red"],
-                fontsize=9, style="italic")
 
         if save:
-            _PLOTS_DIR.mkdir(parents=True, exist_ok=True)
-            path = _PLOTS_DIR / f"{name}_comparison.pdf"
+            out_dir = PLOTS_DIR / "compare"
+            out_dir.mkdir(parents=True, exist_ok=True)
+            path = out_dir / f"{name}_comparison.pdf"
             fig.savefig(path, bbox_inches="tight")
-            print(f"✓ saved → {_rel(path)}")
+            print(f"saved -> {rel_path(path)}")
         plt.show()
 
     def __repr__(self):

@@ -1,240 +1,191 @@
 """
-qaoa.py — QAOA portfolio optimiser.
+qaoa.py — Pure-NumPy QAOA for the portfolio QUBO.
 
-Built on the lecture notebook by Morten Hjorth-Jensen (FYS5419, Spring 2026).
+Functional API: every step is a free function. State is kept in plain
+arrays; no class is required to run the pipeline.
 
-Pipeline:
-    portfolio (mu, Sigma, lam, A, K)
-        → QUBO         (Q matrix)
-        → Ising        (h, J, c)
-        → Hamiltonian  (H_C diagonal, H_M dense)
-        → QAOA ansatz  (statevector simulation)
-        → COBYLA optimisation with random restarts
-        → measurement probabilities
+Pipeline
+--------
+    problem            -> make_hamiltonians  (Q, h, J, const, H_C_diag)
+    (gammas, betas)    -> qaoa_statevector   |psi> in 2^n
+    psi                -> qaoa_energy        <psi|H_C|psi>
+    psi                -> sample_probs       |psi|^2
+    probs              -> decode_top_k       top bitstrings with C(x)
 
-Usage
------
-    from scripts.snp import SNP
-    from scripts.portfolio import Portfolio
-    from scripts.qaoa import QAOA
+End-to-end convenience: `solve(problem, p, n_restarts)` wraps the lot
+and uses `scripts.optimize.multi_start_minimize` (COBYLA + restarts).
 
-    snp = SNP(["AAPL", "MSFT", "AMZN", "GOOG"], "2020-01-01", "2023-12-31").cached_fetch()
-    pf = Portfolio(snp.mu, snp.Sigma, lam=2.0, A=0.5, K=2, tickers=snp.tickers)
-    qaoa = QAOA(pf)
-
-    result = qaoa.optimise(p=2, n_restarts=15)
-    print(qaoa.decode(result["probs"], top_k=5))
+Implementation notes
+--------------------
+- H_C is diagonal in the computational basis, so it is stored as a
+  length-2^n array and applied by elementwise multiplication.
+- exp(-i beta sum_i X_i) factorises into a product of single-qubit X
+  rotations (X_i commute). Applied as (2,..,2)-tensor reshapes for
+  O(n * 2^n) per layer — much cheaper than diagonalising H_M.
+- Qubit 0 is the most significant bit of the basis index (matches the
+  convention in `ising.py`).
 """
+from __future__ import annotations
 import numpy as np
-from scipy.optimize import minimize
-from itertools import product
 
-# ── Single-qubit Pauli matrices ───────────────────────────────────────
-_I2 = np.eye(2, dtype=complex)
-_Z = np.array([[1, 0], [0, -1]], dtype=complex)
-_X = np.array([[0, 1], [1,  0]], dtype=complex)
+from scripts.portfolio import PortfolioProblem, eval_cost
+from scripts.ising     import from_portfolio
 
 
-def _pauli_kron(P, qubit, n_qubits):
-    """Embed single-qubit gate P on `qubit` in n-qubit tensor space (qubit 0 = MSB)."""
-    ops = [_I2] * n_qubits
-    ops[qubit] = P
-    result = ops[0]
-    for op in ops[1:]:
-        result = np.kron(result, op)
-    return result
+# ── Hamiltonian builders ──────────────────────────────────────────────────
+def make_hamiltonians(problem: PortfolioProblem):
+    """Return (Q, offset, h, J, const, H_C_diag) for `problem`.
 
-
-class QAOA:
+    `H_C_diag[k]` is the *full* portfolio cost C(x_k) — i.e. the Ising
+    energy plus the constant offset from the QUBO -> Ising substitution.
+    This keeps QAOA's energy and ground-state values in the same units as
+    `pf.cost(x)`, so `<psi|H_C|psi>` is directly comparable to classical
+    solver costs and `approximation_ratio` is unit-correct.
     """
-    Quantum Approximate Optimisation Algorithm for mean-variance portfolios.
+    Q, off, h, J, c, HC = from_portfolio(problem)
+    return Q, off, h, J, c, HC + c
 
-    Parameters
-    ----------
-    portfolio : Portfolio
-        Portfolio object exposing mu, Sigma, lam, A, K, n, and optionally tickers.
-    seed : int, optional
-        Random seed for restart initialisation. Defaults to 42.
+
+# ── Single-qubit X-mixer (factorised exp(-i beta sum X_i)) ───────────────
+def _apply_X_mixer(psi: np.ndarray, beta: float, n: int) -> np.ndarray:
+    """Apply exp(-i beta sum_i X_i) = prod_i exp(-i beta X_i) to |psi>.
+
+    Each factor is a 2x2 rotation [[cos b, -i sin b], [-i sin b, cos b]].
     """
+    cos = np.cos(beta)
+    isin = -1j * np.sin(beta)
+    psi = psi.reshape((2,) * n)
+    for i in range(n):
+        psi = np.moveaxis(psi, i, 0)
+        new = np.empty_like(psi)
+        new[0] = cos * psi[0] + isin * psi[1]
+        new[1] = isin * psi[0] + cos * psi[1]
+        psi = np.moveaxis(new, 0, i)
+    return psi.reshape(-1)
 
-    def __init__(self, portfolio, seed=42):
-        self.pf = portfolio
-        self.n = portfolio.n
-        self.dim = 2 ** self.n
-        self.rng = np.random.default_rng(seed)
 
-        # Build Q, then (h, J, c), then H_C diagonal and H_M
-        self._Q, self._offset = self._build_qubo()
-        self.h, self.J, self.c = self._qubo_to_ising()
-        self._HC_diag = self._build_HC_diag()
-        self._HM_eigvals, self._HM_eigvecs = self._diagonalise_HM()
-        self._psi0 = np.ones(self.dim, dtype=complex) / np.sqrt(self.dim)
+# ── QAOA ansatz / energy ─────────────────────────────────────────────────
+def qaoa_statevector(gammas, betas, H_C_diag: np.ndarray, n: int) -> np.ndarray:
+    """Apply p QAOA layers to |+>^n.
 
-    # ── QUBO and Ising construction ───────────────────────────────────
-    def _build_qubo(self):
-        """Build QUBO matrix (upper triangular) and constant offset."""
-        pf = self.pf
-        n = self.n
-        Q = np.zeros((n, n))
-        for i in range(n):
-            Q[i, i] = -pf.mu[i] + pf.lam * pf.Sigma[i, i] + pf.A * (1 - 2 * pf.K)
-            for j in range(i + 1, n):
-                Q[i, j] = 2 * pf.lam * pf.Sigma[i, j] + 2 * pf.A
-        return Q, pf.A * pf.K ** 2
+    |psi> = prod_k exp(-i beta_k H_M) exp(-i gamma_k H_C) |+>^n.
+    """
+    dim = 1 << n
+    psi = np.ones(dim, dtype=complex) / np.sqrt(dim)
+    for gamma, beta in zip(gammas, betas):
+        psi = np.exp(-1j * gamma * H_C_diag) * psi
+        psi = _apply_X_mixer(psi, float(beta), n)
+    return psi
 
-    def _qubo_to_ising(self):
-        """Convert QUBO to Ising coefficients using x_i = (1 - z_i)/2."""
-        Q, c = self._Q, self._offset
-        n = self.n
-        h = np.zeros(n)
-        J = np.zeros((n, n))
-        for i in range(n):
-            c -= -Q[i, i] / 2
-            c += Q[i, i] / 2
-            h[i] -= Q[i, i] / 2
-        # diagonal contribution to constant
-        c = self._offset + np.sum(np.diag(Q)) / 2
-        h = -np.diag(Q) / 2
-        # off-diagonal contribution
-        for i in range(n):
-            for j in range(i + 1, n):
-                c += Q[i, j] / 4
-                h[i] -= Q[i, j] / 4
-                h[j] -= Q[i, j] / 4
-                J[i, j] = Q[i, j] / 4
-        return h, J, c
 
-    # ── Hamiltonian construction ──────────────────────────────────────
-    def _build_HC_diag(self):
-        """Diagonal of H_C = Σ h_i Z_i + Σ J_ij Z_i Z_j (kept as 1D array)."""
-        n, dim = self.n, self.dim
-        # bit i of basis index k → spin z_i = +1 if bit=0, -1 if bit=1
-        # (qubit 0 = MSB by our convention)
-        spins = np.empty((dim, n))
-        for k in range(dim):
-            for i in range(n):
-                spins[k, i] = 1 - 2 * ((k >> (n - 1 - i)) & 1)
-        diag = spins @ self.h
-        for i in range(n):
-            for j in range(i + 1, n):
-                if abs(self.J[i, j]) > 1e-14:
-                    diag += self.J[i, j] * spins[:, i] * spins[:, j]
-        return diag
+def qaoa_energy(params: np.ndarray, H_C_diag: np.ndarray, n: int, p: int) -> float:
+    """Objective for the classical outer loop: <psi|H_C|psi>."""
+    gammas, betas = params[:p], params[p:]
+    psi = qaoa_statevector(gammas, betas, H_C_diag, n)
+    return float(np.real(psi.conj() @ (H_C_diag * psi)))
 
-    def _diagonalise_HM(self):
-        """Build H_M = Σ X_i and return its eigendecomposition (cached for speed)."""
-        HM = np.zeros((self.dim, self.dim), dtype=complex)
-        for i in range(self.n):
-            HM += _pauli_kron(_X, i, self.n)
-        eigvals, eigvecs = np.linalg.eigh(HM)
-        return eigvals, eigvecs
 
-    # ── QAOA circuit ──────────────────────────────────────────────────
-    def statevector(self, gammas, betas):
-        """
-        Apply p QAOA layers to |+>^n.
+# ── Measurement ──────────────────────────────────────────────────────────
+def sample_probs(psi: np.ndarray) -> np.ndarray:
+    """|psi|^2 over the computational basis."""
+    return np.abs(psi) ** 2
 
-        |ψ> = Π_k exp(-i β_k H_M) exp(-i γ_k H_C) |+>^n
 
-        H_C action is elementwise (diagonal); H_M action uses the cached
-        eigendecomposition for O(dim^2) per layer instead of O(dim^3).
-        """
-        psi = self._psi0.copy()
-        for gamma, beta in zip(gammas, betas):
-            psi = np.exp(-1j * gamma * self._HC_diag) * psi
-            psi = self._HM_eigvecs @ (
-                np.exp(-1j * beta * self._HM_eigvals)
-                * (self._HM_eigvecs.conj().T @ psi)
-            )
-        return psi
+def decode_top_k(probs: np.ndarray, problem: PortfolioProblem,
+                 k: int = 5) -> list[dict]:
+    """Top-k most probable bitstrings, each with its portfolio cost C(x)."""
+    n = problem.n
+    ranked = np.argsort(probs)[::-1][:k]
+    out = []
+    for idx in ranked:
+        x = np.array([(int(idx) >> (n - 1 - i)) & 1 for i in range(n)],
+                     dtype=int)
+        out.append({
+            "bitstring": "".join(map(str, x)),
+            "x":         x,
+            "prob":      float(probs[idx]),
+            "cost":      eval_cost(x, problem),
+            "budget":    int(x.sum()),
+        })
+    return out
 
-    def energy(self, params, p):
-        """E(γ,β) = <ψ|H_C|ψ> for the QAOA ansatz at depth p."""
-        gammas, betas = params[:p], params[p:]
-        psi = self.statevector(gammas, betas)
-        return float(np.real(psi.conj() @ (self._HC_diag * psi)))
 
-    # ── Optimisation ──────────────────────────────────────────────────
-    def optimise(self, p=1, n_restarts=15, verbose=False):
-        """
-        Find optimal QAOA parameters via COBYLA with random restarts.
+# ── Diagnostics ──────────────────────────────────────────────────────────
+def ground_state_energy(H_C_diag: np.ndarray) -> float:
+    """Exact lowest eigenvalue of H_C (diagonal -> just its min)."""
+    return float(H_C_diag.min())
 
-        Parameters
-        ----------
-        p : int
-            Circuit depth (number of QAOA layers).
-        n_restarts : int
-            Number of independent random initialisations.
-        verbose : bool
-            Print energy of each restart if True.
 
-        Returns
-        -------
-        dict with keys: 'energy', 'gammas', 'betas', 'psi', 'probs', 'p'.
-        """
-        best_energy = np.inf
-        best_x = None
+def approximation_ratio(energy: float, H_C_diag: np.ndarray) -> float:
+    """Scaled QAOA approximation ratio in [0, 1].
 
-        for r in range(n_restarts):
-            x0 = self.rng.uniform(0, 2 * np.pi, 2 * p)
-            res = minimize(
-                lambda params: self.energy(params, p),
-                x0, method="COBYLA",
-                options={"maxiter": 2000, "rhobeg": 0.5},
-            )
-            if verbose:
-                print(f"  restart {r+1:2d}: E = {res.fun:.6f}")
-            if res.fun < best_energy:
-                best_energy = res.fun
-                best_x = res.x
+        r = (E_worst - E) / (E_worst - E_opt),
 
-        gammas, betas = best_x[:p], best_x[p:]
-        psi = self.statevector(gammas, betas)
-        return {
-            "energy": best_energy,
-            "gammas": gammas,
-            "betas":  betas,
-            "psi":    psi,
-            "probs":  np.abs(psi) ** 2,
-            "p":      p,
-        }
+    so r = 1 when QAOA reaches the ground state, r = 0 when it lands on
+    the highest-cost state, and a uniform initial state gives the value
+    (E_worst - mean) / (E_worst - E_opt). This is the standard
+    convention (matches Farhi et al. on Max-Cut) and stays interpretable
+    when E_opt is small in magnitude relative to the spread.
+    """
+    e_opt   = float(H_C_diag.min())
+    e_worst = float(H_C_diag.max())
+    if e_worst == e_opt:
+        return 1.0
+    return (e_worst - energy) / (e_worst - e_opt)
 
-    # ── Decoding ──────────────────────────────────────────────────────
-    def decode(self, probs, top_k=5):
-        """
-        Return the top-k most probable bitstrings with their portfolio costs.
 
-        Returns
-        -------
-        list of dicts, each with: bitstring, x, prob, E_ising, C_finance, budget.
-        """
-        ranked = np.argsort(probs)[::-1][:top_k]
-        out = []
-        for idx in ranked:
-            x = np.array([(idx >> (self.n - 1 - i)) & 1 for i in range(self.n)])
-            z = 1 - 2 * x
-            E_ising = float(self.h @ z)
-            for i in range(self.n):
-                for j in range(i + 1, self.n):
-                    E_ising += self.J[i, j] * z[i] * z[j]
-            out.append({
-                "bitstring": "".join(map(str, x)),
-                "x":         x,
-                "prob":      float(probs[idx]),
-                "E_ising":   E_ising,
-                "C_finance": E_ising + self.c,
-                "budget":    int(x.sum()),
-            })
-        return out
+# ── End-to-end convenience ───────────────────────────────────────────────
+def solve(problem: PortfolioProblem,
+          p: int = 1,
+          n_restarts: int = 10,
+          seed: int = 42,
+          method: str = "COBYLA",
+          maxiter: int = 200,
+          rhobeg: float = 0.1,
+          verbose: bool = False) -> dict:
+    """Build Hamiltonians, train QAOA from `n_restarts` random inits, return result.
 
-    # ── Diagnostics ───────────────────────────────────────────────────
-    def ground_state_energy(self):
-        """Exact lowest eigenvalue of H_C (since H_C is diagonal, just its min)."""
-        return float(self._HC_diag.min())
+    Defaults match the project methodology: 10 multi-start seeds,
+    gamma_k ~ U[0, 2*pi], beta_k ~ U[0, pi], COBYLA with maxiter=200,
+    rhobeg=0.1. Single-seed QAOA results are not meaningful — the
+    landscape is non-convex enough that multi-start is mandatory.
 
-    def approximation_ratio(self, energy):
-        """E / E_0. Equals 1 if QAOA reaches the ground state."""
-        return energy / self.ground_state_energy()
+    The returned dict has everything downstream notebooks need:
+        p, energy, ratio, ground_state_energy, gammas, betas, psi, probs,
+        history (full multi-start trajectory), runtime.
+    """
+    # Local import keeps qaoa.py importable even if optimize.py isn't on the path.
+    from scripts.optimize import multi_start_minimize
 
-    def __repr__(self):
-        return f"QAOA(n={self.n}, K={self.pf.K}, lam={self.pf.lam}, A={self.pf.A})"
+    _, _, _, _, _, HC = make_hamiltonians(problem)
+    n = problem.n
+
+    objective = lambda params: qaoa_energy(params, HC, n, p)
+    # gamma in [0, 2*pi] for the first p entries, beta in [0, pi] for the last p.
+    # multi_start_minimize uses a single bounds tuple, so we sample uniformly in
+    # [0, 2*pi] and rely on the X-mixer's 2*pi-periodicity in beta — equivalent
+    # up to a global phase.
+    opt = multi_start_minimize(
+        objective, n_params=2 * p, n_restarts=n_restarts,
+        method=method, seed=seed, verbose=verbose,
+        maxiter=maxiter, rhobeg=rhobeg,
+    )
+
+    gammas, betas = opt.x[:p], opt.x[p:]
+    psi   = qaoa_statevector(gammas, betas, HC, n)
+    probs = sample_probs(psi)
+
+    return {
+        "p":                   p,
+        "energy":              opt.fun,
+        "ratio":               approximation_ratio(opt.fun, HC),  # scaled, in [0, 1]
+        "ground_state_energy": ground_state_energy(HC),
+        "worst_energy":        float(HC.max()),
+        "gammas":              gammas,
+        "betas":               betas,
+        "psi":                 psi,
+        "probs":               probs,
+        "history":             opt.history,
+        "runtime":             opt.runtime,
+        "n_restarts":          opt.n_restarts,
+    }

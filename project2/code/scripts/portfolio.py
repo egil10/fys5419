@@ -1,76 +1,83 @@
 """
-portfolio.py — Mean-variance portfolio problem container.
+portfolio.py — THE one true definition of the portfolio cost.
 
-A small data class that holds (mu, Sigma, lam, A, K) and provides
-the cost function and brute-force baseline for testing/validation.
+    ┌──────────────────────────────────────────────────────────────────────┐
+    │   C(x) = -mu^T x + lam x^T Sigma x + A (sum x - K)^2,  x in {0,1}^n  │
+    └──────────────────────────────────────────────────────────────────────┘
+
+Every solver — classical (`scripts.classical`) and quantum
+(`scripts.qaoa`) — imports `eval_cost` (or calls `.cost(x)` on a
+`PortfolioProblem`). No solver re-implements C(x). If you ever need to
+change the cost function, you change it HERE, exactly once.
+
+`Portfolio` is an alias of `PortfolioProblem` so older code that
+constructs `Portfolio(mu, Sigma, lam, A, K, tickers=...)` keeps working.
 """
+from __future__ import annotations
+from dataclasses import dataclass, field
+
 import numpy as np
-from itertools import product
 
 
-class Portfolio:
-    """
-    Mean-variance portfolio with budget constraint.
-
-    Cost:
-        C(x) = -μᵀx + λ xᵀΣx + A (Σ x_i - K)²
+@dataclass(frozen=True)
+class PortfolioProblem:
+    """Cardinality-constrained mean-variance problem container.
 
     Parameters
     ----------
-    mu      : (n,) expected returns
-    Sigma   : (n,n) covariance matrix
-    lam     : risk-aversion parameter
-    A       : budget-penalty coefficient
-    K       : target portfolio size (number of selected assets)
-    tickers : list of asset names (optional, used for pretty printing)
+    mu      : (n,)      expected returns
+    Sigma   : (n, n)    covariance matrix
+    lam     : float     risk-aversion coefficient
+    A       : float     budget-penalty coefficient
+    K       : int       target portfolio size (number of selected assets)
+    tickers : sequence of str, optional
+        Asset labels. Defaults to "Asset 0", "Asset 1", ...
     """
+    mu:      np.ndarray
+    Sigma:   np.ndarray
+    lam:     float
+    A:       float
+    K:       int
+    tickers: tuple[str, ...] = field(default_factory=tuple)
 
-    def __init__(self, mu, Sigma, lam, A, K, tickers=None):
-        self.mu = np.asarray(mu)
-        self.Sigma = np.asarray(Sigma)
-        self.lam = float(lam)
-        self.A = float(A)
-        self.K = int(K)
-        self.n = len(self.mu)
-        self.tickers = tickers or [f"Asset {i}" for i in range(self.n)]
+    def __post_init__(self):
+        # Frozen dataclass — use object.__setattr__ to normalise inputs
+        object.__setattr__(self, "mu",    np.asarray(self.mu,    dtype=float))
+        object.__setattr__(self, "Sigma", np.asarray(self.Sigma, dtype=float))
+        object.__setattr__(self, "lam",   float(self.lam))
+        object.__setattr__(self, "A",     float(self.A))
+        object.__setattr__(self, "K",     int(self.K))
+        if not self.tickers:
+            object.__setattr__(
+                self, "tickers",
+                tuple(f"Asset {i}" for i in range(self.mu.size)),
+            )
+        else:
+            object.__setattr__(self, "tickers", tuple(self.tickers))
 
-    def cost(self, x):
-        """Mean-variance cost C(x) for a binary vector x."""
-        x = np.asarray(x, dtype=float)
-        return float(-self.mu @ x
-                     + self.lam * x @ self.Sigma @ x
-                     + self.A * (x.sum() - self.K) ** 2)
+    @property
+    def n(self) -> int:
+        return int(self.mu.size)
 
-    def brute_force(self):
-        """
-        Enumerate all 2^n portfolios and return the best feasible (budget=K) one.
+    def cost(self, x) -> float:
+        """Convenience wrapper around eval_cost(x, self)."""
+        return eval_cost(x, self)
 
-        Returns
-        -------
-        dict with: x, cost, bitstring, all_valid (sorted list of all budget-K solutions)
-        """
-        best_cost, best_x = np.inf, None
-        valid = []
-        for bits in product([0, 1], repeat=self.n):
-            x = np.array(bits)
-            c = self.cost(x)
-            if x.sum() == self.K:
-                valid.append({
-                    "x":         x,
-                    "cost":      c,
-                    "bitstring": "".join(map(str, x)),
-                    "tickers":   [self.tickers[i] for i in range(self.n) if x[i]],
-                })
-                if c < best_cost:
-                    best_cost, best_x = c, x
-        valid.sort(key=lambda r: r["cost"])
-        return {
-            "x":         best_x,
-            "cost":      best_cost,
-            "bitstring": "".join(map(str, best_x)),
-            "tickers":   [self.tickers[i] for i in range(self.n) if best_x[i]],
-            "all_valid": valid,
-        }
+    def __repr__(self) -> str:
+        return (f"PortfolioProblem(n={self.n}, K={self.K}, "
+                f"lam={self.lam}, A={self.A})")
 
-    def __repr__(self):
-        return f"Portfolio(n={self.n}, K={self.K}, λ={self.lam}, A={self.A})"
+
+def eval_cost(x, problem: PortfolioProblem) -> float:
+    """Evaluate C(x) = -mu^T x + lam x^T Sigma x + A (sum x - K)^2."""
+    x = np.asarray(x, dtype=float)
+    return float(
+        -problem.mu @ x
+        + problem.lam * x @ problem.Sigma @ x
+        + problem.A * (x.sum() - problem.K) ** 2
+    )
+
+
+# Backward-compatible alias — existing code that does `from scripts.portfolio
+# import Portfolio` still works.
+Portfolio = PortfolioProblem
