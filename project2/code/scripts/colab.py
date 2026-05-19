@@ -1,41 +1,36 @@
 """
-colab.py — One-line environment setup that works on Colab AND locally.
+colab.py — Colab/local setup with Drive-persistent outputs.
 
-Put this at the top of every notebook:
+Pattern (mirrors the fys5429/PINN-BS notebooks):
 
-    from scripts.colab import setup; setup()
+    Cell 1 — Bootstrap (clone repo to ephemeral /content, chdir, add to path)
+    Cell 2 — Paths     (mount Drive, route plots/results to Drive)
 
-…or, equivalently, the absolute minimum that also works before `scripts/`
-is on `sys.path`:
+Public surface
+--------------
+    setup()                          # pip install + sys.path injection
+    mount_drive()                    # one-time OAuth, returns Drive root
+    out_dir(category, subdir=None)   # Drive-aware output path
 
-    %pip -q install requests
-    exec(__import__('urllib.request', fromlist=['x']).urlopen(
-        'https://raw.githubusercontent.com/egil10/fys5419/main/'
-        'project2/code/scripts/colab.py').read())
-    setup()
+`out_dir('plots', 'eda')` returns
+    /content/drive/MyDrive/GITHUB-COLAB/fys5419/project2/code/plots/eda  (Colab)
+    <repo>/project2/code/plots/eda                                       (local)
 
-Behaviour
----------
-- On Colab:
-    1. `git clone` (or `git -C ... pull`) the repo to `/content/<name>`
-    2. `os.chdir` to `<repo>/project2/code/notebooks`
-    3. add `<repo>/project2/code` to `sys.path` (so `from scripts.foo` works)
-    4. `pip install -q` the project requirements (yfinance, pandas, ...)
-- Locally: detect we are *not* on Colab and just ensure `sys.path` has the
-  `code/` directory so notebook imports still work.
-
-Idempotent — safe to call twice.
+Notebooks should use `out_dir('plots', ...)` and `out_dir('results')` instead
+of `Path("..")/'plots'/...`, so PDF outputs + sweep JSONs survive Colab
+runtime restarts.
 """
 from __future__ import annotations
-import os
 import sys
 import subprocess
 from pathlib import Path
 
 
-REPO_URL_DEFAULT     = "https://github.com/egil10/fys5419.git"
-REPO_NAME_DEFAULT    = "fys5419"
-SUBPROJECT_DEFAULT   = "project2/code"     # `<repo>/<subproject>/{scripts,notebooks,...}`
+#: Drive layout: <DRIVE_ROOT>/<DRIVE_PROJECT>/<SUBPROJECT>/{plots, results, data}
+DRIVE_ROOT      = "/content/drive/MyDrive/GITHUB-COLAB"
+DRIVE_PROJECT   = "fys5419"
+SUBPROJECT      = "project2/code"
+
 REQUIREMENTS_DEFAULT = ("numpy", "pandas", "scipy", "matplotlib",
                         "yfinance", "pyarrow")
 
@@ -49,7 +44,6 @@ def in_colab() -> bool:
 
 
 def _run(cmd: list[str], check: bool = True) -> int:
-    """Run a shell command and stream its output."""
     print(">", " ".join(cmd))
     proc = subprocess.run(cmd, check=False)
     if check and proc.returncode != 0:
@@ -57,39 +51,22 @@ def _run(cmd: list[str], check: bool = True) -> int:
     return proc.returncode
 
 
+# ── pip install + sys.path injection ─────────────────────────────────────
 def setup(
-    repo_url:     str = REPO_URL_DEFAULT,
-    repo_name:    str = REPO_NAME_DEFAULT,
-    subproject:   str = SUBPROJECT_DEFAULT,
     requirements: tuple[str, ...] = REQUIREMENTS_DEFAULT,
     install_deps: bool = True,
     verbose:      bool = True,
 ) -> Path:
-    """Bootstrap the notebook environment. Returns the path of `<repo>/<subproject>`.
+    """Idempotent project setup. Returns the path of `<repo>/<subproject>`.
 
-    Locally: no clone, no pip; just ensures `<subproject>` is on `sys.path`.
-    On Colab: clones or pulls, chdirs to `<subproject>/notebooks`, installs deps.
+    Assumes the inline bootstrap cell in the notebook has already cloned
+    the repo (on Colab) or that we are already inside the local repo.
     """
-    if in_colab():
-        repo_dir = Path("/content") / repo_name
-        if not repo_dir.exists():
-            _run(["git", "clone", repo_url, str(repo_dir)])
-        else:
-            _run(["git", "-C", str(repo_dir), "pull"], check=False)
+    if in_colab() and install_deps and requirements:
+        _run([sys.executable, "-m", "pip", "install", "-q", *requirements],
+             check=False)
 
-        notebooks_dir = repo_dir / subproject / "notebooks"
-        os.chdir(notebooks_dir)
-
-        if install_deps and requirements:
-            _run([sys.executable, "-m", "pip", "install", "-q", *requirements],
-                 check=False)
-
-        scripts_parent = repo_dir / subproject
-    else:
-        # Local mode: walk up from the current working directory to find
-        # the `<subproject>` folder that contains `scripts/` and `notebooks/`.
-        scripts_parent = _find_local_subproject(subproject)
-
+    scripts_parent = _find_subproject_from_cwd(SUBPROJECT)
     sys.path.insert(0, str(scripts_parent))
 
     if verbose:
@@ -101,15 +78,52 @@ def setup(
     return scripts_parent
 
 
-def _find_local_subproject(subproject: str) -> Path:
-    """Walk up from cwd looking for a folder ending with `subproject`."""
+# ── Drive mount + output paths ───────────────────────────────────────────
+def mount_drive(verbose: bool = False) -> Path:
+    """Mount Google Drive (no-op locally) and return the Drive project root.
+
+    Drive project root = `<DRIVE_ROOT>/<DRIVE_PROJECT>/<SUBPROJECT>`,
+    created if missing on first call.
+    """
+    if in_colab():
+        from google.colab import drive  # type: ignore
+        drive.mount("/content/drive")
+
+    root = Path(DRIVE_ROOT) / DRIVE_PROJECT / SUBPROJECT
+    if in_colab():
+        root.mkdir(parents=True, exist_ok=True)
+
+    if verbose:
+        print(f"[colab.mount_drive] root = {root}")
+    return root
+
+
+def out_dir(category: str, subdir: str | None = None) -> Path:
+    """Return the output directory for `category` (plots, results, data, ...).
+
+    - On Colab: `<DRIVE_ROOT>/<DRIVE_PROJECT>/<SUBPROJECT>/<category>[/<subdir>]`
+      (mounts Drive on first call). Outputs persist across runtime restarts.
+    - Locally: `<repo>/<SUBPROJECT>/<category>[/<subdir>]`.
+
+    The directory is created if it does not exist.
+    """
+    if in_colab():
+        base = mount_drive(verbose=False) / category
+    else:
+        base = _find_subproject_from_cwd(SUBPROJECT) / category
+
+    d = base if subdir is None else base / subdir
+    d.mkdir(parents=True, exist_ok=True)
+    return d
+
+
+# ── Local layout discovery ───────────────────────────────────────────────
+def _find_subproject_from_cwd(subproject: str) -> Path:
+    """Walk up from cwd looking for the folder that contains scripts/ + notebooks/."""
     here = Path.cwd().resolve()
-    # First: are we already inside `<subproject>` (e.g. running a notebook
-    # from `<subproject>/notebooks`)?
     for p in (here, *here.parents):
         if (p / "scripts").is_dir() and (p / "notebooks").is_dir():
             return p
-    # Fallback: try `<root>/<subproject>` upward
     for p in (here, *here.parents):
         candidate = p / subproject
         if candidate.is_dir():

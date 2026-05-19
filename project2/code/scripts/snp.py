@@ -323,7 +323,8 @@ class SNP:
         ax.tick_params(axis='x', rotation=30)
 
     # ── public plotting API ───────────────────────────────────────────
-    def plot(self, save=False, individual=False, name="overview", figsize=None):
+    def plot(self, save=False, individual=False, name="overview", figsize=None,
+             save_dir=None):
         """
         Plot 6-panel EDA overview (3x2 grid).
 
@@ -335,16 +336,18 @@ class SNP:
         Parameters
         ----------
         save : bool
-            If True, save plot(s) as PDF to code/project2/plots/eda/.
+            If True, save plot(s) as PDF.
         individual : bool
             If True, render each panel as its own figure. Else a 3x2 grid.
         name : str
-            Filename prefix for saved plots. e.g. name="mag7" produces
-            "mag7_overview.pdf" or "mag7_prices.pdf" etc.
+            Filename prefix for saved plots.
         figsize : tuple, optional
-            Figure size. In individual mode applies to each panel
-            (default (8, 5)); in grid mode it is the overall figure
-            (default (14, 16)).
+            In individual mode applies to each panel (default (8, 5));
+            in grid mode it is the overall figure (default (14, 16)).
+        save_dir : Path | str, optional
+            Where to write the PDFs. Defaults to `<repo>/plots/eda`.
+            Notebooks running on Colab should pass
+            `scripts.colab.out_dir("plots", "eda")` so outputs land in Drive.
         """
         _apply_style()
 
@@ -357,8 +360,9 @@ class SNP:
             ("risk_return", self._panel_risk_return, (2, 1)),
         ]
 
+        out_d = Path(save_dir) if save_dir is not None else _PLOTS_DIR
         if save:
-            _PLOTS_DIR.mkdir(parents=True, exist_ok=True)
+            out_d.mkdir(parents=True, exist_ok=True)
 
         if individual:
             panel_size = figsize or (8, 5)
@@ -367,7 +371,7 @@ class SNP:
                 draw(ax)
                 plt.tight_layout()
                 if save:
-                    path = _PLOTS_DIR / f"{name}_{panel_name}.pdf"
+                    path = out_d / f"{name}_{panel_name}.pdf"
                     fig.savefig(path, bbox_inches="tight")
                     print(f"✓ saved → {_rel(path)}")
                 plt.show()
@@ -383,7 +387,7 @@ class SNP:
                 draw(ax)
 
             if save:
-                path = _PLOTS_DIR / f"{name}_overview.pdf"
+                path = out_d / f"{name}_overview.pdf"
                 fig.savefig(path, bbox_inches="tight")
                 print(f"✓ saved → {_rel(path)}")
             plt.show()
