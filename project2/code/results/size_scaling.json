@@ -1,0 +1,8850 @@
+[
+  {
+    "solver": "brute_force",
+    "cost": -0.0008400221024160283,
+    "runtime_s": 0.0002833930011547636,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 0,
+    "subset_idx": [
+      3,
+      9,
+      10,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0008400221024160283,
+    "runtime_s": 0.00013086000035400502,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 0,
+    "subset_idx": [
+      3,
+      9,
+      10,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0008400221024160283,
+    "runtime_s": 0.00018321500101592392,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 0,
+    "subset_idx": [
+      3,
+      9,
+      10,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0008400221024160283,
+    "runtime_s": 0.30007069549901644,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 0,
+    "subset_idx": [
+      3,
+      9,
+      10,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.057107866405476895,
+    "runtime_s": 3.7056037500005914,
+    "ratio": -67.98376642855729,
+    "p_optimal": 0.22925998715213386,
+    "n": 4,
+    "K": 1,
+    "subset_id": 0,
+    "subset_idx": [
+      3,
+      9,
+      10,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0009627480876013803,
+    "runtime_s": 0.0001611499974387698,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      2,
+      6,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0009627480876013803,
+    "runtime_s": 9.592599963070825e-05,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      2,
+      6,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0009627480876013803,
+    "runtime_s": 0.00018534099945100024,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      2,
+      6,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0009627480876013803,
+    "runtime_s": 0.2913460674990347,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      2,
+      6,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.06741417652351117,
+    "runtime_s": 3.8235417759970005,
+    "ratio": -70.02265430770046,
+    "p_optimal": 0.2338428824024023,
+    "n": 4,
+    "K": 1,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      2,
+      6,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0009627480876013803,
+    "runtime_s": 0.00015629900008207187,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 2,
+    "subset_idx": [
+      0,
+      2,
+      10,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0009627480876013803,
+    "runtime_s": 0.0001019000010273885,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 2,
+    "subset_idx": [
+      0,
+      2,
+      10,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0009627480876013803,
+    "runtime_s": 0.00010140499944100156,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 2,
+    "subset_idx": [
+      0,
+      2,
+      10,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0009627480876013803,
+    "runtime_s": 0.29404430850081553,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 2,
+    "subset_idx": [
+      0,
+      2,
+      10,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.05574797447070106,
+    "runtime_s": 3.81512480800302,
+    "ratio": -57.90504825576257,
+    "p_optimal": 0.22894032669819775,
+    "n": 4,
+    "K": 1,
+    "subset_id": 2,
+    "subset_idx": [
+      0,
+      2,
+      10,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.00015658199845347553,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 3,
+    "subset_idx": [
+      2,
+      9,
+      11,
+      13
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.00013737399785895832,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 3,
+    "subset_idx": [
+      2,
+      9,
+      11,
+      13
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0009627480876013803,
+    "runtime_s": 0.00011511300181155093,
+    "ratio": 0.6524063859753223,
+    "n": 4,
+    "K": 1,
+    "subset_id": 3,
+    "subset_idx": [
+      2,
+      9,
+      11,
+      13
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.296693147998667,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 3,
+    "subset_idx": [
+      2,
+      9,
+      11,
+      13
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.05841145655761632,
+    "runtime_s": 3.74587500099733,
+    "ratio": -39.58253229798924,
+    "p_optimal": 0.22804005810391278,
+    "n": 4,
+    "K": 1,
+    "subset_id": 3,
+    "subset_idx": [
+      2,
+      9,
+      11,
+      13
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.00016328699712175876,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 4,
+    "subset_idx": [
+      5,
+      7,
+      10,
+      11
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 6.052900062059052e-05,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 4,
+    "subset_idx": [
+      5,
+      7,
+      10,
+      11
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.00016884700016817078,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 4,
+    "subset_idx": [
+      5,
+      7,
+      10,
+      11
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.30446055549873563,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 4,
+    "subset_idx": [
+      5,
+      7,
+      10,
+      11
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.060058663405055265,
+    "runtime_s": 3.7159638760022062,
+    "ratio": -40.69876226523732,
+    "p_optimal": 0.26472964872376953,
+    "n": 4,
+    "K": 1,
+    "subset_id": 4,
+    "subset_idx": [
+      5,
+      7,
+      10,
+      11
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0008400221024160283,
+    "runtime_s": 0.0001533109971205704,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      1,
+      6,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0008400221024160283,
+    "runtime_s": 8.575800165999681e-05,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      1,
+      6,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0008400221024160283,
+    "runtime_s": 0.00011106999954790808,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      1,
+      6,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0008400221024160283,
+    "runtime_s": 0.28880114299863635,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      1,
+      6,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.0710527511832752,
+    "runtime_s": 3.803265606999048,
+    "ratio": -84.58438293339775,
+    "p_optimal": 0.2314714413868997,
+    "n": 4,
+    "K": 1,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      1,
+      6,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.00017232900063390844,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 6,
+    "subset_idx": [
+      0,
+      8,
+      11,
+      12
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 6.511600076919422e-05,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 6,
+    "subset_idx": [
+      0,
+      8,
+      11,
+      12
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.00011475400242488831,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 6,
+    "subset_idx": [
+      0,
+      8,
+      11,
+      12
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.29758930100069847,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 6,
+    "subset_idx": [
+      0,
+      8,
+      11,
+      12
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.0576188469570345,
+    "runtime_s": 3.8412076200002048,
+    "ratio": -39.045420283263496,
+    "p_optimal": 0.22803892341906856,
+    "n": 4,
+    "K": 1,
+    "subset_id": 6,
+    "subset_idx": [
+      0,
+      8,
+      11,
+      12
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0008400221024160283,
+    "runtime_s": 0.00017730099716573022,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 7,
+    "subset_idx": [
+      1,
+      8,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0008400221024160283,
+    "runtime_s": 6.0640002629952505e-05,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 7,
+    "subset_idx": [
+      1,
+      8,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0008400221024160283,
+    "runtime_s": 0.00010550300066825002,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 7,
+    "subset_idx": [
+      1,
+      8,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0008400221024160283,
+    "runtime_s": 0.29179850299988175,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 7,
+    "subset_idx": [
+      1,
+      8,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.05591592439514349,
+    "runtime_s": 3.8154062269968563,
+    "ratio": -66.56482518057679,
+    "p_optimal": 0.22781306180354022,
+    "n": 4,
+    "K": 1,
+    "subset_id": 7,
+    "subset_idx": [
+      1,
+      8,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0009627480876013803,
+    "runtime_s": 0.0001563439982419368,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 8,
+    "subset_idx": [
+      2,
+      4,
+      7,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0009627480876013803,
+    "runtime_s": 6.154400034574792e-05,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 8,
+    "subset_idx": [
+      2,
+      4,
+      7,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0009627480876013803,
+    "runtime_s": 0.00016830900131026283,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 8,
+    "subset_idx": [
+      2,
+      4,
+      7,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0009627480876013803,
+    "runtime_s": 0.3035908234996896,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 8,
+    "subset_idx": [
+      2,
+      4,
+      7,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.06472324042865421,
+    "runtime_s": 3.92721285999869,
+    "ratio": -67.22759698220503,
+    "p_optimal": 0.2501268422029169,
+    "n": 4,
+    "K": 1,
+    "subset_id": 8,
+    "subset_idx": [
+      2,
+      4,
+      7,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.00016717099788365886,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 9,
+    "subset_idx": [
+      1,
+      8,
+      11,
+      12
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 6.212500011315569e-05,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 9,
+    "subset_idx": [
+      1,
+      8,
+      11,
+      12
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.0001795739990484435,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 9,
+    "subset_idx": [
+      1,
+      8,
+      11,
+      12
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.29356094250033493,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 9,
+    "subset_idx": [
+      1,
+      8,
+      11,
+      12
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.05544599028788811,
+    "runtime_s": 3.830585969997628,
+    "ratio": -37.57298363548787,
+    "p_optimal": 0.22889304009067377,
+    "n": 4,
+    "K": 1,
+    "subset_id": 9,
+    "subset_idx": [
+      1,
+      8,
+      11,
+      12
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.00015545200221822597,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 10,
+    "subset_idx": [
+      6,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 5.878599768038839e-05,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 10,
+    "subset_idx": [
+      6,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.0001291779990424402,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 10,
+    "subset_idx": [
+      6,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.29965523799910443,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 10,
+    "subset_idx": [
+      6,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.06933787153899344,
+    "runtime_s": 3.700012486999185,
+    "ratio": -46.98681904908207,
+    "p_optimal": 0.23213480416125282,
+    "n": 4,
+    "K": 1,
+    "subset_id": 10,
+    "subset_idx": [
+      6,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0005231871486549717,
+    "runtime_s": 0.00022506900131702423,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 11,
+    "subset_idx": [
+      3,
+      9,
+      10,
+      13
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0005231871486549717,
+    "runtime_s": 7.421199916279875e-05,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 11,
+    "subset_idx": [
+      3,
+      9,
+      10,
+      13
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0005231871486549717,
+    "runtime_s": 0.00019209799938835204,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 11,
+    "subset_idx": [
+      3,
+      9,
+      10,
+      13
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0005231871486549717,
+    "runtime_s": 0.3204709339988767,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 11,
+    "subset_idx": [
+      3,
+      9,
+      10,
+      13
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.05592480506786141,
+    "runtime_s": 4.085341116999189,
+    "ratio": -106.8925435413215,
+    "p_optimal": 0.22896876161260948,
+    "n": 4,
+    "K": 1,
+    "subset_id": 11,
+    "subset_idx": [
+      3,
+      9,
+      10,
+      13
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": 2.188362850467419e-05,
+    "runtime_s": 0.00016698399849701673,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 12,
+    "subset_idx": [
+      4,
+      5,
+      9,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": 0.004514784325681944,
+    "runtime_s": 7.473600271623582e-05,
+    "ratio": 206.30876295115402,
+    "n": 4,
+    "K": 1,
+    "subset_id": 12,
+    "subset_idx": [
+      4,
+      5,
+      9,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": 2.188362850467419e-05,
+    "runtime_s": 0.00011925800208700821,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 12,
+    "subset_idx": [
+      4,
+      5,
+      9,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": 2.188362850467419e-05,
+    "runtime_s": 0.290275286501128,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 12,
+    "subset_idx": [
+      4,
+      5,
+      9,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.040104903120399375,
+    "runtime_s": 3.72335733699947,
+    "ratio": 1832.6441207788394,
+    "p_optimal": 0.2109114738496704,
+    "n": 4,
+    "K": 1,
+    "subset_id": 12,
+    "subset_idx": [
+      4,
+      5,
+      9,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.00016186900029424578,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 13,
+    "subset_idx": [
+      2,
+      11,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 7.263500083354302e-05,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 13,
+    "subset_idx": [
+      2,
+      11,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.00010957999984384514,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 13,
+    "subset_idx": [
+      2,
+      11,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.2956306920004863,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 13,
+    "subset_idx": [
+      2,
+      11,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.05563176431620341,
+    "runtime_s": 3.959632251000585,
+    "ratio": -37.69887343364184,
+    "p_optimal": 0.22838354573301353,
+    "n": 4,
+    "K": 1,
+    "subset_id": 13,
+    "subset_idx": [
+      2,
+      11,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0005466999947737123,
+    "runtime_s": 0.00017422000018996187,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 14,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      13
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0005231871486549717,
+    "runtime_s": 6.31969996902626e-05,
+    "ratio": 0.9569913181936779,
+    "n": 4,
+    "K": 1,
+    "subset_id": 14,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      13
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0005466999947737123,
+    "runtime_s": 0.00010704099986469373,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 14,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      13
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0005466999947737123,
+    "runtime_s": 0.38044117350182205,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 14,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      13
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.06373597674036412,
+    "runtime_s": 4.511216971997783,
+    "ratio": -116.58309374366362,
+    "p_optimal": 0.23082775070668005,
+    "n": 4,
+    "K": 1,
+    "subset_id": 14,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      13
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0008400221024160283,
+    "runtime_s": 0.00016536700059077702,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 15,
+    "subset_idx": [
+      3,
+      10,
+      12,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0008400221024160283,
+    "runtime_s": 0.00010330100121791475,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 15,
+    "subset_idx": [
+      3,
+      10,
+      12,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0008400221024160283,
+    "runtime_s": 0.00017201800073962659,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 15,
+    "subset_idx": [
+      3,
+      10,
+      12,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0008400221024160283,
+    "runtime_s": 0.38690623650109046,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 15,
+    "subset_idx": [
+      3,
+      10,
+      12,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.05710909517919195,
+    "runtime_s": 4.732104941998841,
+    "ratio": -67.98522921591909,
+    "p_optimal": 0.2283887191977942,
+    "n": 4,
+    "K": 1,
+    "subset_id": 15,
+    "subset_idx": [
+      3,
+      10,
+      12,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0007108969226856569,
+    "runtime_s": 0.0004191719999653287,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      8
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0007108969226856569,
+    "runtime_s": 0.00015411200001835823,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      8
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0007108969226856569,
+    "runtime_s": 0.0001250019995495677,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      8
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0007108969226856569,
+    "runtime_s": 0.3544666334983049,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      8
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.0607559511392162,
+    "runtime_s": 5.501673601997027,
+    "ratio": -85.46379819691687,
+    "p_optimal": 0.23203500536373506,
+    "n": 4,
+    "K": 1,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      8
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.00015907600027276203,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 17,
+    "subset_idx": [
+      4,
+      7,
+      9,
+      11
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.00015137700029299594,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 17,
+    "subset_idx": [
+      4,
+      7,
+      9,
+      11
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.0001343730000371579,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 17,
+    "subset_idx": [
+      4,
+      7,
+      9,
+      11
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0014756877129001567,
+    "runtime_s": 0.4376768490019458,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 17,
+    "subset_idx": [
+      4,
+      7,
+      9,
+      11
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.06437099806595276,
+    "runtime_s": 5.11869114000001,
+    "ratio": -43.621016495044856,
+    "p_optimal": 0.24981521175132668,
+    "n": 4,
+    "K": 1,
+    "subset_id": 17,
+    "subset_idx": [
+      4,
+      7,
+      9,
+      11
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0005542250793016967,
+    "runtime_s": 0.0003884030011249706,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 18,
+    "subset_idx": [
+      1,
+      3,
+      7,
+      12
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0005542250793016967,
+    "runtime_s": 8.138699922710657e-05,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 18,
+    "subset_idx": [
+      1,
+      3,
+      7,
+      12
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0005542250793016967,
+    "runtime_s": 0.00011720600014086813,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 18,
+    "subset_idx": [
+      1,
+      3,
+      7,
+      12
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0005542250793016967,
+    "runtime_s": 0.34655528950133885,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 18,
+    "subset_idx": [
+      1,
+      3,
+      7,
+      12
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.07162148397987139,
+    "runtime_s": 4.393016431997239,
+    "ratio": -129.22815414652806,
+    "p_optimal": 0.23015864331777458,
+    "n": 4,
+    "K": 1,
+    "subset_id": 18,
+    "subset_idx": [
+      1,
+      3,
+      7,
+      12
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0007108969226856569,
+    "runtime_s": 0.00015774699932080694,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 19,
+    "subset_idx": [
+      7,
+      8,
+      9,
+      13
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0007108969226856569,
+    "runtime_s": 0.00011366400212864392,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 19,
+    "subset_idx": [
+      7,
+      8,
+      9,
+      13
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0007108969226856569,
+    "runtime_s": 0.0001374870007566642,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 19,
+    "subset_idx": [
+      7,
+      8,
+      9,
+      13
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0007108969226856569,
+    "runtime_s": 0.2879749655003252,
+    "ratio": 1.0,
+    "n": 4,
+    "K": 1,
+    "subset_id": 19,
+    "subset_idx": [
+      7,
+      8,
+      9,
+      13
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.06575691914703277,
+    "runtime_s": 3.6612524849988404,
+    "ratio": -92.4985283360258,
+    "p_optimal": 0.23569280664282447,
+    "n": 4,
+    "K": 1,
+    "subset_id": 19,
+    "subset_idx": [
+      7,
+      8,
+      9,
+      13
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.00042112400115001947,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      4,
+      8,
+      9,
+      11
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001828506726941965,
+    "runtime_s": 5.949800106463954e-05,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      4,
+      8,
+      9,
+      11
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.0001093460014089942,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      4,
+      8,
+      9,
+      11
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.6721263990002626,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      4,
+      8,
+      9,
+      11
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.1355229964970102,
+    "runtime_s": 4.642252887002542,
+    "ratio": -74.11676123481472,
+    "p_optimal": 0.06155570123906308,
+    "n": 6,
+    "K": 2,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      4,
+      8,
+      9,
+      11
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0004703844840696521,
+    "runtime_s": 0.00047512200035271235,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      3,
+      5,
+      10,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0004703844840696521,
+    "runtime_s": 6.767699960619211e-05,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      3,
+      5,
+      10,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0004703844840696521,
+    "runtime_s": 0.00010882200149353594,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      3,
+      5,
+      10,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0004703844840696521,
+    "runtime_s": 0.6701923190012167,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      3,
+      5,
+      10,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.14076622564358887,
+    "runtime_s": 4.477295556000172,
+    "ratio": -299.2577995466894,
+    "p_optimal": 0.060717988040690535,
+    "n": 6,
+    "K": 2,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      3,
+      5,
+      10,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0010381384440409733,
+    "runtime_s": 0.00045912799760117196,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 2,
+    "subset_idx": [
+      1,
+      5,
+      6,
+      7,
+      11,
+      13
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0010381384440409733,
+    "runtime_s": 6.604300142498687e-05,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 2,
+    "subset_idx": [
+      1,
+      5,
+      6,
+      7,
+      11,
+      13
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0010381384440409733,
+    "runtime_s": 0.00010882399874390103,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 2,
+    "subset_idx": [
+      1,
+      5,
+      6,
+      7,
+      11,
+      13
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0010381384440409733,
+    "runtime_s": 0.661289420500907,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 2,
+    "subset_idx": [
+      1,
+      5,
+      6,
+      7,
+      11,
+      13
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.12999279971223016,
+    "runtime_s": 4.640878363999946,
+    "ratio": -125.21721014995914,
+    "p_optimal": 0.04932359494635163,
+    "n": 6,
+    "K": 2,
+    "subset_id": 2,
+    "subset_idx": [
+      1,
+      5,
+      6,
+      7,
+      11,
+      13
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0012762792843149726,
+    "runtime_s": 0.000601038002059795,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 3,
+    "subset_idx": [
+      5,
+      6,
+      9,
+      10,
+      11,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": 0.012646055498151345,
+    "runtime_s": 7.298399941646494e-05,
+    "ratio": -9.908533072319639,
+    "n": 6,
+    "K": 2,
+    "subset_id": 3,
+    "subset_idx": [
+      5,
+      6,
+      9,
+      10,
+      11,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0012762792843149726,
+    "runtime_s": 0.0001366500000585802,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 3,
+    "subset_idx": [
+      5,
+      6,
+      9,
+      10,
+      11,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0012762792843149726,
+    "runtime_s": 0.6632864114999393,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 3,
+    "subset_idx": [
+      5,
+      6,
+      9,
+      10,
+      11,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.1200359974003985,
+    "runtime_s": 4.464693729998544,
+    "ratio": -94.05151276495596,
+    "p_optimal": 0.059712623042372195,
+    "n": 6,
+    "K": 2,
+    "subset_id": 3,
+    "subset_idx": [
+      5,
+      6,
+      9,
+      10,
+      11,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.00045115053839074647,
+    "runtime_s": 0.00044491200242191553,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 4,
+    "subset_idx": [
+      5,
+      6,
+      10,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": 0.011839212748724027,
+    "runtime_s": 6.102599945734255e-05,
+    "ratio": -26.242266696509965,
+    "n": 6,
+    "K": 2,
+    "subset_id": 4,
+    "subset_idx": [
+      5,
+      6,
+      10,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": 0.011839212748724027,
+    "runtime_s": 0.00013606199718196876,
+    "ratio": -26.242266696509965,
+    "n": 6,
+    "K": 2,
+    "subset_id": 4,
+    "subset_idx": [
+      5,
+      6,
+      10,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.00045115053839074647,
+    "runtime_s": 0.6718424450009479,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 4,
+    "subset_idx": [
+      5,
+      6,
+      10,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.12015038447311188,
+    "runtime_s": 4.398385887001496,
+    "ratio": -266.31994035003964,
+    "p_optimal": 0.06015657249600752,
+    "n": 6,
+    "K": 2,
+    "subset_id": 4,
+    "subset_idx": [
+      5,
+      6,
+      10,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001526632918134809,
+    "runtime_s": 0.00041360300019732676,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      2,
+      3,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001526632918134809,
+    "runtime_s": 6.064999979571439e-05,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      2,
+      3,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001526632918134809,
+    "runtime_s": 0.0001148410010500811,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      2,
+      3,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001526632918134809,
+    "runtime_s": 0.6575902215008682,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      2,
+      3,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.13515337226790447,
+    "runtime_s": 4.481022893000045,
+    "ratio": -88.53036683699347,
+    "p_optimal": 0.062077437077760755,
+    "n": 6,
+    "K": 2,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      2,
+      3,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.0004257770015101414,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 6,
+    "subset_idx": [
+      1,
+      7,
+      8,
+      9,
+      11,
+      12
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001828506726941965,
+    "runtime_s": 6.571899939444847e-05,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 6,
+    "subset_idx": [
+      1,
+      7,
+      8,
+      9,
+      11,
+      12
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.00014141800056677312,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 6,
+    "subset_idx": [
+      1,
+      7,
+      8,
+      9,
+      11,
+      12
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.6743916070008709,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 6,
+    "subset_idx": [
+      1,
+      7,
+      8,
+      9,
+      11,
+      12
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.14146459379018056,
+    "runtime_s": 4.394985741997516,
+    "ratio": -77.36618723124364,
+    "p_optimal": 0.06066612967511007,
+    "n": 6,
+    "K": 2,
+    "subset_id": 6,
+    "subset_idx": [
+      1,
+      7,
+      8,
+      9,
+      11,
+      12
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0014595603322792308,
+    "runtime_s": 0.00044695900214719586,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 7,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      8,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014595603322792308,
+    "runtime_s": 7.403600102406926e-05,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 7,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      8,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0014595603322792308,
+    "runtime_s": 0.00011474199709482491,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 7,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      8,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0014595603322792308,
+    "runtime_s": 0.6625187560002814,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 7,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      8,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.13577194089361588,
+    "runtime_s": 4.400269940000726,
+    "ratio": -93.02249306926296,
+    "p_optimal": 0.06214653191137739,
+    "n": 6,
+    "K": 2,
+    "subset_id": 7,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      8,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001526632918134809,
+    "runtime_s": 0.0004285489994799718,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 8,
+    "subset_idx": [
+      2,
+      4,
+      5,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001526632918134809,
+    "runtime_s": 6.233000021893531e-05,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 8,
+    "subset_idx": [
+      2,
+      4,
+      5,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001526632918134809,
+    "runtime_s": 0.00011904899656656198,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 8,
+    "subset_idx": [
+      2,
+      4,
+      5,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001526632918134809,
+    "runtime_s": 0.6682006324990653,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 8,
+    "subset_idx": [
+      2,
+      4,
+      5,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.13515053800860882,
+    "runtime_s": 4.4916782660002355,
+    "ratio": -88.52851029423066,
+    "p_optimal": 0.05774731969242069,
+    "n": 6,
+    "K": 2,
+    "subset_id": 8,
+    "subset_idx": [
+      2,
+      4,
+      5,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001138682227116338,
+    "runtime_s": 0.0004776900022989139,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 9,
+    "subset_idx": [
+      1,
+      8,
+      9,
+      10,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001138682227116338,
+    "runtime_s": 6.936700083315372e-05,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 9,
+    "subset_idx": [
+      1,
+      8,
+      9,
+      10,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001138682227116338,
+    "runtime_s": 0.0001321139970968943,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 9,
+    "subset_idx": [
+      1,
+      8,
+      9,
+      10,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001138682227116338,
+    "runtime_s": 0.6604670429987891,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 9,
+    "subset_idx": [
+      1,
+      8,
+      9,
+      10,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.13544238395821084,
+    "runtime_s": 4.444538105999527,
+    "ratio": -118.9466040066443,
+    "p_optimal": 0.061980808805034954,
+    "n": 6,
+    "K": 2,
+    "subset_id": 9,
+    "subset_idx": [
+      1,
+      8,
+      9,
+      10,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0013747764287196304,
+    "runtime_s": 0.0004256689971953165,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 10,
+    "subset_idx": [
+      4,
+      9,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": 0.0052053478887218695,
+    "runtime_s": 6.351400224957615e-05,
+    "ratio": -3.786323201343918,
+    "n": 6,
+    "K": 2,
+    "subset_id": 10,
+    "subset_idx": [
+      4,
+      9,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0012762792843149726,
+    "runtime_s": 0.0001129119991674088,
+    "ratio": 0.9283540637248261,
+    "n": 6,
+    "K": 2,
+    "subset_id": 10,
+    "subset_idx": [
+      4,
+      9,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0013747764287196304,
+    "runtime_s": 0.6595090235005046,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 10,
+    "subset_idx": [
+      4,
+      9,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.13360429394433235,
+    "runtime_s": 4.51411801499853,
+    "ratio": -97.18256085373964,
+    "p_optimal": 0.06111283067459859,
+    "n": 6,
+    "K": 2,
+    "subset_id": 10,
+    "subset_idx": [
+      4,
+      9,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001138682227116338,
+    "runtime_s": 0.0005471199983730912,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 11,
+    "subset_idx": [
+      1,
+      3,
+      8,
+      9,
+      10,
+      13
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001138682227116338,
+    "runtime_s": 7.012900096015073e-05,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 11,
+    "subset_idx": [
+      1,
+      3,
+      8,
+      9,
+      10,
+      13
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001138682227116338,
+    "runtime_s": 0.00012157699893577956,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 11,
+    "subset_idx": [
+      1,
+      3,
+      8,
+      9,
+      10,
+      13
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001138682227116338,
+    "runtime_s": 0.662779648500873,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 11,
+    "subset_idx": [
+      1,
+      3,
+      8,
+      9,
+      10,
+      13
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.13437863635922598,
+    "runtime_s": 4.416592255001888,
+    "ratio": -118.01241220698938,
+    "p_optimal": 0.061849913318509905,
+    "n": 6,
+    "K": 2,
+    "subset_id": 11,
+    "subset_idx": [
+      1,
+      3,
+      8,
+      9,
+      10,
+      13
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 0.0005111070022394415,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 12,
+    "subset_idx": [
+      2,
+      3,
+      4,
+      5,
+      11,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 7.432200072798878e-05,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 12,
+    "subset_idx": [
+      2,
+      3,
+      4,
+      5,
+      11,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 0.00011380399882909842,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 12,
+    "subset_idx": [
+      2,
+      3,
+      4,
+      5,
+      11,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 0.6745605144988076,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 12,
+    "subset_idx": [
+      2,
+      3,
+      4,
+      5,
+      11,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.1365595671974835,
+    "runtime_s": 4.428149465002207,
+    "ratio": -92.47533582415394,
+    "p_optimal": 0.058241146028492355,
+    "n": 6,
+    "K": 2,
+    "subset_id": 12,
+    "subset_idx": [
+      2,
+      3,
+      4,
+      5,
+      11,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.00045571800001198426,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 13,
+    "subset_idx": [
+      2,
+      9,
+      10,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 6.383399886544794e-05,
+    "ratio": 0.8048239451501338,
+    "n": 6,
+    "K": 2,
+    "subset_id": 13,
+    "subset_idx": [
+      2,
+      9,
+      10,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.00011116499808849767,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 13,
+    "subset_idx": [
+      2,
+      9,
+      10,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.6677028394988156,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 13,
+    "subset_idx": [
+      2,
+      9,
+      10,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.13503968573755148,
+    "runtime_s": 4.400445925002714,
+    "ratio": -73.5980136242962,
+    "p_optimal": 0.062045065209136864,
+    "n": 6,
+    "K": 2,
+    "subset_id": 13,
+    "subset_idx": [
+      2,
+      9,
+      10,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001138682227116338,
+    "runtime_s": 0.00046036400090088136,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 14,
+    "subset_idx": [
+      0,
+      1,
+      8,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001138682227116338,
+    "runtime_s": 6.392400246113539e-05,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 14,
+    "subset_idx": [
+      0,
+      1,
+      8,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0010109440851929193,
+    "runtime_s": 0.00011070600157836452,
+    "ratio": 0.8878193240559222,
+    "n": 6,
+    "K": 2,
+    "subset_id": 14,
+    "subset_idx": [
+      0,
+      1,
+      8,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001138682227116338,
+    "runtime_s": 0.6729440265025914,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 14,
+    "subset_idx": [
+      0,
+      1,
+      8,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.1369770800911331,
+    "runtime_s": 4.418811381998239,
+    "ratio": -120.29438664202344,
+    "p_optimal": 0.06223642922111078,
+    "n": 6,
+    "K": 2,
+    "subset_id": 14,
+    "subset_idx": [
+      0,
+      1,
+      8,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0012762792843149726,
+    "runtime_s": 0.0004522029994404875,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 15,
+    "subset_idx": [
+      3,
+      4,
+      6,
+      11,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.000822803135591489,
+    "runtime_s": 5.972399958409369e-05,
+    "ratio": 0.6446889373693145,
+    "n": 6,
+    "K": 2,
+    "subset_id": 15,
+    "subset_idx": [
+      3,
+      4,
+      6,
+      11,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0012762792843149726,
+    "runtime_s": 0.00010860699694603682,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 15,
+    "subset_idx": [
+      3,
+      4,
+      6,
+      11,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0012762792843149726,
+    "runtime_s": 0.6689191835012025,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 15,
+    "subset_idx": [
+      3,
+      4,
+      6,
+      11,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.1375347649273771,
+    "runtime_s": 4.523990718997084,
+    "ratio": -107.7622794772519,
+    "p_optimal": 0.05773043140504347,
+    "n": 6,
+    "K": 2,
+    "subset_id": 15,
+    "subset_idx": [
+      3,
+      4,
+      6,
+      11,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.00041773599878069945,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      2,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 6.238299829419702e-05,
+    "ratio": 0.8076062144557451,
+    "n": 6,
+    "K": 2,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      2,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.00011179899956914596,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      2,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.6591238059991156,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      2,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.13625437125735776,
+    "runtime_s": 4.401061963999382,
+    "ratio": -74.51674595982075,
+    "p_optimal": 0.062154379720384,
+    "n": 6,
+    "K": 2,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      2,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001182709935480768,
+    "runtime_s": 0.00040895100028137676,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 17,
+    "subset_idx": [
+      1,
+      4,
+      9,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001182709935480768,
+    "runtime_s": 6.144199869595468e-05,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 17,
+    "subset_idx": [
+      1,
+      4,
+      9,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001182709935480768,
+    "runtime_s": 0.0001731000011204742,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 17,
+    "subset_idx": [
+      1,
+      4,
+      9,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001182709935480768,
+    "runtime_s": 0.6630684785013727,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 17,
+    "subset_idx": [
+      1,
+      4,
+      9,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.13424634725146867,
+    "runtime_s": 4.471226116002072,
+    "ratio": -113.5074148141809,
+    "p_optimal": 0.06127325890033386,
+    "n": 6,
+    "K": 2,
+    "subset_id": 17,
+    "subset_idx": [
+      1,
+      4,
+      9,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.00041474500176263973,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 18,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      7,
+      8,
+      11
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001828506726941965,
+    "runtime_s": 6.0236998251639307e-05,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 18,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      7,
+      8,
+      11
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.00012032700033159927,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 18,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      7,
+      8,
+      11
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.6590811215010035,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 18,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      7,
+      8,
+      11
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.13448234292762404,
+    "runtime_s": 4.417466909002542,
+    "ratio": -73.54763367621582,
+    "p_optimal": 0.05656166418920323,
+    "n": 6,
+    "K": 2,
+    "subset_id": 18,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      7,
+      8,
+      11
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0011020399499112943,
+    "runtime_s": 0.0004173759989498649,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 19,
+    "subset_idx": [
+      0,
+      5,
+      6,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0011020399499112943,
+    "runtime_s": 6.286200004979037e-05,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 19,
+    "subset_idx": [
+      0,
+      5,
+      6,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0011020399499112943,
+    "runtime_s": 0.00011014900155714713,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 19,
+    "subset_idx": [
+      0,
+      5,
+      6,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0011020399499112943,
+    "runtime_s": 0.6688429820005695,
+    "ratio": 1.0,
+    "n": 6,
+    "K": 2,
+    "subset_id": 19,
+    "subset_idx": [
+      0,
+      5,
+      6,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.12015920899430976,
+    "runtime_s": 4.40324670800328,
+    "ratio": -109.03344203082806,
+    "p_optimal": 0.059956936498339226,
+    "n": 6,
+    "K": 2,
+    "subset_id": 19,
+    "subset_idx": [
+      0,
+      5,
+      6,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.0011238110018894076,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 0,
+    "subset_idx": [
+      4,
+      6,
+      7,
+      8,
+      10,
+      11,
+      12,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001834827858628132,
+    "runtime_s": 6.53649985906668e-05,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 0,
+    "subset_idx": [
+      4,
+      6,
+      7,
+      8,
+      10,
+      11,
+      12,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 0.00011008499859599397,
+    "ratio": 0.685036940641207,
+    "n": 8,
+    "K": 2,
+    "subset_id": 0,
+    "subset_idx": [
+      4,
+      6,
+      7,
+      8,
+      10,
+      11,
+      12,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001834827858628132,
+    "runtime_s": 1.194035968501339,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 0,
+    "subset_idx": [
+      4,
+      6,
+      7,
+      8,
+      10,
+      11,
+      12,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.15904071687660087,
+    "runtime_s": 5.196126495997305,
+    "ratio": -86.67882173726792,
+    "p_optimal": 0.029119027940261485,
+    "n": 8,
+    "K": 2,
+    "subset_id": 0,
+    "subset_idx": [
+      4,
+      6,
+      7,
+      8,
+      10,
+      11,
+      12,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0010109440851929193,
+    "runtime_s": 0.0011423910000303295,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      6,
+      7,
+      8,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0010004937537015843,
+    "runtime_s": 6.802899952162988e-05,
+    "ratio": 0.9896627997093027,
+    "n": 8,
+    "K": 2,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      6,
+      7,
+      8,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0010004937537015843,
+    "runtime_s": 0.0001237339965882711,
+    "ratio": 0.9896627997093027,
+    "n": 8,
+    "K": 2,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      6,
+      7,
+      8,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0010109440851929193,
+    "runtime_s": 1.1887892779996037,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      6,
+      7,
+      8,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.13903338936000978,
+    "runtime_s": 5.113115468000615,
+    "ratio": -137.5282682755673,
+    "p_optimal": 0.030355770750239538,
+    "n": 8,
+    "K": 2,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      6,
+      7,
+      8,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001526632918134809,
+    "runtime_s": 0.0014633640021202154,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 2,
+    "subset_idx": [
+      2,
+      4,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001526632918134809,
+    "runtime_s": 7.876100062276237e-05,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 2,
+    "subset_idx": [
+      2,
+      4,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001526632918134809,
+    "runtime_s": 0.00012722099927486852,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 2,
+    "subset_idx": [
+      2,
+      4,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001526632918134809,
+    "runtime_s": 1.1669127365003078,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 2,
+    "subset_idx": [
+      2,
+      4,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.12545382350077475,
+    "runtime_s": 5.064331845002016,
+    "ratio": -82.17681016209855,
+    "p_optimal": 0.0298511859993255,
+    "n": 8,
+    "K": 2,
+    "subset_id": 2,
+    "subset_idx": [
+      2,
+      4,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.0011124280026706401,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 3,
+    "subset_idx": [
+      4,
+      5,
+      6,
+      7,
+      11,
+      12,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001834827858628132,
+    "runtime_s": 6.339199899230152e-05,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 3,
+    "subset_idx": [
+      4,
+      5,
+      6,
+      7,
+      11,
+      12,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.00011219000225537457,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 3,
+    "subset_idx": [
+      4,
+      5,
+      6,
+      7,
+      11,
+      12,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001834827858628132,
+    "runtime_s": 1.2012884729992948,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 3,
+    "subset_idx": [
+      4,
+      5,
+      6,
+      7,
+      11,
+      12,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.17731735663067225,
+    "runtime_s": 5.2504769079969265,
+    "ratio": -96.6397778390226,
+    "p_optimal": 0.028656052434191226,
+    "n": 8,
+    "K": 2,
+    "subset_id": 3,
+    "subset_idx": [
+      4,
+      5,
+      6,
+      7,
+      11,
+      12,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 0.0012070510019839276,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 4,
+    "subset_idx": [
+      0,
+      4,
+      5,
+      6,
+      8,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 6.849900091765448e-05,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 4,
+    "subset_idx": [
+      0,
+      4,
+      5,
+      6,
+      8,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 0.00011579700003494509,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 4,
+    "subset_idx": [
+      0,
+      4,
+      5,
+      6,
+      8,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 1.172825671497776,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 4,
+    "subset_idx": [
+      0,
+      4,
+      5,
+      6,
+      8,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.1629007600769436,
+    "runtime_s": 5.107621867999114,
+    "ratio": -129.60262374312794,
+    "p_optimal": 0.028588559321347556,
+    "n": 8,
+    "K": 2,
+    "subset_id": 4,
+    "subset_idx": [
+      0,
+      4,
+      5,
+      6,
+      8,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0013747764287196304,
+    "runtime_s": 0.0011268240014032926,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      3,
+      7,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.000822803135591489,
+    "runtime_s": 6.563699935213663e-05,
+    "ratio": 0.5984995948452431,
+    "n": 8,
+    "K": 2,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      3,
+      7,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0012781216455901288,
+    "runtime_s": 0.0001154609999503009,
+    "ratio": 0.9296941807334309,
+    "n": 8,
+    "K": 2,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      3,
+      7,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0013747764287196304,
+    "runtime_s": 1.1744453999999678,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      3,
+      7,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.12642032868335637,
+    "runtime_s": 5.061826848999772,
+    "ratio": -91.9570091851919,
+    "p_optimal": 0.029930161712501166,
+    "n": 8,
+    "K": 2,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      3,
+      7,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0010381384440409733,
+    "runtime_s": 0.0011348549996910151,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 6,
+    "subset_idx": [
+      1,
+      3,
+      5,
+      6,
+      7,
+      9,
+      11,
+      13
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0010381384440409733,
+    "runtime_s": 6.83069993101526e-05,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 6,
+    "subset_idx": [
+      1,
+      3,
+      5,
+      6,
+      7,
+      9,
+      11,
+      13
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.000822803135591489,
+    "runtime_s": 0.00011511300181155093,
+    "ratio": 0.7925755377950482,
+    "n": 8,
+    "K": 2,
+    "subset_id": 6,
+    "subset_idx": [
+      1,
+      3,
+      5,
+      6,
+      7,
+      9,
+      11,
+      13
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0010381384440409733,
+    "runtime_s": 1.1842247949989542,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 6,
+    "subset_idx": [
+      1,
+      3,
+      5,
+      6,
+      7,
+      9,
+      11,
+      13
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.13575941177543782,
+    "runtime_s": 5.157412292999652,
+    "ratio": -130.77197223040096,
+    "p_optimal": 0.03150887131668956,
+    "n": 8,
+    "K": 2,
+    "subset_id": 6,
+    "subset_idx": [
+      1,
+      3,
+      5,
+      6,
+      7,
+      9,
+      11,
+      13
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0010109440851929193,
+    "runtime_s": 0.0011318639990349766,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 7,
+    "subset_idx": [
+      0,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      12
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0010109440851929193,
+    "runtime_s": 8.596999759902246e-05,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 7,
+    "subset_idx": [
+      0,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      12
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0010109440851929193,
+    "runtime_s": 0.00011815300240414217,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 7,
+    "subset_idx": [
+      0,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      12
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0010109440851929193,
+    "runtime_s": 1.1579579269982787,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 7,
+    "subset_idx": [
+      0,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      12
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.15201631787319808,
+    "runtime_s": 5.165843937000318,
+    "ratio": -150.37064868349142,
+    "p_optimal": 0.03242477845131303,
+    "n": 8,
+    "K": 2,
+    "subset_id": 7,
+    "subset_idx": [
+      0,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      12
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0004703844840696521,
+    "runtime_s": 0.0010758030002762098,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 8,
+    "subset_idx": [
+      0,
+      3,
+      5,
+      7,
+      9,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0004703844840696521,
+    "runtime_s": 6.473299799836241e-05,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 8,
+    "subset_idx": [
+      0,
+      3,
+      5,
+      7,
+      9,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0004703844840696521,
+    "runtime_s": 0.00012685699766734615,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 8,
+    "subset_idx": [
+      0,
+      3,
+      5,
+      7,
+      9,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0004703844840696521,
+    "runtime_s": 1.1669586440002604,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 8,
+    "subset_idx": [
+      0,
+      3,
+      5,
+      7,
+      9,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.13161362852962183,
+    "runtime_s": 5.11758129199734,
+    "ratio": -279.80010605565207,
+    "p_optimal": 0.03034858868791139,
+    "n": 8,
+    "K": 2,
+    "subset_id": 8,
+    "subset_idx": [
+      0,
+      3,
+      5,
+      7,
+      9,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 0.0011724519972631242,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 9,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      8,
+      9,
+      10,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 6.6534001234686e-05,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 9,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      8,
+      9,
+      10,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 0.00019358600184204988,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 9,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      8,
+      9,
+      10,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 1.1889502984995488,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 9,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      8,
+      9,
+      10,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.12740695222647916,
+    "runtime_s": 5.099142172999564,
+    "ratio": -101.36401625055488,
+    "p_optimal": 0.02955769683437942,
+    "n": 8,
+    "K": 2,
+    "subset_id": 9,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      8,
+      9,
+      10,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0009707248753968289,
+    "runtime_s": 0.0010975980003422592,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 10,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      5,
+      6,
+      9,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0009707248753968289,
+    "runtime_s": 6.417099939426407e-05,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 10,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      5,
+      6,
+      9,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0009707248753968289,
+    "runtime_s": 0.00017591099822311662,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 10,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      5,
+      6,
+      9,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0009707248753968289,
+    "runtime_s": 1.1886280405014986,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 10,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      5,
+      6,
+      9,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.15882992296862214,
+    "runtime_s": 5.095648059999803,
+    "ratio": -163.61991640905774,
+    "p_optimal": 0.028052047988721195,
+    "n": 8,
+    "K": 2,
+    "subset_id": 10,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      5,
+      6,
+      9,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.0011182570015080273,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 11,
+    "subset_idx": [
+      3,
+      5,
+      6,
+      8,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001828506726941965,
+    "runtime_s": 6.36549993942026e-05,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 11,
+    "subset_idx": [
+      3,
+      5,
+      6,
+      8,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.00017904799824464135,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 11,
+    "subset_idx": [
+      3,
+      5,
+      6,
+      8,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001828506726941965,
+    "runtime_s": 1.1641198639990762,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 11,
+    "subset_idx": [
+      3,
+      5,
+      6,
+      8,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.13150863587405467,
+    "runtime_s": 5.040883075998863,
+    "ratio": -71.92133008665088,
+    "p_optimal": 0.03046618037280349,
+    "n": 8,
+    "K": 2,
+    "subset_id": 11,
+    "subset_idx": [
+      3,
+      5,
+      6,
+      8,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 0.0011756759995478205,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 12,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      8,
+      9,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 6.812700303271413e-05,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 12,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      8,
+      9,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 0.00011475300198071636,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 12,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      8,
+      9,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 1.1916374754982826,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 12,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      8,
+      9,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.16728675667096676,
+    "runtime_s": 5.04587131900189,
+    "ratio": -133.0920897594027,
+    "p_optimal": 0.026135502504481562,
+    "n": 8,
+    "K": 2,
+    "subset_id": 12,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      8,
+      9,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.0011490540018712636,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 13,
+    "subset_idx": [
+      2,
+      5,
+      9,
+      10,
+      11,
+      12,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 6.884699905640446e-05,
+    "ratio": 0.8048239451501338,
+    "n": 8,
+    "K": 2,
+    "subset_id": 13,
+    "subset_idx": [
+      2,
+      5,
+      9,
+      10,
+      11,
+      12,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.00012444500316632912,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 13,
+    "subset_idx": [
+      2,
+      5,
+      9,
+      10,
+      11,
+      12,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001834827858628132,
+    "runtime_s": 1.1594795295004587,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 13,
+    "subset_idx": [
+      2,
+      5,
+      9,
+      10,
+      11,
+      12,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.13411226427023465,
+    "runtime_s": 5.156136640998739,
+    "ratio": -73.09255941345255,
+    "p_optimal": 0.028758894916909108,
+    "n": 8,
+    "K": 2,
+    "subset_id": 13,
+    "subset_idx": [
+      2,
+      5,
+      9,
+      10,
+      11,
+      12,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0014595603322792308,
+    "runtime_s": 0.001133900001150323,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 14,
+    "subset_idx": [
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014595603322792308,
+    "runtime_s": 8.191700180759653e-05,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 14,
+    "subset_idx": [
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0014595603322792308,
+    "runtime_s": 0.00011349299893481657,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 14,
+    "subset_idx": [
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0014595603322792308,
+    "runtime_s": 1.154053317501166,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 14,
+    "subset_idx": [
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.13478586985259397,
+    "runtime_s": 5.036482896000962,
+    "ratio": -92.34689849518867,
+    "p_optimal": 0.030646287132128802,
+    "n": 8,
+    "K": 2,
+    "subset_id": 14,
+    "subset_idx": [
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001182709935480768,
+    "runtime_s": 0.0011797790029959287,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 15,
+    "subset_idx": [
+      1,
+      3,
+      5,
+      9,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001182709935480768,
+    "runtime_s": 6.321999899228103e-05,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 15,
+    "subset_idx": [
+      1,
+      3,
+      5,
+      9,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001182709935480768,
+    "runtime_s": 0.00011625700062722899,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 15,
+    "subset_idx": [
+      1,
+      3,
+      5,
+      9,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001182709935480768,
+    "runtime_s": 1.1938046919985936,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 15,
+    "subset_idx": [
+      1,
+      3,
+      5,
+      9,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.1357722216303149,
+    "runtime_s": 5.026181274999544,
+    "ratio": -114.79756579124695,
+    "p_optimal": 0.029078526003586805,
+    "n": 8,
+    "K": 2,
+    "subset_id": 15,
+    "subset_idx": [
+      1,
+      3,
+      5,
+      9,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0014595603322792308,
+    "runtime_s": 0.00116376200094237,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      2,
+      3,
+      6,
+      8,
+      10,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014595603322792308,
+    "runtime_s": 6.435099930968136e-05,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      2,
+      3,
+      6,
+      8,
+      10,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0014595603322792308,
+    "runtime_s": 0.00014695400022901595,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      2,
+      3,
+      6,
+      8,
+      10,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0014595603322792308,
+    "runtime_s": 1.1887366004993964,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      2,
+      3,
+      6,
+      8,
+      10,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.17977579761225793,
+    "runtime_s": 5.155064834998484,
+    "ratio": -123.17120000892484,
+    "p_optimal": 0.02594874680870087,
+    "n": 8,
+    "K": 2,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      2,
+      3,
+      6,
+      8,
+      10,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.0012038810018566437,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 17,
+    "subset_idx": [
+      0,
+      4,
+      5,
+      9,
+      11,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.00012090199743397534,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 17,
+    "subset_idx": [
+      0,
+      4,
+      5,
+      9,
+      11,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.00013047299944446422,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 17,
+    "subset_idx": [
+      0,
+      4,
+      5,
+      9,
+      11,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001834827858628132,
+    "runtime_s": 1.1670468740012439,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 17,
+    "subset_idx": [
+      0,
+      4,
+      5,
+      9,
+      11,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.12719415771668321,
+    "runtime_s": 5.107797016000404,
+    "ratio": -69.32212039323625,
+    "p_optimal": 0.030403020200338787,
+    "n": 8,
+    "K": 2,
+    "subset_id": 17,
+    "subset_idx": [
+      0,
+      4,
+      5,
+      9,
+      11,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.0014874650005367585,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 18,
+    "subset_idx": [
+      0,
+      1,
+      4,
+      6,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001828506726941965,
+    "runtime_s": 7.69380021665711e-05,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 18,
+    "subset_idx": [
+      0,
+      1,
+      4,
+      6,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.00011892800102941692,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 18,
+    "subset_idx": [
+      0,
+      1,
+      4,
+      6,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001828506726941965,
+    "runtime_s": 1.1988563044997136,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 18,
+    "subset_idx": [
+      0,
+      1,
+      4,
+      6,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.12898050543697123,
+    "runtime_s": 5.099695622000581,
+    "ratio": -70.53870983164556,
+    "p_optimal": 0.03003748601772336,
+    "n": 8,
+    "K": 2,
+    "subset_id": 18,
+    "subset_idx": [
+      0,
+      1,
+      4,
+      6,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 0.0011087310012953822,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 19,
+    "subset_idx": [
+      4,
+      5,
+      8,
+      9,
+      10,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 7.73920000938233e-05,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 19,
+    "subset_idx": [
+      4,
+      5,
+      8,
+      9,
+      10,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 0.00011636300041573122,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 19,
+    "subset_idx": [
+      4,
+      5,
+      8,
+      9,
+      10,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 1.1705517769987637,
+    "ratio": 1.0,
+    "n": 8,
+    "K": 2,
+    "subset_id": 19,
+    "subset_idx": [
+      4,
+      5,
+      8,
+      9,
+      10,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.12862877127597153,
+    "runtime_s": 5.202330983000138,
+    "ratio": -102.33608632855054,
+    "p_optimal": 0.030248295785648877,
+    "n": 8,
+    "K": 2,
+    "subset_id": 19,
+    "subset_idx": [
+      4,
+      5,
+      8,
+      9,
+      10,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.003981116999057122,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      5,
+      7,
+      8,
+      10,
+      11,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 8.398200225201435e-05,
+    "ratio": 0.8076062144557451,
+    "n": 10,
+    "K": 2,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      5,
+      7,
+      8,
+      10,
+      11,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.0001294169996981509,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      5,
+      7,
+      8,
+      10,
+      11,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001828506726941965,
+    "runtime_s": 2.0403101864994824,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      5,
+      7,
+      8,
+      10,
+      11,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.41566419447951675,
+    "runtime_s": 6.299354812003003,
+    "ratio": -227.32439993517698,
+    "p_optimal": 0.010134077113340039,
+    "n": 10,
+    "K": 2,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      5,
+      7,
+      8,
+      10,
+      11,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.004181958000117447,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      4,
+      8,
+      9,
+      10,
+      11,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 8.469900058116764e-05,
+    "ratio": 0.8076062144557451,
+    "n": 10,
+    "K": 2,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      4,
+      8,
+      9,
+      10,
+      11,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.00014235299749998376,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      4,
+      8,
+      9,
+      10,
+      11,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001828506726941965,
+    "runtime_s": 2.0598127605007903,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      4,
+      8,
+      9,
+      10,
+      11,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.38372815646484054,
+    "runtime_s": 6.425338142998953,
+    "ratio": -209.85876114691465,
+    "p_optimal": 0.01056452132744167,
+    "n": 10,
+    "K": 2,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      4,
+      8,
+      9,
+      10,
+      11,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.004133653001190396,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 2,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      9,
+      11,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 8.887099829735234e-05,
+    "ratio": 0.8076062144557451,
+    "n": 10,
+    "K": 2,
+    "subset_id": 2,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      9,
+      11,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.00014270599785959348,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 2,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      9,
+      11,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001828506726941965,
+    "runtime_s": 2.0659521375000622,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 2,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      9,
+      11,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.3863026353109903,
+    "runtime_s": 6.481807348001894,
+    "ratio": -211.266729085023,
+    "p_optimal": 0.01047637460711774,
+    "n": 10,
+    "K": 2,
+    "subset_id": 2,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      9,
+      11,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.005757471997640096,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 3,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      5,
+      7,
+      10,
+      11,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.0001509549983893521,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 3,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      5,
+      7,
+      10,
+      11,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.00012894400060758926,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 3,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      5,
+      7,
+      10,
+      11,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001834827858628132,
+    "runtime_s": 2.0752318510003533,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 3,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      5,
+      7,
+      10,
+      11,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.3935891336139024,
+    "runtime_s": 6.394075080999755,
+    "ratio": -214.51011426662225,
+    "p_optimal": 0.010572992883864728,
+    "n": 10,
+    "K": 2,
+    "subset_id": 3,
+    "subset_idx": [
+      0,
+      3,
+      4,
+      5,
+      7,
+      10,
+      11,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.004109148001589347,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 4,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      8,
+      9,
+      11,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 9.217800106853247e-05,
+    "ratio": 0.8048239451501338,
+    "n": 10,
+    "K": 2,
+    "subset_id": 4,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      8,
+      9,
+      11,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 0.00013626200234284624,
+    "ratio": 0.685036940641207,
+    "n": 10,
+    "K": 2,
+    "subset_id": 4,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      8,
+      9,
+      11,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001834827858628132,
+    "runtime_s": 2.0753029704992514,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 4,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      8,
+      9,
+      11,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.3958487042197282,
+    "runtime_s": 6.510170346002269,
+    "ratio": -215.7416034197874,
+    "p_optimal": 0.01042398110562181,
+    "n": 10,
+    "K": 2,
+    "subset_id": 4,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      8,
+      9,
+      11,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.003915743000106886,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 5,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      10,
+      11,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 8.495600195601583e-05,
+    "ratio": 0.8076062144557451,
+    "n": 10,
+    "K": 2,
+    "subset_id": 5,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      10,
+      11,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.00014629100041929632,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 5,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      10,
+      11,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001828506726941965,
+    "runtime_s": 2.078821646000506,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 5,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      10,
+      11,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.38568828884445616,
+    "runtime_s": 6.430579222997039,
+    "ratio": -210.930746472828,
+    "p_optimal": 0.01050091217106108,
+    "n": 10,
+    "K": 2,
+    "subset_id": 5,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      10,
+      11,
+      12,
+      13
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0014595603322792308,
+    "runtime_s": 0.003942942999856314,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 6,
+    "subset_idx": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014595603322792308,
+    "runtime_s": 6.941600076970644e-05,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 6,
+    "subset_idx": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0014595603322792308,
+    "runtime_s": 0.0001569720006955322,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 6,
+    "subset_idx": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0014595603322792308,
+    "runtime_s": 2.067363991498496,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 6,
+    "subset_idx": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.3996506265452433,
+    "runtime_s": 6.359691271001793,
+    "ratio": -273.8157633546768,
+    "p_optimal": 0.010356364502957788,
+    "n": 10,
+    "K": 2,
+    "subset_id": 6,
+    "subset_idx": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0009707248753968289,
+    "runtime_s": 0.0035308320002513938,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 7,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      9,
+      10,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0009707248753968289,
+    "runtime_s": 6.330299947876483e-05,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 7,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      9,
+      10,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0009707248753968289,
+    "runtime_s": 0.00014433699834626168,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 7,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      9,
+      10,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0009707248753968289,
+    "runtime_s": 2.0713883400003397,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 7,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      9,
+      10,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.394166325516349,
+    "runtime_s": 6.330395552999107,
+    "ratio": -406.05359510872245,
+    "p_optimal": 0.010470987103551857,
+    "n": 10,
+    "K": 2,
+    "subset_id": 7,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      9,
+      10,
+      12,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.003883751996909268,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 8,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001834827858628132,
+    "runtime_s": 6.879200009279884e-05,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 8,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 0.0001336130007985048,
+    "ratio": 0.685036940641207,
+    "n": 10,
+    "K": 2,
+    "subset_id": 8,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001834827858628132,
+    "runtime_s": 2.0559465140013344,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 8,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.38478409771726174,
+    "runtime_s": 6.290611181000713,
+    "ratio": -209.7112794030487,
+    "p_optimal": 0.010433150632549659,
+    "n": 10,
+    "K": 2,
+    "subset_id": 8,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001526632918134809,
+    "runtime_s": 0.00403606199688511,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 9,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001526632918134809,
+    "runtime_s": 9.941799726220779e-05,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 9,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001526632918134809,
+    "runtime_s": 0.00013582400060840882,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 9,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001526632918134809,
+    "runtime_s": 2.077983946999666,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 9,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.3926950981392814,
+    "runtime_s": 6.4020063930001925,
+    "ratio": -257.229549732927,
+    "p_optimal": 0.010556498548875068,
+    "n": 10,
+    "K": 2,
+    "subset_id": 9,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.003899661998730153,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 10,
+    "subset_idx": [
+      1,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001834827858628132,
+    "runtime_s": 8.897400039131753e-05,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 10,
+    "subset_idx": [
+      1,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 0.00013884399959351867,
+    "ratio": 0.685036940641207,
+    "n": 10,
+    "K": 2,
+    "subset_id": 10,
+    "subset_idx": [
+      1,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001834827858628132,
+    "runtime_s": 2.071997608500169,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 10,
+    "subset_idx": [
+      1,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.3962535692998438,
+    "runtime_s": 6.447562883000501,
+    "ratio": -215.96225904053773,
+    "p_optimal": 0.010560424371561605,
+    "n": 10,
+    "K": 2,
+    "subset_id": 10,
+    "subset_idx": [
+      1,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.003934306001610821,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 11,
+    "subset_idx": [
+      1,
+      2,
+      6,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 0.00012443000014172867,
+    "ratio": 0.8076062144557451,
+    "n": 10,
+    "K": 2,
+    "subset_id": 11,
+    "subset_idx": [
+      1,
+      2,
+      6,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.00018500299847801216,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 11,
+    "subset_idx": [
+      1,
+      2,
+      6,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001828506726941965,
+    "runtime_s": 2.0848477644995,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 11,
+    "subset_idx": [
+      1,
+      2,
+      6,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.3881693301642023,
+    "runtime_s": 6.376719025000057,
+    "ratio": -212.287613955561,
+    "p_optimal": 0.010421146976861011,
+    "n": 10,
+    "K": 2,
+    "subset_id": 11,
+    "subset_idx": [
+      1,
+      2,
+      6,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.004578781001328025,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 12,
+    "subset_idx": [
+      1,
+      3,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001834827858628132,
+    "runtime_s": 8.998799967230298e-05,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 12,
+    "subset_idx": [
+      1,
+      3,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 0.00013389100058702752,
+    "ratio": 0.685036940641207,
+    "n": 10,
+    "K": 2,
+    "subset_id": 12,
+    "subset_idx": [
+      1,
+      3,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001834827858628132,
+    "runtime_s": 2.0878139849992294,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 12,
+    "subset_idx": [
+      1,
+      3,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.3885071428890553,
+    "runtime_s": 6.476390257001185,
+    "ratio": -211.74037720330622,
+    "p_optimal": 0.010371495177530523,
+    "n": 10,
+    "K": 2,
+    "subset_id": 12,
+    "subset_idx": [
+      1,
+      3,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.004088210000190884,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 13,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      4,
+      6,
+      7,
+      9,
+      10,
+      11,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 7.764900146867149e-05,
+    "ratio": 0.8048239451501338,
+    "n": 10,
+    "K": 2,
+    "subset_id": 13,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      4,
+      6,
+      7,
+      9,
+      10,
+      11,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.0001852610002970323,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 13,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      4,
+      6,
+      7,
+      9,
+      10,
+      11,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001834827858628132,
+    "runtime_s": 2.038572352999836,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 13,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      4,
+      6,
+      7,
+      9,
+      10,
+      11,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.3929004473790405,
+    "runtime_s": 6.302741483999853,
+    "ratio": -214.13477320581188,
+    "p_optimal": 0.010577641787581608,
+    "n": 10,
+    "K": 2,
+    "subset_id": 13,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      4,
+      6,
+      7,
+      9,
+      10,
+      11,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.0037116540006536525,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 14,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      6,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 6.535700231324881e-05,
+    "ratio": 0.8076062144557451,
+    "n": 10,
+    "K": 2,
+    "subset_id": 14,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      6,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.00013739000132773072,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 14,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      6,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001828506726941965,
+    "runtime_s": 2.0617785815011302,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 14,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      6,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.38274385342566797,
+    "runtime_s": 6.644269540000096,
+    "ratio": -209.32045137497371,
+    "p_optimal": 0.010525614147866406,
+    "n": 10,
+    "K": 2,
+    "subset_id": 14,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      6,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.004010992000985425,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 15,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 8.891700053936802e-05,
+    "ratio": 0.8076062144557451,
+    "n": 10,
+    "K": 2,
+    "subset_id": 15,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001828506726941965,
+    "runtime_s": 0.00013420599862001836,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 15,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001828506726941965,
+    "runtime_s": 2.0547298085002694,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 15,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.3921750972475504,
+    "runtime_s": 6.425312536001002,
+    "ratio": -214.4783453454572,
+    "p_optimal": 0.010376248546499555,
+    "n": 10,
+    "K": 2,
+    "subset_id": 15,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.003927116002159892,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      6,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001834827858628132,
+    "runtime_s": 7.144600022002123e-05,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      6,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0012569248628778726,
+    "runtime_s": 0.00013222200141171925,
+    "ratio": 0.685036940641207,
+    "n": 10,
+    "K": 2,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      6,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001834827858628132,
+    "runtime_s": 2.1254596749986376,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      6,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.3848715222896433,
+    "runtime_s": 6.621250295000209,
+    "ratio": -209.75892669157795,
+    "p_optimal": 0.010491818639978435,
+    "n": 10,
+    "K": 2,
+    "subset_id": 16,
+    "subset_idx": [
+      0,
+      6,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.005018473999371054,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 17,
+    "subset_idx": [
+      0,
+      1,
+      4,
+      5,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.00014799200289417058,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 17,
+    "subset_idx": [
+      0,
+      1,
+      4,
+      5,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.00015970200183801353,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 17,
+    "subset_idx": [
+      0,
+      1,
+      4,
+      5,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001834827858628132,
+    "runtime_s": 2.1496477114978916,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 17,
+    "subset_idx": [
+      0,
+      1,
+      4,
+      5,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.387982534523294,
+    "runtime_s": 6.586241520999465,
+    "ratio": -211.45446026385366,
+    "p_optimal": 0.010436459587076174,
+    "n": 10,
+    "K": 2,
+    "subset_id": 17,
+    "subset_idx": [
+      0,
+      1,
+      4,
+      5,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.003840966001007473,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 18,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      7,
+      9,
+      11,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 8.330000127898529e-05,
+    "ratio": 0.8048239451501338,
+    "n": 10,
+    "K": 2,
+    "subset_id": 18,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      7,
+      9,
+      11,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.00014211199959390797,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 18,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      7,
+      9,
+      11,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001834827858628132,
+    "runtime_s": 2.079120785498162,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 18,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      7,
+      9,
+      11,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.39028272013075105,
+    "runtime_s": 6.422041113000887,
+    "ratio": -212.70808500943434,
+    "p_optimal": 0.010445542621379108,
+    "n": 10,
+    "K": 2,
+    "subset_id": 18,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      7,
+      9,
+      11,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.004059306000272045,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 19,
+    "subset_idx": [
+      0,
+      2,
+      5,
+      6,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014767133958524651,
+    "runtime_s": 8.037299994612113e-05,
+    "ratio": 0.8048239451501338,
+    "n": 10,
+    "K": 2,
+    "subset_id": 19,
+    "subset_idx": [
+      0,
+      2,
+      5,
+      6,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001834827858628132,
+    "runtime_s": 0.00020049800150445662,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 19,
+    "subset_idx": [
+      0,
+      2,
+      5,
+      6,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001834827858628132,
+    "runtime_s": 2.090098428499914,
+    "ratio": 1.0,
+    "n": 10,
+    "K": 2,
+    "subset_id": 19,
+    "subset_idx": [
+      0,
+      2,
+      5,
+      6,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.40294090666709576,
+    "runtime_s": 6.412319525999919,
+    "ratio": -219.60692648757114,
+    "p_optimal": 0.010322323125414444,
+    "n": 10,
+    "K": 2,
+    "subset_id": 19,
+    "subset_idx": [
+      0,
+      2,
+      5,
+      6,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0013410973452036628,
+    "runtime_s": 0.016771316000813385,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 0,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0013410973452036628,
+    "runtime_s": 8.64590001583565e-05,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 0,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0013410973452036628,
+    "runtime_s": 0.00014348199692904018,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 0,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0013410973452036628,
+    "runtime_s": 2.989869446500961,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 0,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 2.575810157132675,
+    "runtime_s": 10.074552086996846,
+    "ratio": -1920.6735188499722,
+    "p_optimal": 0.0008938592665339565,
+    "n": 12,
+    "K": 3,
+    "subset_id": 0,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0016154477318864671,
+    "runtime_s": 0.017535491999296937,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 1,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0016154477318864671,
+    "runtime_s": 8.849000005284324e-05,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 1,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0016154477318864671,
+    "runtime_s": 0.0001312950007559266,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 1,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0016154477318864671,
+    "runtime_s": 2.9702936819976458,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 1,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.6905615733251952,
+    "runtime_s": 10.039156763999927,
+    "ratio": -427.4737954652237,
+    "p_optimal": 0.0016399563790338175,
+    "n": 12,
+    "K": 3,
+    "subset_id": 1,
+    "subset_idx": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0017294510005888475,
+    "runtime_s": 0.01771951699993224,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 2,
+    "subset_idx": [
+      0,
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0017294510005888475,
+    "runtime_s": 9.28839981497731e-05,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 2,
+    "subset_idx": [
+      0,
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0017294510005888475,
+    "runtime_s": 0.000144090001413133,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 2,
+    "subset_idx": [
+      0,
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0017294510005888475,
+    "runtime_s": 2.996310259499296,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 2,
+    "subset_idx": [
+      0,
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.6915900828396936,
+    "runtime_s": 10.166864768001687,
+    "ratio": -399.88995502284797,
+    "p_optimal": 0.0017051732530745847,
+    "n": 12,
+    "K": 3,
+    "subset_id": 2,
+    "subset_idx": [
+      0,
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.001500298000559678,
+    "runtime_s": 0.01726942700042855,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 3,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0012645176832117664,
+    "runtime_s": 9.558600140735507e-05,
+    "ratio": 0.8428443434171379,
+    "n": 12,
+    "K": 3,
+    "subset_id": 3,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0013842878273654883,
+    "runtime_s": 0.00014421000014408492,
+    "ratio": 0.9226752464171034,
+    "n": 12,
+    "K": 3,
+    "subset_id": 3,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.001500298000559678,
+    "runtime_s": 2.9697950940008013,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 3,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 1.1074854640673395,
+    "runtime_s": 10.249851387998206,
+    "ratio": -738.1769912738657,
+    "p_optimal": 0.0016214782908868014,
+    "n": 12,
+    "K": 3,
+    "subset_id": 3,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0014731729210715968,
+    "runtime_s": 0.01724810899759177,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 4,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014731729210715968,
+    "runtime_s": 0.00011749500117730349,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 4,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0012722898781066896,
+    "runtime_s": 0.00013387400031206198,
+    "ratio": 0.8636391966675687,
+    "n": 12,
+    "K": 3,
+    "subset_id": 4,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0014731729210715968,
+    "runtime_s": 2.962844777999635,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 4,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.7649523680281667,
+    "runtime_s": 10.087017196998204,
+    "ratio": -519.2549748143176,
+    "p_optimal": 0.001718494505278421,
+    "n": 12,
+    "K": 3,
+    "subset_id": 4,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0014449798642039292,
+    "runtime_s": 0.017382756999722915,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0011857413435319916,
+    "runtime_s": 9.070899977814406e-05,
+    "ratio": 0.8205936794733415,
+    "n": 12,
+    "K": 3,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.001352579644039658,
+    "runtime_s": 0.0001457250000385102,
+    "ratio": 0.9360543198882729,
+    "n": 12,
+    "K": 3,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0014449798642039292,
+    "runtime_s": 2.9714685549988644,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.7070127010215062,
+    "runtime_s": 10.296073033998255,
+    "ratio": -489.28896418291254,
+    "p_optimal": 0.001744383135216542,
+    "n": 12,
+    "K": 3,
+    "subset_id": 5,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0015597162696978414,
+    "runtime_s": 0.0163019899991923,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 6,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0015597162696978414,
+    "runtime_s": 8.264200005214661e-05,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 6,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0015597162696978414,
+    "runtime_s": 0.000128570001834305,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 6,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0015597162696978414,
+    "runtime_s": 2.996212870000818,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 6,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 1.1368832899255132,
+    "runtime_s": 10.38970921299915,
+    "ratio": -728.903911572172,
+    "p_optimal": 0.0020078908510443596,
+    "n": 12,
+    "K": 3,
+    "subset_id": 6,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0018936527104461282,
+    "runtime_s": 0.017091908997826977,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 7,
+    "subset_idx": [
+      0,
+      1,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0018936527104461282,
+    "runtime_s": 7.419699977617711e-05,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 7,
+    "subset_idx": [
+      0,
+      1,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0018936527104461282,
+    "runtime_s": 0.000149200001033023,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 7,
+    "subset_idx": [
+      0,
+      1,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0018936527104461282,
+    "runtime_s": 2.979757947001417,
+    "ratio": 1.0,
+    "n": 12,
+    "K": 3,
+    "subset_id": 7,
+    "subset_idx": [
+      0,
+      1,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.582266545125049,
+    "runtime_s": 10.177490055997623,
+    "ratio": -307.48327922698775,
+    "p_optimal": 0.0018727960533825956,
+    "n": 12,
+    "K": 3,
+    "subset_id": 7,
+    "subset_idx": [
+      0,
+      1,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0011440667260752511,
+    "runtime_s": 0.07142199500231072,
+    "ratio": 1.0,
+    "n": 14,
+    "K": 4,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.00036438146309545217,
+    "runtime_s": 8.862000322551467e-05,
+    "ratio": 0.318496687990806,
+    "n": 14,
+    "K": 4,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0005165489169723717,
+    "runtime_s": 0.00015094899936229922,
+    "ratio": 0.45150243879953167,
+    "n": 14,
+    "K": 4,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0011440667260752511,
+    "runtime_s": 4.074975785499191,
+    "ratio": 1.0,
+    "n": 14,
+    "K": 4,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.7911884967501577,
+    "runtime_s": 38.09823061499992,
+    "ratio": -691.5579998243189,
+    "p_optimal": 0.00035304656971614186,
+    "n": 14,
+    "K": 4,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0010338761052496098,
+    "runtime_s": 0.10335312299866928,
+    "ratio": 1.0,
+    "n": 14,
+    "K": 4,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0006831378038488481,
+    "runtime_s": 7.068700142554007e-05,
+    "ratio": 0.6607540307587604,
+    "n": 14,
+    "K": 4,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0005933777046580437,
+    "runtime_s": 0.0001481239996792283,
+    "ratio": 0.5739350214644761,
+    "n": 14,
+    "K": 4,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0010338761052496098,
+    "runtime_s": 4.0392042599996785,
+    "ratio": 1.0,
+    "n": 14,
+    "K": 4,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.9212343377528847,
+    "runtime_s": 37.41186561699942,
+    "ratio": -891.0490658167113,
+    "p_optimal": 0.0003239075743652281,
+    "n": 14,
+    "K": 4,
+    "subset_id": 1,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0014044564435080308,
+    "runtime_s": 0.09647322200180497,
+    "ratio": 1.0,
+    "n": 14,
+    "K": 4,
+    "subset_id": 2,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014044564435080308,
+    "runtime_s": 0.00011318600081722252,
+    "ratio": 1.0,
+    "n": 14,
+    "K": 4,
+    "subset_id": 2,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0014044564435080308,
+    "runtime_s": 0.0001378660017508082,
+    "ratio": 1.0,
+    "n": 14,
+    "K": 4,
+    "subset_id": 2,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0014044564435080308,
+    "runtime_s": 4.028342957501081,
+    "ratio": 1.0,
+    "n": 14,
+    "K": 4,
+    "subset_id": 2,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.8607737748708739,
+    "runtime_s": 37.77418506399772,
+    "ratio": -612.8874831609913,
+    "p_optimal": 0.000337012567000075,
+    "n": 14,
+    "K": 4,
+    "subset_id": 2,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0010597574807183529,
+    "runtime_s": 0.10016867400190677,
+    "ratio": 1.0,
+    "n": 14,
+    "K": 4,
+    "subset_id": 3,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": 0.00033258281486908074,
+    "runtime_s": 8.468899977742694e-05,
+    "ratio": -0.31382917405182237,
+    "n": 14,
+    "K": 4,
+    "subset_id": 3,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0009082239938926493,
+    "runtime_s": 0.00015007699767011218,
+    "ratio": 0.8570111656838816,
+    "n": 14,
+    "K": 4,
+    "subset_id": 3,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0010597574807183529,
+    "runtime_s": 4.0307123540005705,
+    "ratio": 1.0,
+    "n": 14,
+    "K": 4,
+    "subset_id": 3,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 0.9060205444224769,
+    "runtime_s": 37.42548737499965,
+    "ratio": -854.9319640643953,
+    "p_optimal": 0.0003074437679393147,
+    "n": 14,
+    "K": 4,
+    "subset_id": 3,
+    "subset_idx": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "solver": "brute_force",
+    "cost": -0.0014044564435080299,
+    "runtime_s": 0.2753594929999963,
+    "ratio": 1.0,
+    "n": 16,
+    "K": 4,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "greedy_sharpe",
+    "cost": -0.0014044564435080299,
+    "runtime_s": 0.00010438800018164329,
+    "ratio": 1.0,
+    "n": 16,
+    "K": 4,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "markowitz_round",
+    "cost": -0.0014044564435080299,
+    "runtime_s": 0.00013418799790088087,
+    "ratio": 1.0,
+    "n": 16,
+    "K": 4,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "sa_best",
+    "cost": -0.0014044564435080299,
+    "runtime_s": 5.247376051502215,
+    "ratio": 1.0,
+    "n": 16,
+    "K": 4,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  {
+    "solver": "qaoa_p3",
+    "cost": 3.997290234023678,
+    "runtime_s": 130.43081584500032,
+    "ratio": -2846.147527394518,
+    "p_optimal": 0.00016432965949076192,
+    "n": 16,
+    "K": 4,
+    "subset_id": 0,
+    "subset_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  }
+]
