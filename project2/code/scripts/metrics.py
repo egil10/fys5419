@@ -29,10 +29,16 @@ def scaled_ratio(energy: float, e_opt: float, e_worst: float) -> float:
     E_opt is small in magnitude relative to the Hamiltonian's spread —
     use this instead of E / E_opt for mixed-sign cost functions where the
     unscaled ratio explodes.
+
+    Output is clipped to [0, 1] to suppress float-precision artefacts that
+    would otherwise produce ratios like 1 + 1e-16 for exact-optimum solvers
+    (brute force, SA at the optimum). A reader who sees r > 1 should not be
+    led to think a solver "beat the optimum".
     """
     if e_worst == e_opt:
         return 1.0
-    return (e_worst - energy) / (e_worst - e_opt)
+    r = (e_worst - energy) / (e_worst - e_opt)
+    return max(0.0, min(1.0, r))
 
 
 def gap(energy: float, optimum: float) -> float:

@@ -78,7 +78,11 @@ def _apply_style():
         "text.color":        PALETTE["charcoal"],
         "xtick.color":       PALETTE["charcoal"],
         "ytick.color":       PALETTE["charcoal"],
-        "axes.grid":         True,
+        # Project-wide preference: no gridlines on any axis. Notebooks 02-08
+        # already enforce `ax.grid(False)` per axis; flipping the global
+        # default keeps 00_snp / 00_visuals / 01_eda consistent without
+        # patching each plotting call site.
+        "axes.grid":         False,
         "grid.color":        PALETTE["grid"],
         "grid.linestyle":    "--",
         "grid.alpha":        0.6,
