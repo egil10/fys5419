@@ -40,14 +40,17 @@ project2/code/
 │   ├── 04_depth.ipynb        Sweep 1 — p ∈ {1..5}
 │   ├── 05_scaling.ipynb      Sweep 2 — n ∈ {4..16} via random subsets
 │   ├── 06_risk.ipynb         Sweep 3 — λ across two decades
-│   ├── 07_penalty.ipynb      Sweep 4 — A ∈ {0.5, 2, 8, 32}
-│   └── 08_compare.ipynb      Headline plots reading all four sweep caches
+│   ├── 07_penalty.ipynb      Sweep 4 — A logspace(-2, 1.5, 8), 50 restarts
+│   ├── 08_compare.ipynb      Headline plots reading all sweep caches
+│   └── 09_xy_mixer.ipynb     Sweep 5 — XY ring + Dicke vs X + uniform (n=8)
 ├── data/                   Cached parquet prices + CSV previews
 ├── plots/                  PDF outputs by category (eda/ visuals/ qaoa/ compare/ analysis/ snp/)
 ├── results/                Cached sweep outputs (.json) so re-plotting is instant
-├── tests/                  pytest — QUBO↔Ising round-trip, classical, QAOA
-└── requirements.txt        Pinned dependency ranges (Python 3.11)
+└── tests/                  pytest — QUBO↔Ising round-trip, classical, QAOA, XY
 ```
+
+Dependencies are pinned in the repo-root `requirements.txt` (one file
+for the whole repo).
 
 ## One-line bootstrap (Colab + local)
 
@@ -137,7 +140,7 @@ cache present just loads-and-skips.
 ## Tests
 
 ```bash
-pip install -r project2/code/requirements.txt
+pip install -r requirements.txt
 pytest project2/code/tests -q
 ```
 
