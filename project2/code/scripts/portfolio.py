@@ -89,6 +89,3 @@ def eval_cost(x, problem: PortfolioProblem) -> float:
     )
 
 
-# Backward-compatible alias — existing code that does `from scripts.portfolio
-# import Portfolio` still works.
-Portfolio = PortfolioProblem

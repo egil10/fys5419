@@ -14,7 +14,7 @@ import numpy as np
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 from scripts.ising     import build_qubo, qubo_to_ising, build_HC_diag, ising_energy
-from scripts.portfolio import Portfolio
+from scripts.portfolio import PortfolioProblem
 
 
 def _small_problem(n=4, K=2, seed=0):
@@ -22,7 +22,7 @@ def _small_problem(n=4, K=2, seed=0):
     mu = rng.normal(0.0, 0.1, size=n)
     A = rng.normal(0.0, 0.05, size=(n, n))
     Sigma = A @ A.T + 0.01 * np.eye(n)
-    return Portfolio(mu, Sigma, lam=2.0, A=0.5, K=K)
+    return PortfolioProblem(mu, Sigma, lam=2.0, A=0.5, K=K)
 
 
 def test_qubo_cost_matches_portfolio_cost():

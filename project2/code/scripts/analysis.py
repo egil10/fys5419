@@ -34,7 +34,7 @@ import matplotlib.pyplot as plt
 
 from scripts.portfolio import PortfolioProblem
 from scripts.qaoa      import make_hamiltonians, qaoa_energy
-from scripts.plotting  import PALETTE, apply_style, title, rel_path, PLOTS_DIR
+from scripts.plotting  import PALETTE, apply_style, title, rel_path, out_dir
 
 
 # ════════════════════════════════════════════════════════════════════════
@@ -94,9 +94,7 @@ class Landscape:
 
         plt.tight_layout()
         if save:
-            out_dir = PLOTS_DIR / "analysis"
-            out_dir.mkdir(parents=True, exist_ok=True)
-            path = out_dir / f"{name}_landscape.pdf"
+            path = out_dir("plots", "analysis") / f"{name}_landscape.pdf"
             fig.savefig(path, bbox_inches="tight")
             print(f"saved -> {rel_path(path)}")
         plt.show()
@@ -172,9 +170,7 @@ class Thermodynamics:
 
         plt.tight_layout()
         if save:
-            out_dir = PLOTS_DIR / "analysis"
-            out_dir.mkdir(parents=True, exist_ok=True)
-            path = out_dir / f"{name}_thermodynamics.pdf"
+            path = out_dir("plots", "analysis") / f"{name}_thermodynamics.pdf"
             fig.savefig(path, bbox_inches="tight")
             print(f"saved -> {rel_path(path)}")
         plt.show()

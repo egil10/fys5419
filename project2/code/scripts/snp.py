@@ -27,7 +27,7 @@ _DATA_DIR = _ROOT / "data"
 _PLOTS_DIR = _ROOT / "plots" / "eda"
 _PALETTE_PATH = _ROOT / "palette" / "palette.json"
 
-def _rel(path):
+def rel_path(path):
     """Display path relative to project root for clean console output."""
     try:
         return path.relative_to(_ROOT)
@@ -67,7 +67,7 @@ def title(ax, bold, subtitle=None):
         ax.set_title(bold, loc="left", fontweight="bold", fontsize=12)
 
 
-def _apply_style():
+def apply_style():
     plt.rcParams.update({
         "figure.facecolor":  "white",
         "axes.facecolor":    "white",
@@ -124,7 +124,7 @@ class SNP:
         _DATA_DIR.mkdir(parents=True, exist_ok=True)
         path = _DATA_DIR / f"{name}.parquet"
         self.prices.to_parquet(path)
-        print(f"✓ saved → {_rel(path)}")
+        print(f"✓ saved → {rel_path(path)}")
         self._write_sample(name)
         return path
 
@@ -132,7 +132,7 @@ class SNP:
         """Write a small CSV preview of self.prices for quick inspection."""
         sample_path = _DATA_DIR / f"{name}_sample.csv"
         self.prices.head(rows).to_csv(sample_path)
-        print(f"✓ sample → {_rel(sample_path)}")
+        print(f"✓ sample → {rel_path(sample_path)}")
         return sample_path
 
     @classmethod
@@ -189,7 +189,7 @@ class SNP:
 
             if stale_reason is None:
                 self.prices = cached[self.tickers]
-                print(f"✓ cached → {_rel(path)}")
+                print(f"✓ cached → {rel_path(path)}")
                 self._write_sample(name)
                 return self
 
@@ -198,7 +198,7 @@ class SNP:
         self.fetch()
         _DATA_DIR.mkdir(parents=True, exist_ok=True)
         self.prices.to_parquet(path)
-        print(f"✓ cached → {_rel(path)}")
+        print(f"✓ cached → {rel_path(path)}")
         self._write_sample(name)
         return self
 
@@ -353,7 +353,7 @@ class SNP:
             Notebooks running on Colab should pass
             `scripts.colab.out_dir("plots", "eda")` so outputs land in Drive.
         """
-        _apply_style()
+        apply_style()
 
         single_panels = [
             ("prices",      self._panel_prices,      (0, 0)),
@@ -377,7 +377,7 @@ class SNP:
                 if save:
                     path = out_d / f"{name}_{panel_name}.pdf"
                     fig.savefig(path, bbox_inches="tight")
-                    print(f"✓ saved → {_rel(path)}")
+                    print(f"✓ saved → {rel_path(path)}")
                 plt.show()
         else:
             fig = plt.figure(figsize=figsize or (14, 16))
@@ -393,7 +393,7 @@ class SNP:
             if save:
                 path = out_d / f"{name}_overview.pdf"
                 fig.savefig(path, bbox_inches="tight")
-                print(f"✓ saved → {_rel(path)}")
+                print(f"✓ saved → {rel_path(path)}")
             plt.show()
 
     def __repr__(self):

@@ -1,0 +1,12 @@
+# Minimal pinned dependencies for the FYS5419 QAOA portfolio project.
+# Tested working set as of 2026-05-20 on Python 3.11 (Colab) and 3.11.x local.
+# Re-pin (and re-run tests) if you bump major versions.
+numpy>=1.26,<3.0
+pandas>=2.0,<3.0
+scipy>=1.11,<2.0
+matplotlib>=3.7,<4.0
+yfinance>=0.2.40,<1.0
+pyarrow>=14.0,<22.0
+
+# Dev / CI
+pytest>=8.0,<9.0

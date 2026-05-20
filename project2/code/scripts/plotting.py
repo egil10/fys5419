@@ -9,9 +9,9 @@ Colab (so PDFs survive runtime restarts) and in the local repo otherwise.
 from pathlib import Path
 from scripts.snp   import (
     PALETTE,
-    _apply_style as apply_style,
+    apply_style,
     title,
-    _rel as rel_path,
+    rel_path,
 )
 from scripts.colab import out_dir
 

@@ -4,46 +4,49 @@ House style for every figure in project 2. Anything new should follow this.
 
 ## Palette
 
-Source of truth: [`code/palette/palette.json`](../code/palette/palette.json) — 18 named colours.
+Source of truth: [`code/palette/palette.json`](../palette/palette.json) — 18 named colours.
 
-- `scripts/snp.py` loads it as `PALETTE` and applies the style via `_apply_style()`.
+- `scripts/snp.py` loads it as `PALETTE` and applies the style via `apply_style()`.
 - Notebooks load it directly:
 
   ```python
-  PALETTE = json.loads(
-      (Path.cwd().parent / "palette" / "palette.json").read_text(encoding="utf-8")
-  )
+  PALETTE = json.loads(open('../palette/palette.json', encoding='utf-8').read())
   ```
 
 - Never hard-code a hex string. Pick a name from the palette (`PALETTE["red"]`, `PALETTE["blue"]`, …). Editing the JSON re-themes every figure that follows the convention.
 
 ## Defaults
 
-- **Size:** `figsize=(12, 6)`. Wider when a figure has many bars or x-tick labels; never taller without reason.
-- **Style:** call `_apply_style()` once per notebook. Strips top/right spines, sets a light dashed grid, applies the editorial typeface defaults.
+- **Size:** `figsize=(12, 6)` baseline; wider when many bars/x-ticks, never taller without reason.
+- **Style:** call `apply_style()` once per notebook. Strips top/right spines, **disables the grid globally**, applies the editorial typeface defaults. If you want a grid back for a specific axis call `ax.grid(True)` explicitly.
 - **Output format:** PDF, vector. Save with `bbox_inches="tight"`.
-- **Output root:** every plot lives under [`project2/code/plots/<category>/`](../code/plots/) — one root only, no parallel directories elsewhere. Categories in use:
-  - `eda/`       — exploratory dataset overviews (`snp.SNP.plot`).
-  - `visuals/`   — motivational / report figures (`notebooks/visuals.ipynb`).
-  - `compare/`   — method comparisons (`scripts/compare.Compare.plot`).
-  - `analysis/`  — QAOA diagnostics (`scripts/analysis.Landscape`, `Thermodynamics`).
+- **Output root:** every plot lives under [`code/plots/<category>/`](../plots/) on local and `<Drive>/.../code/plots/<category>/` on Colab. Use `fig_path(category, name)` from `scripts.plotting` — never construct the path by hand. Categories in use:
+  - `eda/`       — exploratory dataset overviews (`01_eda` via `SNP.plot`).
+  - `visuals/`   — motivational / report figures (`00_visuals`).
+  - `qaoa/`      — single-run diagnostics (`03_qaoa`).
+  - `compare/`   — headline sweep figures (`08_compare`).
+  - `analysis/`  — QAOA diagnostics (`scripts.analysis.Landscape`, `Thermodynamics`).
+  - `snp/`       — reserved for any per-basket sanity plots driven by `00_snp` (currently unused).
 
-Create the directory on first use:
+The recommended pattern in any notebook:
 
 ```python
-PLOTS_DIR = Path.cwd().parent / "plots" / "visuals"   # notebooks are at code/notebooks/
-PLOTS_DIR.mkdir(parents=True, exist_ok=True)
-fig.savefig(PLOTS_DIR / "name.pdf", bbox_inches="tight")
+from scripts.plotting import apply_style, PALETTE, title, fig_path
+apply_style()
+fig, ax = plt.subplots(figsize=(12, 6))
+# ... build figure ...
+fig.savefig(fig_path('compare', 'depth_sweep'), bbox_inches='tight')
+plt.show()
 ```
 
-Module code computes `_PLOTS_DIR = _ROOT / "plots" / <category>` where `_ROOT = Path(__file__).resolve().parent.parent` resolves to `project2/code/`.
+`fig_path()` resolves to Drive on Colab and to the local repo otherwise.
 
 ## Titles — two lines, left-shifted
 
 Every figure has a bold short headline plus a non-bold descriptive subtitle, both left-aligned. Use the shared helper:
 
 ```python
-from scripts.snp import title
+from scripts.plotting import title
 
 title(ax, "Markowitz efficient frontier",
       "Continuous weights on the simplex — mag7 (4 assets, daily 2023–2025)")
@@ -63,7 +66,7 @@ title(ax, "Markowitz efficient frontier",
 
 - One idea per figure. If two ideas fight for the title, split the figure.
 - No top or right spines, no boxed legends, no chartjunk shadows or 3-D effects.
-- Grid is light dashed grey at low alpha — already configured by `_apply_style()`.
+- **No grid by default.** `apply_style()` sets `axes.grid: False`. Add `ax.grid(True)` explicitly only when the plot genuinely needs it (rare).
 - Annotate sparingly. Direct labels on points beat a packed legend.
 - Markers: `s=70–140` for "important" points, `s=6–12` for clouds. Keep ≤ 3 size tiers per figure.
 - Prefer filled circles for assets and open circles (`facecolor='white'`) for derived/summary points like MVP/tangency. Avoid stars, diamonds, and crosses unless they encode something the colour can't.
@@ -74,7 +77,7 @@ title(ax, "Markowitz efficient frontier",
 Inside a notebook, save *before* `plt.show()` so the figure isn't closed when the cell renders:
 
 ```python
-fig.savefig(PLOTS_DIR / f"{name}.pdf", bbox_inches="tight")
+fig.savefig(fig_path('compare', 'foo'), bbox_inches="tight")
 plt.show()
 ```
 

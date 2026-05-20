@@ -15,7 +15,7 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 from scripts.classical import (
     brute_force, greedy_top_k, markowitz_round, simulated_annealing, run_all,
 )
-from scripts.portfolio import Portfolio
+from scripts.portfolio import PortfolioProblem
 
 
 def _small_problem(n=5, K=2, seed=1):
@@ -23,7 +23,7 @@ def _small_problem(n=5, K=2, seed=1):
     mu = rng.normal(0.0, 0.1, size=n)
     A = rng.normal(0.0, 0.05, size=(n, n))
     Sigma = A @ A.T + 0.01 * np.eye(n)
-    return Portfolio(mu, Sigma, lam=2.0, A=0.5, K=K)
+    return PortfolioProblem(mu, Sigma, lam=2.0, A=0.5, K=K)
 
 
 def test_brute_force_feasible():

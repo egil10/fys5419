@@ -17,34 +17,36 @@ apples-to-apples comparison. The one true definition lives in
 
 ```
 project2/code/
-├── scripts/        Pure-Python modules; no notebook side-effects
-│   ├── colab.py        Colab + local bootstrap helper (one-line setup)
-│   ├── baskets.py      Thematic ticker baskets
-│   ├── snp.py          Data loader + 6-panel EDA (legacy class, still used by snp.ipynb)
-│   ├── data.py         load_returns(...) -> Returns (functional API)
-│   ├── portfolio.py    PortfolioProblem dataclass + eval_cost — THE cost function
-│   ├── ising.py        QUBO <-> Ising mapping; H_C diag + H_M sparse builders
-│   ├── classical.py    SolverResult + brute_force, greedy, SA, Markowitz-round
-│   ├── qaoa.py         Functional QAOA: statevector, energy, decode, solve(...)
-│   ├── optimize.py     multi_start_minimize wrapper (COBYLA / SPSA)
-│   ├── metrics.py      approx ratio (scaled), gap, P(opt), P(feas), Sharpe
-│   ├── plotting.py     Re-exports of style helpers + fig_path(...)
-│   ├── compare.py      Compare class — brute force + QAOA at multiple p
-│   └── analysis.py     Landscape + Thermodynamics diagnostics
+├── scripts/                Pure-Python modules; no notebook side-effects
+│   ├── bootstrap.py         Two-line notebook bootstrap (Colab + local)
+│   ├── colab.py             Drive-aware out_dir(); sys.path setup
+│   ├── baskets.py           Thematic ticker baskets (one source of truth)
+│   ├── snp.py               Data loader + 6-panel EDA class
+│   ├── data.py              load_returns / load_universe (functional API)
+│   ├── portfolio.py         PortfolioProblem + eval_cost (THE cost function)
+│   ├── ising.py             QUBO ↔ Ising; H_C diag + H_M sparse
+│   ├── classical.py         SolverResult + brute force / greedy / SA / Markowitz
+│   ├── qaoa.py              Statevector QAOA + solve() multi-start convenience
+│   ├── optimize.py          multi_start_minimize (COBYLA, SPSA), parallel
+│   ├── metrics.py           scaled_ratio, gap, P(opt), P(feas), Sharpe
+│   ├── plotting.py          Re-exports for the house style + fig_path()
+│   └── analysis.py          QAOA diagnostics: (γ,β) landscape, thermodynamics
 ├── notebooks/
-│   ├── snp.ipynb         Cache S&P data into data/ (run once per basket)
-│   ├── visuals.ipynb     Motivational figures (frontier, cost landscape, …)
-│   ├── 01_eda.ipynb      Sanity-check the data, generate EDA figures
-│   ├── 02_classical.ipynb Brute force, greedy, Markowitz-round, SA (10 seeds)
-│   ├── 03_qaoa.ipynb     Single QAOA run with training restarts + top-5
-│   ├── 04_depth.ipynb    Sweep 1 — p ∈ {1..5}, ratio + P(opt) + P(feas)
-│   ├── 05_scaling.ipynb  Sweep 2 — n ∈ {4,6,8,10,12}, classical vs QAOA
-│   ├── 06_risk.ipynb     Sweep 3 — λ over two decades
-│   └── 07_compare.ipynb  Headline figures (reads results/*.json)
-├── data/           Cached parquet prices + small CSV previews
-├── plots/          PDF outputs from the notebooks
-├── results/        Cached sweep outputs (.json) so re-plotting stays fast
-└── tests/          pytest — QUBO↔Ising round-trip, classical sanity, QAOA sanity
+│   ├── 00_snp.ipynb          Pre-fetch all per-basket parquets to data/
+│   ├── 00_visuals.ipynb      Motivational figures → plots/visuals/
+│   ├── 01_eda.ipynb          16-equity EDA → plots/eda/
+│   ├── 02_classical.ipynb    Baselines at n=16, K=4
+│   ├── 03_qaoa.ipynb         Single QAOA run + (γ,β) landscape at p=1
+│   ├── 04_depth.ipynb        Sweep 1 — p ∈ {1..5}
+│   ├── 05_scaling.ipynb      Sweep 2 — n ∈ {4..16} via random subsets
+│   ├── 06_risk.ipynb         Sweep 3 — λ across two decades
+│   ├── 07_penalty.ipynb      Sweep 4 — A ∈ {0.5, 2, 8, 32}
+│   └── 08_compare.ipynb      Headline plots reading all four sweep caches
+├── data/                   Cached parquet prices + CSV previews
+├── plots/                  PDF outputs by category (eda/ visuals/ qaoa/ compare/ analysis/ snp/)
+├── results/                Cached sweep outputs (.json) so re-plotting is instant
+├── tests/                  pytest — QUBO↔Ising round-trip, classical, QAOA
+└── requirements.txt        Pinned dependency ranges (Python 3.11)
 ```
 
 ## One-line bootstrap (Colab + local)
@@ -52,86 +54,90 @@ project2/code/
 The first cell of every numbered notebook runs:
 
 ```python
-import sys, os
-try:
-    import google.colab
-    !test -d /content/fys5419 || git clone -q https://github.com/egil10/fys5419.git /content/fys5419
-    %cd /content/fys5419/project2/code/notebooks
-except ImportError:
-    pass
-sys.path.append('..')
-from scripts.colab import setup; setup()
+import os, urllib.request as _u
+exec((open('../scripts/bootstrap.py') if os.path.exists('../scripts/bootstrap.py')
+      else _u.urlopen('https://raw.githubusercontent.com/egil10/fys5419/main/project2/code/scripts/bootstrap.py')).read())
 ```
 
 On Colab: clones the repo (if missing), `cd`s to the notebook dir, installs the
-small dependency set, and adds `scripts/` to `sys.path`. Locally: the
-`google.colab` import fails silently, `setup()` walks up from the cwd to find
-the `scripts/` dir, and adds it to the path. Idempotent.
+dependency set, and adds `scripts/` to `sys.path`. Locally: same path discovery,
+no clone or install. Idempotent.
 
 ## Canonical dataset: ONE universe, sub-sampled
 
-There is exactly one dataset: the **16-asset universe** = Mag7 + quantum +
-quantum_big + anti, 2023-01-01 to 2025-12-31 daily log returns. It lives at
-[`results/universe_16.npz`](code/results/) (computed on first call to
-`load_universe()` and cached forever).
+There is exactly one dataset: the **16-asset universe** = mag7 + quantum +
+quantum_big + anti (definitions in [`scripts/baskets.py`](code/scripts/baskets.py)),
+2023-01-01 to 2025-12-31 daily log returns. It is cached to
+[`results/universe_16.npz`](code/results/) on first call to `load_universe()`.
 
-- **Notebooks 02, 03, 04, 06** fix `n=16, K=4` and call `load_universe()`.
+- **Notebooks 02, 03, 04, 06, 07** fix `n=16, K=4` and call `load_universe()`.
   Same μ and Σ everywhere — no per-notebook recomputation.
 - **Notebook 05** loads the same universe and **sub-samples** for each
-  `n ∈ {4, 6, 8, 10, 12, 14, 16}`. For each `n < 16` it draws 20 random
-  subsets, runs every solver, and reports median + IQR. The `n=16`
-  endpoint is the single canonical subset (all 16 assets), and by
-  construction reproduces the runs in notebooks 02/03/04/06.
-- `K` follows the ratio rule `K = round(0.25 * n)` ∈ {1, 2, 2, 3, 3, 4, 4}.
-  At `n=16` this gives `K=4`, matching `DEFAULTS["K_AT_16"]`.
+  `n ∈ {4, 6, 8, 10, 12, 14, 16}`. For each `n < 16` it draws random subsets
+  with a tiered count (20 at small n, fewer at large n since QAOA cost
+  scales as 2ⁿ). The `n=16` endpoint is the canonical single subset (all 16
+  assets) and reproduces the run in notebooks 02/03/04/06/07 by construction.
+- `K = round(0.25 * n)` ∈ {1, 2, 2, 3, 3, 4, 4}. At `n=16` this gives `K=4`,
+  matching `DEFAULTS["K_AT_16"]`.
 
-Project-wide constants live in `scripts.portfolio.DEFAULTS` so every
-notebook imports `lam`, `A`, `K_FRAC`, and `K_AT_16` from the same place.
+Project-wide constants live in [`scripts.portfolio.DEFAULTS`](code/scripts/portfolio.py)
+so every notebook imports `lam`, `A`, `K_FRAC`, `K_AT_16` from the same place.
 
 ## Workflow
 
-1. **`snp.ipynb`** — fetch and cache prices (run once per basket; also
-   populates the universe parquet via `load_universe()`).
-2. **`01_eda.ipynb`** — confirm the data is sane, per-basket EDA figures.
-3. **`02_classical.ipynb`** — baselines table at the canonical `n=16, K=4`.
-4. **`03_qaoa.ipynb`** — one QAOA run end-to-end at `n=16, K=4, p=3`.
-5. **`04_depth.ipynb`** — Sweep 1 (p ∈ {1..5}) at `n=16, K=4`.
-   Writes `results/depth_sweep.json`.
-6. **`05_scaling.ipynb`** — Sweep 2 (n ∈ {4..16} via random subsets, M=20).
-   Writes `results/size_scaling.json`.
-7. **`06_risk.ipynb`** — Sweep 3 (λ across two decades) at `n=16, K=4`.
-   Writes `results/risk_sweep.json`.
-8. **`07_compare.ipynb`** — read all three result files, produce the
-   headline figures with median + IQR shading.
+Run top-to-bottom in numeric order. Estimates are Colab CPU.
 
-## Module ownership (the one-true-definition rules)
+| nb | role                              | runtime |
+|----|-----------------------------------|---------|
+| 00_snp     | Pre-fetch per-basket parquets                                     | ~30 s |
+| 00_visuals | Motivational figures (frontier, cardinality, wall, cost landscape) | ~30 s |
+| 01_eda     | 6-panel EDA on the 16-equity universe                              | ~30 s |
+| 02_classical | Brute force / greedy / Markowitz / SA at n=16, K=4               | ~10 s |
+| 03_qaoa    | One QAOA solve at p=3 + (γ,β) landscape at p=1                   | ~4–5 min |
+| 04_depth   | **Sweep 1** — p ∈ {1..5}; writes `results/depth_sweep.json`        | ~12 min |
+| 05_scaling | **Sweep 2** — n ∈ {4..16}; writes `results/size_scaling.json`      | ~45–60 min |
+| 06_risk    | **Sweep 3** — λ over two decades; writes `results/risk_sweep.json`  | ~15–18 min |
+| 07_penalty | **Sweep 4** — A ∈ {0.5, 2, 8, 32}; writes `results/penalty_sweep.json` | ~10 min |
+| 08_compare | Four headline figures from the cached sweeps                       | ~5 s |
+
+Sweep notebooks (04–07) all **cache** their JSON output and **resume** on partial
+runs (Colab disconnects cost at most one inner iteration). Re-running with a
+cache present just loads-and-skips.
+
+## Module ownership (one-true-definition rules)
 
 | File              | What lives here, and nowhere else                          |
 |-------------------|------------------------------------------------------------|
-| `data.py`         | Prices → (μ, Σ). No optimisation logic.                    |
-| `portfolio.py`    | The cost function `C(x)` (`eval_cost`). Every solver imports from here. |
-| `ising.py`        | QUBO ↔ Ising algebra; H_C and H_M builders.                |
+| `baskets.py`      | Ticker baskets. Window dates live in `data.py`.            |
+| `data.py`         | Prices → (μ, Σ). UNIVERSE_START / UNIVERSE_END. No optimisation logic. |
+| `portfolio.py`    | The cost function `C(x)` (`eval_cost`) + `DEFAULTS`.       |
+| `ising.py`        | QUBO ↔ Ising algebra; H_C diagonal builder; H_M sparse.    |
 | `classical.py`    | Every classical solver; uniform `SolverResult` dataclass.  |
-| `qaoa.py`         | QAOA statevector + energy + `solve()` convenience.         |
-| `optimize.py`     | Outer-loop wrappers (COBYLA, SPSA, multi-start).           |
-| `metrics.py`      | Comparison metrics for tables/plots.                       |
+| `qaoa.py`         | Statevector QAOA + `solve()` convenience (multi-start).    |
+| `optimize.py`     | Outer-loop wrappers (COBYLA, SPSA, multi-start, parallel). |
+| `metrics.py`      | scaled_ratio, gap, P(opt), P(feas), Sharpe.                |
 | `plotting.py`     | Shared style — every notebook calls `apply_style()`.       |
-| `colab.py`        | Bootstrap that works on Colab + locally.                   |
+| `analysis.py`     | QAOA diagnostics: (γ,β) landscape, spin-glass thermodynamics. |
+| `colab.py`        | Drive-aware `out_dir()` + `setup()`.                       |
+| `bootstrap.py`    | Inline-execed bootstrap; clones+chdirs on Colab.            |
 
 ## Methodology — what you actually measure
 
 - **Approximation ratio** is the **scaled** form
-  `r = (E_worst − E) / (E_worst − E_opt) ∈ [0, 1]` (Farhi-style; interpretable
+  `r = (E_worst − E) / (E_worst − E_opt) ∈ [0, 1]` (Farhi convention; stable
   even when E_opt is small in magnitude). `qaoa.solve()` returns this in `ratio`.
-- **P(optimum)** and **P(feasible)** for QAOA (`scripts.metrics`).
-- **Multi-start**: QAOA `solve()` defaults to 10 random `(γ, β)` inits and
-  keeps the best — single-seed QAOA is not meaningful. SA notebook reports
-  median + IQR over 10 seeds.
-- Sweeps **cache** to `results/*.json` so the plotting notebook stays fast.
+  Note that `E_worst` is dominated by the budget penalty `A·K²` — a "0.99" can
+  mean "in the top percent of the spectrum" rather than "near the optimum",
+  which is why we also report `gap_rel = (E − E_opt)/|E_opt|` and `P(optimum)`.
+- **P(optimum)** and **P(feasible)** — measurement-mass diagnostics from `scripts.metrics`.
+- **Multi-start mandatory** — `solve()` defaults to 10 random `(γ, β)` inits and
+  keeps the best. Single-seed QAOA is not meaningful; the landscape is non-convex.
+- Sweeps **cache + resume** to `results/*.json` so re-plotting stays fast.
 
 ## Tests
 
 ```bash
+pip install -r project2/code/requirements.txt
 pytest project2/code/tests -q
 ```
 
