@@ -20,6 +20,21 @@ def approximation_ratio(energy: float, ground_state: float,
     return (energy - worst) / (ground_state - worst)
 
 
+def scaled_ratio(energy: float, e_opt: float, e_worst: float) -> float:
+    """Scaled approximation ratio r = (E_worst - E) / (E_worst - E_opt) in [0, 1].
+
+    Same convention used by `qaoa.approximation_ratio`. r = 1 at the true
+    ground state, r = 0 at the worst basis state, and an unbiased uniform
+    distribution gives (E_worst - mean) / (E_worst - E_opt). Stable when
+    E_opt is small in magnitude relative to the Hamiltonian's spread —
+    use this instead of E / E_opt for mixed-sign cost functions where the
+    unscaled ratio explodes.
+    """
+    if e_worst == e_opt:
+        return 1.0
+    return (e_worst - energy) / (e_worst - e_opt)
+
+
 def gap(energy: float, optimum: float) -> float:
     """Relative gap (E - E_opt) / |E_opt|. Smaller is better; 0 = optimal.
 

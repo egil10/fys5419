@@ -51,8 +51,7 @@ def build_qubo(mu: np.ndarray, Sigma: np.ndarray,
 def qubo_cost(x: np.ndarray, Q: np.ndarray, offset: float) -> float:
     """Evaluate the QUBO cost x^T Q x + offset for a binary vector x."""
     x = np.asarray(x, dtype=float)
-    return float(x @ Q @ x - np.sum(np.diag(Q) * x * (x - 1)) + offset) \
-        if False else float(np.einsum("i,ij,j->", x, Q, x) + offset)
+    return float(np.einsum("i,ij,j->", x, Q, x) + offset)
 
 
 # ── QUBO -> Ising ────────────────────────────────────────────────────────
