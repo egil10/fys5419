@@ -12,7 +12,7 @@ XY ring mixer (see `scripts.xy_mixer`) lives entirely on the
 weight-K manifold — exact budget feasibility throughout the dynamics, not
 just at the final measurement.
 
-For small n (which is the regime we benchmark in notebook 09 — n <= 12)
+For small n (which is the regime we benchmark in notebook 08 — n <= 12)
 we build |D^n_K> by direct enumeration of all weight-K bitstrings.
 A scalable Bärtschi-Eidenbenz preparation circuit would be needed for
 n >> 20; not relevant here.

@@ -41,8 +41,8 @@ project2/code/
 │   ├── 05_scaling.ipynb      Sweep 2 — n ∈ {4..16} via random subsets
 │   ├── 06_risk.ipynb         Sweep 3 — λ across two decades
 │   ├── 07_penalty.ipynb      Sweep 4 — A logspace(-2, 1.5, 8), 50 restarts
-│   ├── 08_compare.ipynb      Headline plots reading all sweep caches
-│   └── 09_xy_mixer.ipynb     Sweep 5 — XY ring + Dicke vs X + uniform (n=8)
+│   ├── 08_xy_mixer.ipynb     Sweep 5 — XY ring + Dicke vs X + uniform (n=8)
+│   └── 09_compare.ipynb      Headline plots reading all sweep caches
 ├── data/                   Cached parquet prices + CSV previews
 ├── plots/                  PDF outputs by category (eda/ visuals/ qaoa/ compare/ analysis/ snp/)
 ├── results/                Cached sweep outputs (.json) so re-plotting is instant
@@ -97,13 +97,14 @@ Run top-to-bottom in numeric order. Estimates are Colab CPU.
 | 01_eda     | 6-panel EDA on the 16-equity universe                              | ~30 s |
 | 02_classical | Brute force / greedy / Markowitz / SA at n=16, K=4               | ~10 s |
 | 03_qaoa    | One QAOA solve at p=3 + (γ,β) landscape at p=1                   | ~4–5 min |
-| 04_depth   | **Sweep 1** — p ∈ {1..5}; writes `results/depth_sweep.json`        | ~12 min |
+| 04_depth   | **Sweep 1** — p ∈ {1..5}, 50 restarts + warm-start variant; writes `depth_sweep.json` + `depth_sweep_warm.json` | ~30 min |
 | 05_scaling | **Sweep 2** — n ∈ {4..16}; writes `results/size_scaling.json`      | ~45–60 min |
-| 06_risk    | **Sweep 3** — λ over two decades; writes `results/risk_sweep.json`  | ~15–18 min |
-| 07_penalty | **Sweep 4** — A ∈ {0.5, 2, 8, 32}; writes `results/penalty_sweep.json` | ~10 min |
-| 08_compare | Four headline figures from the cached sweeps                       | ~5 s |
+| 06_risk    | **Sweep 3** — λ over two decades, 50 restarts; writes `results/risk_sweep.json`  | ~30 min |
+| 07_penalty | **Sweep 4** — A logspace(-2, 1.5, 8), 50 restarts; writes `results/penalty_sweep.json` | ~30 min |
+| 08_xy_mixer | **Sweep 5** — XY ring + Dicke vs X + uniform (n=8, K=2); writes `xy_comparison.json` | ~3 min |
+| 09_compare | Six headline figures from the cached sweeps                        | ~10 s |
 
-Sweep notebooks (04–07) all **cache** their JSON output and **resume** on partial
+Sweep notebooks (04–08) all **cache** their JSON output and **resume** on partial
 runs (Colab disconnects cost at most one inner iteration). Re-running with a
 cache present just loads-and-skips.
 

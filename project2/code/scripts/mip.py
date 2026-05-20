@@ -20,7 +20,7 @@ The cardinality constraint sum x_i = K replaces the QUBO's soft
 A (sum x - K)^2 penalty — feasibility is exact.
 
 Same `SolverResult` shape as `scripts.classical` so the comparison
-table in 02_classical / 08_compare gets a one-line addition.
+table in 02_classical / 09_compare gets a one-line addition.
 
 PuLP / CBC are required; install via `pip install pulp` (which bundles
 the CBC binary). If PuLP isn't on the path the import raises a clear

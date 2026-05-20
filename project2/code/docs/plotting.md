@@ -24,7 +24,7 @@ Source of truth: [`code/palette/palette.json`](../palette/palette.json) — 18 n
   - `eda/`       — exploratory dataset overviews (`01_eda` via `SNP.plot`).
   - `visuals/`   — motivational / report figures (`00_visuals`).
   - `qaoa/`      — single-run diagnostics (`03_qaoa`).
-  - `compare/`   — headline sweep figures (`08_compare`).
+  - `compare/`   — headline sweep figures (`09_compare`).
   - `analysis/`  — QAOA diagnostics (`scripts.analysis.Landscape`, `Thermodynamics`).
   - `snp/`       — reserved for any per-basket sanity plots driven by `00_snp` (currently unused).
 
