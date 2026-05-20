@@ -22,3 +22,7 @@ __pycache__/
 
 # Teaching / lecture material
 .teachings/
+
+# Notebook exports (markdown/html/pdf bundles for agent ingestion)
+.exports/
+
